@@ -1,0 +1,13 @@
+<view>
+
+<view>
+请选择行业(单选)
+</view>
+
+<include src="../common/typeTemp.wxml"></include>
+
+<view>
+<button class="confirm-btn" bindtap="confirm">确定</button>
+</view>
+
+</view>

@@ -1,0 +1,90 @@
+<view class="enterprise">
+    <!-- <view class="weui-search-bar__settled" bindtap="settled">企业入驻</view> -->
+    <!-- <view class="main-title"> -->
+    <!-- <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                <input type="text" class="weui-search-bar__input" placeholder="输入企业名称" value="{{searchValue}}"
+                    focus="{{inputShowed}}" bindinput="inputTyping" />
+                <view class="weui-icon-clear" wx:if="{{searchValue.length > 0}}" bindtap="clearInput">
+                    <icon type="clear" size="14"></icon>
+                </view>
+            </view>
+            <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                <icon class="weui-icon-search" type="search" size="14" wx:if="{{searchValue==''}}"></icon>
+                <view class="weui-search-bar__text" wx:if="{{searchValue==''}}">企业名称</view>
+                <view class="weui-search-bar__text weui-search-bar-value" wx:if="{{searchValue!=''}}"
+                    bindtap="clearSearch">
+                    <view class="weui-search-bar-search-value">{{searchValue}}</view>
+                    <image class="weui-search-bar-value-close" src="/pages/img/close_2.png" mode="aspectFill"></image>
+                </view>
+            </label>
+        </view>
+        <view class="weui-search-bar__cancel-btn" bindtap="searchSubmit">搜索</view> -->
+    <!-- </view> -->
+
+    <!-- 选择类型区域 -->
+    <view class="select-area">
+        <view class="select-item" data-type="a" data-typeName="资格考证" bindtap="screenEnterpriseList">
+            <image class="select-item-image" src="/pages/img/certificate.png" mode="aspectFill"></image>
+            <view class="select-item-tip">资格考证</view>
+        </view>
+        <view class="select-item" data-type="b" data-typeName="大巴租赁" bindtap="screenEnterpriseList">
+            <image class="select-item-image" src="/pages/img/bus.png" mode="aspectFill"></image>
+            <view class="select-item-tip">大巴租赁</view>
+        </view>
+        <view class="select-item" data-type="c" data-typeName="活动执行" bindtap="screenEnterpriseList">
+            <image class="select-item-image" src="/pages/img/activity-execution.png" mode="aspectFill"></image>
+            <view class="select-item-tip">活动执行</view>
+        </view>
+        <view class="select-item" data-type="d" data-typeName="活动场地" bindtap="screenEnterpriseList">
+            <image class="select-item-image" src="/pages/img/field.png" mode="aspectFill"></image>
+            <view class="select-item-tip">活动场地</view>
+        </view>
+        <view class="select-item" data-type="e" data-typeName="公众号运营" bindtap="screenEnterpriseList">
+            <image class="select-item-image" src="/pages/img/official-account.png" mode="aspectFill"></image>
+            <view class="select-item-tip">公众号运营</view>
+        </view>
+        <view class="select-item" data-type="f" data-typeName="抖音运营" bindtap="screenEnterpriseList">
+            <image class="select-item-image" src="/pages/img/douyin.png" mode="aspectFill"></image>
+            <view class="select-item-tip">抖音运营</view>
+        </view>
+        <view class="select-item" data-type="g" data-typeName="拍摄剪辑" bindtap="screenEnterpriseList">
+            <image class="select-item-image" src="/pages/img/clip.png" mode="aspectFill"></image>
+            <view class="select-item-tip">拍摄剪辑</view>
+        </view>
+        <view class="select-item" data-type="h" data-typeName="平面设计" bindtap="screenEnterpriseList">
+            <image class="select-item-image" src="/pages/img/graphic-design.png" mode="aspectFill"></image>
+            <view class="select-item-tip">平面设计</view>
+        </view>
+        <view class="select-item" data-type="i" data-typeName="课程设计" bindtap="screenEnterpriseList">
+            <image class="select-item-image" src="/pages/img/curriculum-design.png" mode="aspectFill"></image>
+            <view class="select-item-tip">课程设计</view>
+        </view>
+        <view class="select-item" data-type="j" data-typeName="图文制作" bindtap="screenEnterpriseList">
+            <image class="select-item-image" src="/pages/img/graphic-production.png" mode="aspectFill"></image>
+            <view class="select-item-tip">图文制作</view>
+        </view>
+        <!-- <view class="select-item" data-type="k" data-typeName="旅行社挂靠" bindtap="screenEnterpriseList">
+            <image class="select-item-image" src="/pages/img/station-wagon-attachment.png" mode="aspectFill"></image>
+            <view class="select-item-tip">旅行社挂靠</view>
+        </view> -->
+    </view>
+
+    <!-- 热门企业展示 -->
+    <view class="enterprise-area">
+        <view class="tip">
+            热门服务
+            <image class="hot-image" src="/pages/img/hot.png" mode="aspectFill"></image>
+        </view>
+        <view class="enterprise-item" wx:for="{{enterpriseHotList}}" wx:key="index" data-name="{{item.name}}"
+            data-id="{{item.id}}" data-card_id="{{item.card_id}}" data-business="{{item.business}}"
+            data-requirement="{{item.requirement}}" data-resources="{{item.resources}}" data-isHot="{{item.isHot}}"
+            data-main_image="{{item.main_image}}" data-introduce="{{item.introduce}}" data-title="{{item.title}}"
+            data-score="{{item.score}}" wx:if="{{item.isHot==1}}" bindtap="toDetailEnterprise">
+            <image class="enterprise-item-image" src="{{item.main_image}}" mode="aspectFill"></image>
+            <view class="enterprise-item-title">{{item.title}}</view>
+            <view class="enterprise-item-name">{{item.name}}</view>
+        </view>
+    </view>
+</view>

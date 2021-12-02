@@ -1,0 +1,8 @@
+.home-bak-btn {
+  background-color: rgb(1, 143, 215);
+  color: white;
+}
+
+.weui-msg__tip {
+  font-size: 17px;
+}

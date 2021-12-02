@@ -1,0 +1,6 @@
+<view class="one-service" wx:for="{{service}}" wx:for-index="index" data-index="{{index}}"  wx:key="{{item.subserviceId}}" > 
+  <view class="title"><text style="color:yellow;">●</text> {{item.subserviceName}}</view>
+  <view>
+    <button class="one-btn {{btnServiceSelected[index][tagIndex]}}" wx:for="{{item.tagList}}" wx:for-index="tagIndex" wx:for-item="tags" data-parent="{{index}}" data-index="{{tagIndex}}" wx:key="{{tags.tagId}}" data-tag="{{tags.tagId}}" data-name="{{tags.tagName}}" bindtap="tagClick">{{tags.tagName}} </button>
+  </view>
+</view>

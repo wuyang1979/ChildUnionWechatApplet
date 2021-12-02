@@ -1,0 +1,135 @@
+.one-business{
+  margin-left: 5px;
+  background-color: white;
+}
+
+.business-photo{
+  width: 150rpx;
+  height: 150rpx;
+  margin: 10rpx;
+  border-radius: 50%;
+}
+
+.business-left-info, .business-middle-info, .business-right-info{
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.business-left-info{
+  width: 25%;
+}
+
+.business-middle-info{
+  width: 55%;
+}
+
+/*
+.business-right-info{
+  width: 20%;
+}
+*/
+
+.business-desc-info{
+  margin: 0px;
+}
+
+.business-name{
+  font-size: 0.9em;
+}
+
+.business-job{
+  color: #777777;
+  font-size:0.7em;
+}
+
+.business-company{
+  color: #777777;
+  font-size:0.7em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+}
+
+.business-name, .business-job{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+}
+
+.business-name, .business-job{
+  width: 45%;
+}
+
+.leaguer-btn{
+  font-size: 0.6em;
+  font-weight: bold;
+  width: 36px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(184, 13, 13);
+  padding: 4px;
+  display: inline-block;
+  line-height: 0.8;
+  margin-left: 5px;
+}
+
+.leaguer_normal{
+  width: 17px;
+  height: 15px;
+  margin-left: 5px;
+}
+
+.business-button-info{
+  margin: 0px;
+}
+
+.business-btn-tag{
+  color: black;
+  font-size: 0.6em;
+  width: 60px;
+  height: 20px;
+  display: inline-block;
+  line-height: 1.8;
+  vertical-align: middle;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin-right: 3px;
+}
+
+.tag1{
+  background-color: rgb(128, 214, 127);
+}
+
+.tag2{
+  background-color: rgb(242, 184, 121);
+}
+
+.tag3{
+  background-color:rgb(137, 218, 199);
+}
+
+.default-tag, .default-tag::after{
+  border: none;
+  background-color: white;
+}
+
+.business-btn-not-follow, .business-btn-follow{
+  font-size:0.8em;
+  width: 70px;
+  border-radius:5px;
+  padding-left:10px;
+  padding-right: 10px;
+  margin-bottom: 30%;
+}
+
+.business-btn-not-follow{
+  background-color: rgb(2, 143, 215);
+  color: white;
+}
+
+.business-btn-follow{
+  background-color: rgb(238, 238, 238);
+}
+
+.form_class_message {
+  width: 100%;
+}

@@ -1,0 +1,203 @@
+.page {
+  margin: 10px;
+}
+
+.title-input,
+.message-input {
+  padding-top: 10px;
+}
+
+.title-name,
+.message-name {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.one-pic-area {
+  padding-left: 10px;
+}
+
+.one-pic-tip {
+  padding-left: 15px;
+}
+
+.one-pic {
+  width: 30%;
+  height: 100px;
+  display: inline-block;
+  padding: 10px 5px;
+}
+
+.radio {
+  margin: 5px;
+}
+
+.title-tip,
+.message-tip {
+  color: #999;
+  font-size: 0.7em;
+  text-align: right;
+}
+
+.uploadBtnClass {
+  background-color: #f7b24f;
+  border-radius: 10px;
+  position: absolute;
+  width: 20%;
+  font-size: 13px;
+  top: 8rpx;
+  right: 65rpx;
+}
+
+.upload {
+  position: absolute;
+  width: 20px;
+  top: 10px;
+  left: 80px;
+}
+
+.picker {
+  position: relative;
+  padding-bottom: 5px;
+  margin-top: 20px;
+  border-bottom: 1px solid rgb(232, 232, 232);
+  font-size: 14px;
+}
+
+.upload-area {
+  margin-top: 20px;
+  font-size: 14px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgb(232, 232, 232);
+}
+
+.right-icon {
+  position: absolute;
+  right: 0;
+  top: -4rpx;
+  width: 30px;
+  opacity: 0.4;
+}
+
+.messageTypeClass {
+  margin-top: 10px;
+  background-color: #f7b24f;
+  border-radius: 10px;
+  font-size: 16px;
+
+  width: 80%;
+}
+
+.radio-group {
+  margin-left: 4rpx;
+  position: relative;
+}
+
+.message-type-image {
+  display: inline-block;
+  width: 26px;
+}
+
+.xuqiu {
+  margin-left: 5px;
+}
+
+.xuqiu-value {
+  position: absolute;
+  right: 50rpx;
+  top: 0;
+  width: 75px;
+  text-align: right;
+}
+
+input,
+textarea {
+  border: 1rpx solid rgb(221, 221, 221);
+}
+
+textarea {
+  width: 99%;
+  height: 350px;
+}
+
+.submit-view {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.submit-btn {
+  background-color: rgb(1, 143, 215);
+  width: 90%;
+  border: 2px solid;
+  border-radius: 25px;
+  color: white;
+}
+
+.form_class_message {
+  width: 100%;
+}
+
+.form_button_message {
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  line-height: 0;
+}
+
+.form_button_message::after {
+  border: 0px;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+}
+
+.form_button_message buton-over {
+  padding: 0;
+  margin: 0;
+}
+
+.inputClass {
+  border: none;
+  border-bottom: 1px solid rgb(221, 221, 221);
+  padding: 5px;
+}
+
+.radio-type {
+  display: inline-block;
+  margin-left: 3px;
+  margin-right: 5px;
+}
+
+.title-title {
+  font-size: 16px;
+  margin-left: 5px;
+}
+
+
+.inputClass-focus {
+  border-color: #008fd1;
+}
+
+.message {
+  margin-top: 10px;
+}
+
+.message-content {
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.message-content-focus {
+  border-color: #008fd1;
+}
+
+.tips {
+  font-size: 13px;
+  margin-left: 5px;
+  color: #838f90;
+}
+
+.message-tips {
+  color: #838f90;
+}

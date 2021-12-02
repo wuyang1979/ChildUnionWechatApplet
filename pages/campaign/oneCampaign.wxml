@@ -1,0 +1,142 @@
+<view class="page">
+
+  <view class="top-banner">
+
+    <view class="banner">
+      <image src="{{img}}"></image>
+    </view>
+    <view class="banner-title">
+      <view class="banner-title-desc weui-media-box__desc"><text class="text-message">{{oneCampaign.name}}</text></view>
+      <view class="banner-title-share">
+        <button class="btn-campaign-img" open-type="share">
+          <image class="campaign-img" src="/pages/img/campaign-share.png"></image>
+        </button>
+      </view>
+    </view>
+    <view class="follow-count">
+      <view class="follow-left">
+        <view class="pay-value">
+          {{oneCampaign.channel_price}}
+        </view>
+        <view class="coin-desc">{{currencyType}}
+        </view>
+
+      </view>
+
+      <view class="follow-middle">
+        <view class="marketprice-value">
+          {{oneCampaign.price}}
+        </view>
+        <view class="follow-desc">市场价(元)
+        </view>
+
+      </view>
+
+      <view class="follow-right">
+        <view class="follow-value">
+          {{'≥' + oneCampaign.limit_stock + '个'}}
+        </view>
+        <view class="follow-desc">起订数
+        </view>
+
+      </view>
+    </view>
+
+    <!-- <view class="product-stock control-num">
+      <button class="control-btn btn-left" bindtap="minusStock">
+        <image src="{{'/pages/img/' + minusBtnImg + '.png'}}" style="width: 15px; height: 15px;" />
+      </button>
+      <button class="control-btn btn-middle">{{stockNumber}}</button>
+      <button class="control-btn btn-right" bindtap="addStock">
+        <image src="{{'/pages/img/' + addBtnImg + '.png'}}" style="width: 15px; height: 15px;" />
+      </button>
+    </view> -->
+
+    <view class="deadline">
+      <view class="deadline-tip">报名截止时间：</view>
+      <view class="deadline-time">{{deadlineTime}}</view>
+    </view>
+
+    <view class="vip-tip-area">
+      <view class="vip-tip">vip可享免费报名</view>
+    </view>
+
+  </view>
+
+  <view class="{{replyList.length>0?'show-desc':'show-desc padding50'}}">
+    <view class="top-title">
+      <text class="title-desc" decode="emsp">&nbsp;&nbsp;详细信息 </text>
+    </view>
+
+    <text class="desc-info">
+      {{oneCampaign.detail}}
+    </text>
+
+    <view class="other_image-area" wx:if="{{picList.length>0}}">
+      <image wx:for="{{picList}}" class="one-pic" src="{{item.url}}" data-url="{{item.url}}" mode="widthFix"
+        bindtap="previewImage"></image>
+    </view>
+
+    <view class="desc-company">
+      提供方: {{oneCampaign.company}}
+    </view>
+
+    <view class="attach-message">
+      <view class="read-count">
+        阅读 {{read}}
+      </view>
+      <view class="like-count" bindtap="updateLike">
+        <image src="/pages/img/like.jpg" style="width:16px;height:16px;"></image> {{like}}
+      </view>
+    </view>
+
+  </view>
+  <!-- 报名名单 -->
+  <view class="reply-bannber" wx:if="{{replyList.length > 0}}">
+    报名名单
+  </view>
+
+  <view class="reply-content" wx:if="{{replyList.length > 0}}">
+    <view class="weui-panel__bd">
+      <view wx:for="{{replyList}}" wx:key="{{item.id}}">
+        <view class="weui-media-box weui-media-box_text">
+          <view class="weui-media-box__desc">
+            <!-- 头像 -->
+            <view class="reply-left-info" data-card="{{item.cardId}}" bindtap="jumpBusiness">
+              <image class="reply-photo" src="{{item.cardInfo.headimgurl}}" background-size="cover"></image>
+            </view>
+            <view class="reply-middle-info">
+              <view class="reply-name-info">
+                <text class="reply-name"> {{item.cardInfo.realname}}</text>
+                <text class="job-text"> {{item.cardInfo.job}}</text>
+
+
+              </view>
+              <view class="reply-time-info">
+                <text class="company-text"> {{item.cardInfo.company}} </text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <text> \t\n </text>
+    <text> \t\n </text>
+  </view>
+  <view class='placeholder-view'></view>
+
+
+  <view class="bottom-button">
+    <button class="bottom-left-button bottom-class" bindtap="goCampaignlist">
+      <image src="/pages/img/home.png" class="bottom-img" />
+      <text class="bottom-txt">返回</text>
+    </button>
+
+    <button class="bottom-right-button bottom-class" bindtap="onGotUserInfo">
+      <text
+        class="{{isDeadlineExceeded?'price-bottom-txt disabled':'price-bottom-txt'}}">{{isDeadlineExceeded?'报名截止':'合计'
+        + allPrice + ' 立即预订'}}</text>
+    </button>
+  </view>
+
+</view>

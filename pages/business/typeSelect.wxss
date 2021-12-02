@@ -1,0 +1,7 @@
+/* pages/business/typeSelect.wxss */
+@import "../common/typeTemp.wxss";
+
+.confirm-btn{
+  color: white;
+  background-color:  #018fd1;
+}

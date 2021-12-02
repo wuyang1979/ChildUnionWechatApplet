@@ -1,0 +1,119 @@
+page {
+    height: 100%;
+}
+
+.cont {
+    background-color: white;
+    padding: 10px;
+    height: 100%;
+}
+
+.cover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-size: 19px;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+}
+
+.tips {
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.horizontal-line {
+    color: #cdcdcd;
+    display: inline-block;
+}
+
+.select-amount {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.select-amount-title {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.select-item {
+    font-size: 14px;
+    display: inline-block;
+    padding: 30px 20px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    width: 19%;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+}
+
+.choosed {
+    background-color: #eeeeee;
+}
+
+.charge-btn {
+    margin-top: 30px;
+    text-align: center;
+    width: 80%;
+    color: white;
+    background-color: #48c466;
+    border-radius: 10px;
+}
+
+.other-amount-area {
+    position: fixed;
+    width: 80%;
+    height: 180px;
+    top: 230rpx;
+    left: 50rpx;
+    padding: 15px;
+    background-color: white;
+    z-index: 10;
+}
+
+.other-close-img {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.5;
+}
+
+.other-title {
+    font-size: 18px;
+    text-align: center;
+}
+
+.other-amount {
+    border: 1px solid darkgray;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.other-bth {
+    text-align: center;
+    width: 60%;
+    color: white;
+    background-color: #48c466;
+    border-radius: 10px;
+    font-weight: 550;
+    margin-top: 30px;
+}
+
+.input-area {
+    position: relative;
+}
+
+.input-tip {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 18px;
+}

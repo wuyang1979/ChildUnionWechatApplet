@@ -1,0 +1,27 @@
+<view class="page">
+
+  <!--form bindsubmit="submit" report-submit="true"-->
+  <view class="message">
+    <view class="message-input">
+
+
+      <!-- <button formType="submit" class='form_button_message'> -->
+      <textarea id="replyMessage" name="replyMessage" maxlength="256" placeholder="请输入内容"
+        bindinput="bindMessageInput"></textarea>
+      <!-- </button> -->
+
+    </view>
+  </view>
+
+  <view class="submit-view">
+
+    <!--view bindtap="submit" report-submit="{{true}}">
+  <button class="submit-btn" formType="submit">提交</button>
+  </view-->
+
+    <button bindtap="submit" class="submit-btn" formType="submit">提交</button>
+
+  </view>
+  <!--/form-->
+
+</view>

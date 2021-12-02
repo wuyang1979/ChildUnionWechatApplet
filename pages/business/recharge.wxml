@@ -1,0 +1,45 @@
+<view class="{{otherAmountFlag?'cont cover':'cont'}}">
+    <view class="title">充值亲子币</view>
+    <view class="tips">1元=10亲子币</view>
+    <view class="select-amount">
+        <view class="horizontal-line">——</view>
+        <view class="select-amount-title">
+            <text decode="{{true}}">&emsp;单笔充值&emsp;</text>
+        </view>
+        <view class="horizontal-line">——</view>
+        <view class="select-area">
+            <view class="{{value==5?'select-item choosed':'select-item'}}" bindtap="amount10">
+                <text>5元</text>
+            </view>
+            <view class="{{value==10?'select-item choosed':'select-item'}}" bindtap="amount30">
+                <text>10元</text>
+            </view>
+            <view class="{{value==50?'select-item choosed':'select-item'}}" bindtap="amount50">
+                <text>50元</text>
+            </view>
+            <view class="{{value==100?'select-item choosed':'select-item'}}" bindtap="amount100">
+                <text>100元</text>
+            </view>
+            <view class="{{value==500?'select-item choosed':'select-item'}}" bindtap="amount200">
+                <text>500元</text>
+            </view>
+            <view class="select-item" bindtap="amountOther">
+                <text>其他金额</text>
+            </view>
+        </view>
+    </view>
+    <!-- 充值按钮 -->
+    <view class="recharge">
+        <button class="charge-btn" bindtap="payfor" disabled="{{otherAmountFlag}}">确认充值</button>
+    </view>
+
+    <view class="other-amount-area" wx:if="{{otherAmountFlag}}">
+        <image class="other-close-img" src="/pages/img/close-l.png" mode="aspectFill" bindtap="closeAmountArea"></image>
+        <view class="other-title">其他金额</view>
+        <view class="input-area">
+            <input type="text" class="other-amount" placeholder="请输入充值金额" bindinput="inputAmount" />
+            <view class="input-tip">元</view>
+        </view>
+        <button class="other-bth" bindtap="payfor">确认充值</button>
+    </view>
+</view>

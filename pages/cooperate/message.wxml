@@ -1,0 +1,95 @@
+<wxs src="../../utils/tool.wxs" module="tool" />
+<view class="page">
+
+  <!--form bindsubmit="submit" report-submit="true"-->
+  <view class="title">
+    <view class="title-name">发布需求</view>
+
+    <view class="title-input">
+      <view class="title-title">标题</view>
+      <!-- <button formType="submit" class='form_button_message'> -->
+      <input maxlength="50" placeholder="请输入标题" bindinput="bindTitleInput"
+        class="{{titleFocusStatus?'inputClass inputClass-focus':'inputClass'}}" bindblur="titleBlur"
+        bindfocus="titleFocus"></input>
+      <!-- </button> -->
+
+    </view>
+    <view class="title-tip">
+      最多50字
+    </view>
+  </view>
+
+  <!-- 需求类型 -->
+  <view class="picker">
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{tool.messageTypeStr}}">
+      <!-- <image src="/pages/img/messageType.png" mode="widthFix" class="message-type-image"></image> -->
+      <view class="xuqiu">需求类型</view>
+      <view class="xuqiu-value"> {{!!select ? tool.messageTypeStr[index] : '请选择'}}</view>
+      <image class="right-icon" src="/pages/img/chevron-right.png" mode="widthFix"></image>
+    </picker>
+  </view>
+
+  <!-- 上传资料 -->
+  <view class="upload-area">
+    <checkbox-group class="radio-group">
+      <view class="radio-type">文件类型:</view>
+      <checkbox class="radio" data-value="0" disabled="{{!canCheckPic}}" bindtap="choosePic">
+        <text class="sexText">图片</text>
+      </checkbox>
+      <checkbox class="radio" data-value="1" disabled="{{!canCheckVideo}}" bindtap="chooseVideo">
+        <text class="sexText">视频</text>
+      </checkbox>
+      <button bindtap="uploadFile" class="uploadBtnClass">
+        上传
+        <!-- <image src="/pages/img/upload.png" mode="widthFix" class="upload"></image> -->
+      </button>
+    </checkbox-group>
+
+    <text>{{showResult}}</text>
+    <view class="one-pic-area">
+      <image class="one-pic" wx:if="{{sourceType == 0 && pics.length>0}}" wx:for="{{pics}}" src="{{item}}"
+        data-index="{{index}}" mode="aspectFill" bindlongpress="delectPic"></image>
+    </view>
+    <view class="one-pic-tip" wx:if="{{sourceType == 0 && pics.length>0}}">图片长按以删除</view>
+  </view>
+  <!-- <view class="picker">
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{tool.messageTypeStr}}">
+      <button class="messageTypeClass">
+        {{!!select ? tool.messageTypeStr[index] : '需求类型'}}
+        <image src="/pages/img/messageType.png" mode="widthFix" class="message-type-image"></image>
+        <image class="right-icon" src="/pages/img/chevron-right.png" mode="widthFix"></image>
+      </button>
+    </picker>
+  </view> -->
+  <view class="message">
+    <view class="title-title">需求详情</view>
+    <view class="tips">请勿填写QQ、微信、电话等联系方式及特殊符号、违反法律的相关内容，否则有可能会导致您的账号被封禁。</view>
+    <view class="message-input">
+
+      <!-- <button formType="submit" class='form_button_message'> -->
+      <textarea maxlength="2000" bindinput="bindMessageInput"
+        class="{{messageFocusStatus?'message-content message-content-focus':'message-content'}}"
+        bindfocus="messageFocus" bindblur="messageBlur">
+        <text wx:if="{{message==''}}" class="message-tips">1.已有的资源\n\n2.需要的资源\n\n3.其他资源</text></textarea>
+      <!-- </button> -->
+
+
+    </view>
+    <view class="message-tip">
+      最多2000字(不支持表情包)
+    </view>
+  </view>
+
+  <view class="submit-view">
+
+    <!--view bindtap="submit" report-submit="{{true}}">
+  <button bindtap="submit" class="submit-btn" formType="submit">提交</button>
+</view-->
+
+    <button bindtap="submit" class="submit-btn" formType="submit">提交</button>
+
+  </view>
+
+  <!--/form-->
+
+</view>

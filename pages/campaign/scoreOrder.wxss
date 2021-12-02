@@ -1,0 +1,92 @@
+.page,
+page {
+  background-color: #eee;
+}
+
+.main-panel,
+.pay-list,
+.cost-panel {
+  background-color: white;
+}
+
+.main-panel {
+  padding: 20px 10px 0 10px;
+}
+
+.cost-panel {
+  margin-top: 20px;
+}
+
+.one-line {
+  padding: 5px 5px 0px 5px;
+}
+
+.right-txt {
+  margin-right: 35px;
+}
+
+.left-txt {
+  margin-left: 20px;
+}
+
+.left-txt,
+.right-txt {
+  display: inline-block;
+  font-size: 0.8em;
+}
+
+.left-txt {
+  text-align: left;
+}
+
+.right-txt {
+  text-align: right;
+  float: right;
+  color: rgb(214 177 14);
+}
+
+.pay-title {
+  margin-top: 20px;
+}
+
+.pay-list {
+  height: 60px;
+}
+
+.pay-left,
+.pay-right {
+  display: inline-block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.pay-left {
+  width: 80%;
+}
+
+.pay-right {
+  width: 20%;
+}
+
+.pay-left-img {
+  padding-left: 10px;
+  text-align: left;
+  width: 40px;
+  height: 40px;
+}
+
+.pay-right-img {
+  width: 25px;
+  height: 25px;
+  text-align: right;
+  padding-bottom: 10px;
+}
+
+.confirm-btn {
+  margin-top: 30px;
+  text-align: center;
+  width: 80%;
+  color: white;
+  background-color: #48c466;
+  border-radius: 10px;
+}

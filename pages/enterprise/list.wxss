@@ -1,0 +1,169 @@
+.page,
+page {
+    background-color: white;
+}
+
+.enterprise {
+    margin-top: 5px;
+}
+
+.main-title {
+    font-size: 18px;
+    text-align: center;
+    position: relative;
+    margin-top: 10px;
+}
+
+
+.weui-search-bar__form {
+    width: 60%;
+    margin-left: 20rpx;
+    border-color: rgb(60, 184, 233);
+}
+
+.weui-search-bar__cancel-btn {
+    position: absolute;
+    top: 0;
+    left: 480rpx;
+    font-size: 15px;
+    padding: 5px;
+    margin-left: 0;
+    line-height: inherit;
+}
+
+.weui-search-bar__settled {
+    position: absolute;
+    top: 8rpx;
+    right: 30rpx;
+    font-size: 13px;
+    padding: 4px 10px;
+    line-height: inherit;
+    color: white;
+    background-color: rgb(60, 184, 233);
+    border-radius: 5px;
+}
+
+.weui-search-bar__label {
+    line-height: inherit;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.weui-search-bar__text {
+    margin-left: 10px;
+}
+
+.weui-search-bar__input {
+    height: 35px;
+    margin-left: 20px;
+    text-align: left;
+}
+
+.weui-icon-search_in-box {
+    position: absolute;
+    top: 24rpx;
+    left: 43rpx;
+}
+
+.weui-search-bar-value {
+    color: white;
+    background-color: #9a9a9a;
+    padding: 2px 12px;
+    border-radius: 10px;
+    margin-left: -200rpx;
+    margin-top: 4rpx;
+}
+
+.weui-search-bar-search-value {
+    display: inline-block;
+    font-size: 13px;
+}
+
+.weui-search-bar-value-close {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-left: 3px;
+}
+
+.weui-icon-clear {
+    position: absolute;
+    top: 8rpx;
+}
+
+.select-area {
+    margin-top: 20px;
+    padding: 10px 20px 0 20px;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+
+.select-item {
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    width: 22%;
+    margin-bottom: 10px;
+}
+
+.select-item-image {
+    width: 30px;
+    height: 30px;
+}
+
+.select-item-tip {
+    font-size: 13px;
+}
+
+.tip {
+    padding: 5px 0 5px 10px;
+    background-color: #eee;
+}
+
+.enterprise-item {
+    padding: 15px 10px 10px 20px;
+    border-bottom: 1px solid #ccc;
+    font-size: 14px;
+    position: relative;
+}
+
+.hot-image {
+    width: 20px;
+    height: 20px;
+}
+
+.enterprise-item-image {
+    width: 100px;
+    height: 80px;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.enterprise-item-name {
+    margin-bottom: 5px;
+    position: absolute;
+    top:  75px;
+    left: 140px;
+    font-size: 15px;
+    width: 210px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.enterprise-item-title {
+    margin-left: auto;
+    font-weight: 550;
+    margin-right: 50rpx;
+    position: absolute;
+    top: 15px;
+    left: 140px;
+    font-size: 17px;
+    width: 58%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}

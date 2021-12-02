@@ -1,0 +1,7 @@
+<view> 
+
+      <view class="one-order" wx:for="{{rechargeOrderList}}" wx:for-index="index" data-index="{{index}}" data-id="{{item.id}}" wx:key="{{item.id}}" data-id="{{item.id}}" bindtap="oneRechargeOrder"> 
+        <include src="../common/orderTemp.wxml"></include>
+      </view>
+
+</view>

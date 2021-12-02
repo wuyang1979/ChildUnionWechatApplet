@@ -1,0 +1,108 @@
+<view class="one-base">
+    <image class="one-base-image" src="{{main_image}}" mode="aspectFill"></image>
+    <view class="one-base-info">
+        <view class="one-base-name">{{name}}</view>
+        <view class="one-base-type-area">
+            <view class="one-base-topic_type" wx:for="{{topic_type}}">{{item}}</view>
+            <view class="one-base-level" wx:if="{{levelId!='0'}}">{{level+'级景区'}}</view>
+            <!-- <view class="one-base-city">{{city}}</view>
+            <view class="one-base-district">{{districtName}}</view> -->
+        </view>
+        <view class="one-base-open-area">
+            <view class="one-base-open_time-tip">开放时间</view>
+            <view class="one-base-open_time">{{open_time}}</view>
+        </view>
+        <view class="one-base-workaddress-area" bindtap="openMapByTencent">
+            <view class="one-base-workaddress-tip">地址</view>
+            <view class="one-base-workaddress">{{workaddress}}</view>
+            <image class="map" src="/pages/img/map.png" mode="aspectFill"></image>
+        </view>
+        <view class="one-base-traffic-area">
+            <view class="traffic-tip">交通</view>
+            <view class="traffic">{{traffic}}</view>
+        </view>
+        <!-- <view class="official_account_name-area">
+            <view class="official_account_name-tip">公众号：</view>
+            <view class="official_account_name">{{official_account_name}}</view>
+        </view> -->
+        <view class="one-base-price-area">
+            <view class="one-base-price">票价</view>
+            <view class="one-base-value">{{price}}</view>
+        </view>
+        <!-- <view class="card_name-area">
+            <view class="card_name-tip">联系人：</view>
+            <view class="card_name">{{card_name}}</view>
+        </view> -->
+        <view class="{{pictureList.length>0?'label-area':'label-area padding-bottom30'}}">
+            <view class="label-top">
+                <view class="{{isIntroduce?'base-introduce-tip choosed':'base-introduce-tip'}}" bindtap="toIntroduce">
+                    基地介绍</view>
+                <view class="{{isActivities?'latest-activities-tip choosed':'latest-activities-tip'}}"
+                    bindtap="toActivitie">最新活动</view>
+                <view class="{{isConsultinge?'consulting-trends-tip choosed':'consulting-trends-tip'}}"
+                    bindtap="toConsultinge">
+                    <view>咨询动态</view>
+                    <view class="consulting-number">{{number}}</view>
+                </view>
+            </view>
+            <view class="label-content">
+                <!-- 基地介绍 -->
+                <view class="one-base-introduce-lab" wx:if="{{isIntroduce}}">
+                    <view class="one-base-introduce">
+                        {{introduce}}
+                    </view>
+                    <view class="one-base-picture-area" wx:if="{{pictureList.length>0}}">
+                        <image wx:for="{{pictureList}}" class="one-base-picture-item" src="{{item.src}}"
+                            data-src="{{item.src}}" mode="widthFix" bindtap="previewImage"></image>
+                    </view>
+                </view>
+                <view class="one-base-activities" wx:if="{{isActivities}}">{{activities}}</view>
+                <!-- 咨询动态 -->
+                <view class="one-base-consulting" wx:if="{{isConsultinge}}">
+                    <view class="weui-panel__bd">
+                        <view class="weui-panel-area" wx:for="{{consultingeList}}" wx:key="{{item.id}}">
+                            <!-- bindtap="jumpBusiness" -->
+                            <view class="weui-media-box weui-media-box_text" data-card="{{item.card_id}}">
+                                <view class="weui-media-box__desc">
+                                    <!-- 头像 -->
+                                    <!-- <view class="reply-left-info">
+                                        <image class="reply-photo" src="{{item.headimgurl}}" background-size="cover">
+                                        </image>
+                                    </view> -->
+                                    <view class="reply-middle-info">
+                                        <view class="reply-name-info">
+                                            <view class="reply-name">{{item.company}}</view>
+                                            <view class="job-text">已联系</view>
+                                        </view>
+                                        <!-- <view class="reply-time-info">
+                                            <text class="company-text">  </text>
+                                        </view> -->
+                                        <view class="reply-time"> {{item.lastString}} </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- <view class="{{pictureList.length>0?'one-base-introduce-area':'one-base-introduce-area padding-bottom30'}}">
+            <view class="one-base-introduce-tip">详情介绍：</view>
+            <view class="one-base-introduce">{{introduce}}</view>
+        </view> -->
+    </view>
+
+    <view class="reserve-area">
+        <button class="reserve" bindtap="onGotUserInfo">立即咨询</button>
+    </view>
+
+    <view class="cover-area" wx:if="{{isConfirmShow}}">
+        <view class="confirm-area">
+            <view class="confiem-area-tip">是否继续？</view>
+            <view class="confirm-area-bottom">
+                <view class="deny" bindtap="deny">取消</view>
+                <view class="confirm" bindtap="confirm">允许</view>
+            </view>
+        </view>
+    </view>
+</view>

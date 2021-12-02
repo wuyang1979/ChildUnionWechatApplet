@@ -1,0 +1,125 @@
+<view>
+  <wxs src="../../utils/tool.wxs" module="tool" />
+  <view class="content">
+    <view class="title">
+      {{tool.translateMessageType(messageType) + title}}
+    </view>
+
+    <view class="author" data-card="{{card}}" bindtap="jumpBusiness">
+      <!-- 头像 -->
+      <view class="message-left-info">
+        <image class="message-photo" src="{{headimgurl}}" background-size="cover"></image>
+      </view>
+      <!-- 信息 -->
+      <view class="message-right-info">
+        <view class="message-desc-info">
+          <text class="name-text"> {{realname}} </text>
+          <text class="job-text"> {{job}} </text>
+        </view>
+        <view class="message-company-info">
+          <text class="company-text"> {{company}} </text>
+          <text class="last-text"> {{last}} </text>
+        </view>
+
+      </view>
+      <!-- 关注 -->
+      <view class="business-right-info">
+
+        <form bindsubmit="saveFormId" class='form_class_message'>
+          <button class="business-btn-not-follow" data-id="{{card}}" form-type="submit" catchtap="guanzhu">关注</button>
+        </form>
+
+        <!-- <button class="business-btn-follow" wx:if="{{item.isFollow == 1}}" data-id="{{item.id}}"
+          data-follow="{{item.isFollow}}">已关注</button> -->
+      </view>
+    </view>
+
+    <view class="message">
+      <text class="text-message">{{message}}</text>
+    </view>
+    <view wx:if="{{!!sourcePath}}" class="source">
+      <!-- 图片 -->
+      <view wx:for="{{sourcePathList}}" wx:if="{{sourceType == 0 && sourcePathList.length>0}}">
+        <image class="one-pic" src="{{item.url}}" data-src="{{item.url}}" mode="widthFix" style="width: 100%;"
+          bindtap="previewImage"></image>
+      </view>
+      <view wx:if="{{sourceType == 0 && sourcePathList.length==0 && sourcePath}}">
+        <image class="one-pic" src="{{sourcePath}}" data-src="{{sourcePath}}" mode="widthFix" style="width: 100%;"
+          bindtap="previewImage">
+          </image>
+      </view>
+
+      <!-- 视频 -->
+      <view wx:if="{{sourceType == 1}}">
+        <video src="{{sourcePath}}"></video>
+      </view>
+    </view>
+    <view class="attach-message">
+      <view class="read-count">
+        阅读 {{read}}
+      </view>
+      <view class="like-count" bindtap="updateLike">
+        <image src="/pages/img/like.jpg" style="width:16px;height:16px;"></image> {{like}}
+      </view>
+    </view>
+    <!--button class="weui-btn" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo">
+    回复
+  </button-->
+
+  </view>
+
+  <view class="reply-bannber" wx:if="{{newMessageList.length > 0}}">
+    相关推荐
+  </view>
+
+  <view class="reply-content">
+    <view class="recommandList" wx:for="{{newMessageList}}" wx:for-index="index" wx:if="{{index < 5}}"
+      data-index="{{index}}" data-id="{{item.id}}" data-title="{{item.title}}" data-message="{{item.message}}"
+      data-type="{{item.messageType}}" data-last="{{item.lastString}}" data-card="{{item.cardId}}"
+      data-realname="{{item.cardInfo.realname}}" realname data-job="{{item.cardInfo.job}}"
+      data-company="{{item.cardInfo.company}}" data-headimgurl="{{item.cardInfo.headimgurl}}"
+      data-phone="{{item.cardInfo.phone}}" data-read="{{item.readCount}}" data-like="{{item.giveLike}}"
+      data-stype="{{item.sourceType}}" data-spath="{{item.sourcePath}}" wx:key="{{item.id}}" bindtap="oneMessage">
+      <view class="weui-media-box__title">
+        {{item.title}}</view>
+    </view>
+  </view>
+  <view class='placeholder-view'></view>
+
+  <view class="reply-bannber" wx:if="{{replyList.length > 0}}">
+    咨询信息
+  </view>
+
+  <view class="reply-content" wx:if="{{replyList.length > 0}}">
+    <view class="weui-panel__bd">
+      <view wx:for="{{replyList}}" wx:key="{{item.id}}">
+        <view class="weui-media-box weui-media-box_text">
+          <view class="weui-media-box__desc">
+            <include src="../common/messageReplyTemp.wxml"></include>
+          </view>
+        </view>
+      </view>
+    </view>
+    <text> \t\n </text>
+    <text> \t\n </text>
+  </view>
+  <view class='placeholder-view'></view>
+
+  <view class="bottom-button">
+    <button class="bottom-left-button bottom-class" bindtap="goCooperateList">
+      <image src="/pages/img/home.png" class="bottom-img" />
+      <text class="bottom-txt"> 首页</text>
+    </button>
+    <!--button class="bottom-middle-button bottom-class"   bindtap="contact">
+      <image src="/pages/img/button-contact.png" class="bottom-right-img" />
+    </button-->
+    <button class="bottom-middle-button bottom-class" bindtap="onGotUserInfo">
+      回复
+    </button>
+    <button class="bottom-right-button bottom-class" open-type="share">
+      <image src="/pages/img/button-share.png" class="bottom-right-img" />
+    </button>
+  </view>
+
+
+</view>

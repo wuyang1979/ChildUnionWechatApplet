@@ -1,0 +1,338 @@
+.enterprise {
+    padding: 10px 15px;
+}
+
+.title {
+    padding: 5px;
+    font-size: 18px;
+    font-weight: 550;
+}
+
+.main-image {
+    width: 100%;
+    margin-top: 10px;
+    height: 150px;
+}
+
+.authentication {
+    color: #c96a54;
+    border: 1px solid #ecb1a3;
+    padding: 2px 5px;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.tips {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.guarantee-image {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+.guarantee {
+    font-size: 15px;
+    font-weight: 550;
+    margin-right: 20px;
+}
+
+.score {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.score-value {
+    color: #d5614a;
+}
+
+.label-top {
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+.detail-tip,
+.comment-tip,
+.consulting-tip {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    width: 25%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 17px;
+}
+
+.commentCount,
+.consultingCount {
+    position: absolute;
+    top: -10px;
+    right: 15px;
+    font-size: 13px;
+    color: red;
+}
+
+.choosed {
+    font-weight: bold;
+}
+
+.choosed::after {
+    content: '';
+    width: 40%;
+    height: 0;
+    display: block;
+    margin: 0 auto;
+    border-bottom: 4px solid #ffb545;
+}
+
+.detail {
+    font-size: 15px;
+    margin-top: 5px;
+    text-indent: 2em;
+    text-align: justify;
+    margin-bottom: 10px;
+}
+
+.enterprise-name {
+    display: flex;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.enerprise-area {
+    padding: 10px 10px 10px 3px;
+}
+
+.know-more {
+    color: #949494;
+    font-size: 14px;
+    margin-left: auto;
+}
+
+.detail-image-item {
+    width: 100%;
+}
+
+.weui-media-box {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #eee;
+}
+
+.weui-media-box__desc {
+    -webkit-line-clamp: initial;
+}
+
+.reply-photo {
+    width: 80rpx;
+    height: 80rpx;
+    margin: 0;
+    border-radius: 50%;
+    margin-top: 5px;
+}
+
+.reply-left-info,
+.reply-middle-info,
+.reply-right-info {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.reply-left-info {
+    width: 15%;
+}
+
+.reply-middle-info {
+    width: 80%;
+}
+
+.reply-name {
+    font-size: 14px;
+    width: 50%;
+    color: #1d6eaf;
+}
+
+.job-text {
+    font-size: 14px;
+    width: 50%;
+    margin-right: 60rpx;
+    color: black;
+}
+
+.reply-time {
+    color: #777777;
+    font-size: 13px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.reply-name,
+.reply-time {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.reply-name,
+.reply-time {
+    width: 45%;
+}
+
+.reply-btn {
+    font-size: 0.8em;
+    background-color: white;
+    color: black;
+    /*display:inline-block;*/
+}
+
+.reply-name-info {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.reply-message {
+    padding-top: 5px;
+    font-size: 16px;
+    color: black;
+    margin-left: 10px;
+}
+
+.reply-message-inner {
+    margin: 5px;
+    padding: 5px;
+    background-color: #eee;
+}
+
+.inner-reply-message {
+    margin: 3px;
+    color: #777777;
+    font-size: 0.9em;
+}
+
+.bottom-button {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 42px;
+    background-color: white;
+    border-top: thick #c6c6c6;
+    padding-bottom: 10px;
+    padding-top: 5px;
+}
+
+.bottom-left-button,
+.bottom-middle-button,
+.bottom-right-button {
+    /*width: 45%;*/
+    display: inline-block;
+    text-align: center;
+}
+
+.bottom-left-button {
+    width: 30%;
+}
+
+.bottom-middle-button {
+    width: 25%;
+    font-size: 1em;
+    margin-left: -20rpx;
+    border-radius: 10px;
+    background-color: #ffad00;
+}
+
+.bottom-right-button {
+    width: 25%;
+    color: #018fd1;
+    margin-left: -20rpx;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.bottom-class {
+    height: 100%;
+    font-size: 1em;
+    margin-right: 60rpx;
+}
+
+.bottom-img {
+    width: 20px;
+    height: 20px;
+    padding-bottom: 5px;
+    vertical-align: middle;
+}
+
+.bottom-right-img {
+    width: 100px;
+    height: 33px;
+    padding-bottom: 5px;
+    vertical-align: middle;
+}
+
+.bottom-txt {
+    color: #666666;
+    padding-top: 0px;
+}
+
+.middle-bottom-txt {
+    color: #018fd1;
+    padding-top: 0px;
+}
+
+.bottom-class::after {
+    border: 0rpx;
+    font-size: 1em;
+}
+
+.reply-content {
+    background-color: white;
+    padding: 10px 15px;
+}
+
+.detail-area,
+.consulting-area,
+.reply-content {
+    padding-bottom: 50px;
+}
+
+.weui-panel-area {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(228, 228, 228);
+}
+
+.consulting-name {
+    font-size: 14px;
+    width: 30%;
+    color: #1d6eaf;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 30rpx;
+}
+
+.consulting-job-text {
+    font-size: 14px;
+    color: black;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 150rpx;
+}
+
+.consulting-time {
+    display: inline-block;
+    color: #777777;
+    font-size: 13px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.consulting-middle-info {
+    width: 100%;
+}

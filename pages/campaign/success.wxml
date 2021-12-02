@@ -1,0 +1,38 @@
+<view class="page">
+    <view class="weui-msg">
+        <view class="weui-msg__icon-area">
+            <icon type="success" size="93"></icon>
+        </view>
+        <view class="weui-msg__text-area">
+            <view class="weui-msg__title">支付成功</view>
+        </view>
+
+        <!-- 仅对于亲子社群开放 -->
+        <view class="community-area" wx:if="{{type==3}}">
+            <view class="community-title">群主二维码：</view>
+            <image class="leader-qr-code" src='{{qrCodeSrc}}' mode="widthFix"></image>
+            <button class="save-image" data-img="{{qrCodeSrc}}" bindtap="saveQrCode">保存群主二维码</button>
+            <view class="community-tips">添加群主时备注“入收费群”</view>
+        </view>
+
+        <!-- 对最新活动、充值亲子币、加入会员开放 -->
+        <!-- <view class="newest-campaign" wx:if="{{activeType==4}}">
+            <view class="invite" bindtap="jumpInvite">
+                <image src="/pages/img/invite.jpg" class="invite-img"></image>
+            </view>
+        </view> -->
+
+        <view class="weui-msg__extra-area">
+            <view class="weui-footer">
+                <view class="weui-footer__links">
+                    <button class="home-bak-btn" bindtap="goHome">回到首页</button>
+                </view>
+                <view class="weui-footer__links">
+                    <button class="home-bak-btn" bindtap="goOrder">查看订单</button>
+                </view>
+                <view class="weui-footer__text">Copyright © 2015-2021 南京豆苗软件科技有限公司</view>
+            </view>
+        </view>
+    </view>
+
+</view>

@@ -1,0 +1,31 @@
+<view>
+
+  <view class="top-banner">
+    <image src="/pages/img/campaign-list-banner.jpg"></image>
+  </view>
+
+
+  <view class="top-title">
+    <text class="title-desc" decode="emsp">&nbsp;&nbsp;热门推荐 </text>
+  </view>
+
+  <view>
+
+    <view class="one-campaign" wx:for="{{campaigns}}" wx:key="{{item.id}}" data-index="{{item.id}}"
+      data-id="{{item.id}}" data-read="{{item.read_count}}" data-like="{{item.give_like}}"
+      data-img="{{qinzi + item.main_image}}" data-deadline="{{item.deadline}}" data-currency="{{item.currency}}"
+      bindtap="oneCampaign">
+      <view class="campaign-img">
+        <image src="{{qinzi + item.main_image}}"></image>
+      </view>
+      <view class="campaign-title">
+        {{item.name}}
+      </view>
+      <view class="campaign-time">
+        {{item.create_time}}
+      </view>
+    </view>
+
+  </view>
+
+</view>

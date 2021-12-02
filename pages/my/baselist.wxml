@@ -1,0 +1,15 @@
+<view class="cont">
+    <view class="title">我的基地</view>
+    <view class="base-area">
+        <view class="base-item" wx:for="{{baseList}}" wx:key="{{item.id}}">
+            <view class="base-item-name">{{item.name}}</view>
+            <view class="modify-btn" bindtap="modify" data-card_id="{{item.card_id}}" data-city="{{item.city}}"
+                data-id="{{item.id}}" data-district="{{item.district}}" data-introduce="{{item.introduce}}"
+                data-latitude="{{item.latitude}}" data-level="{{item.level}}" data-longitude="{{item.longitude}}"
+                data-main_image="{{item.main_image}}" data-name="{{item.name}}"
+                data-official_account_name="{{item.official_account_name}}" data-open_time="{{item.open_time}}"
+                data-price="{{item.price}}" data-topic_type_id="{{item.topic_type_id}}" data-traffic="{{item.traffic}}"
+                data-workaddress="{{item.workaddress}}" data-topic_type_name="{{item.topicTypeName}}">修改</view>
+        </view>
+    </view>
+</view>

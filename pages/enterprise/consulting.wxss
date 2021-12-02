@@ -1,0 +1,38 @@
+.consulting{
+    padding: 10px 20px;
+}
+
+.base-name-area {
+    background-color: white;
+    margin-top: 10px;
+}
+
+.base-name-tip {
+    margin-right: 270rpx;
+}
+
+.base-name-input {
+    margin-top: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.title {
+    font-size: 17px;
+    text-align: center;
+    font-weight: 550;
+}
+
+.submit-area {
+    background-color: white;
+    padding: 10px 0;
+    margin-top: 10px;
+}
+
+.submit-btn {
+    background-color: rgb(1, 143, 215);
+    width: 90%;
+    border: 2px solid;
+    border-radius: 25px;
+    color: white;
+}

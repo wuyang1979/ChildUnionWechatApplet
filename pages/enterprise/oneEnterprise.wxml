@@ -1,0 +1,101 @@
+<view class="enterprise">
+    <view class="title">{{title}}</view>
+    <image class="main-image" src="{{mainImage}}" mode="aspectFill" data-src="{{mainImage}}" bindtap="previewImage">
+    </image>
+    <view class="tips">
+        <view class="authentication">平台认证</view>
+        <image class="guarantee-image" src="/pages/img/guarantee.png" mode="aspectFill"></image>
+        <view class="guarantee">服务保障</view>
+        <view class="score-tip">综合评分：</view>
+        <view class="score-value">{{score}}</view>
+    </view>
+
+    <view class="enerprise-area">
+        <view class="enterprise-name">
+            <view class="name">{{name}}</view>
+            <view class="know-more">了解更多 ></view>
+        </view>
+    </view>
+
+    <view class="label-top">
+        <view class="{{isDetail?'detail-tip choosed':'detail-tip'}}" bindtap="toDetail">
+            详情</view>
+        <view class="{{isComment?'comment-tip choosed':'comment-tip'}}" bindtap="toComment">
+            评价
+            <view class="commentCount">{{commentCount}}</view>
+        </view>
+        <view class="{{isConsulting?'consulting-tip choosed':'consulting-tip'}}" bindtap="toConsulting">
+            咨询
+            <view class="consultingCount">{{consultingCount}}</view>
+        </view>
+    </view>
+
+    <view class="detail-area" wx:if="{{isDetail}}">
+        <view class="detail">{{introduce}}</view>
+        <image class="detail-image-item" wx:for="{{pictureList}}" src="{{item.url}}" mode="widthFix"
+            data-src="{{item.url}}" bindtap="previewImage"></image>
+    </view>
+
+    <view class="reply-content" wx:if="{{isComment}}">
+        <view class="weui-panel__bd">
+            <view wx:for="{{replyList}}" wx:key="{{item.id}}">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__desc">
+                        <!-- 头像 -->
+                        <view class="reply-left-info" data-card="{{item.cardId}}" bindtap="jumpBusiness">
+                            <image class="reply-photo" src="{{item.headimgurl}}" background-size="cover">
+                            </image>
+                        </view>
+                        <view class="reply-middle-info">
+                            <view class="reply-name-info">
+                                <text class="reply-name"> {{item.realname}}</text>
+                                <text class="job-text"> {{item.job}}</text>
+                                <text class="reply-time"> {{item.lastString}} </text>
+                            </view>
+                            <view class="reply-time-info">
+                                <text class="company-text"> {{item.company}} </text>
+                            </view>
+                        </view>
+                        <view class="reply-message">
+                            {{item.message}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <text> \t\n </text>
+        <text> \t\n </text>
+    </view>
+
+    <view class="consulting-area" wx:if="{{isConsulting}}">
+        <!-- 咨询动态 -->
+        <view class="weui-panel__bd">
+            <view class="weui-panel-area" wx:for="{{consultingeList}}" wx:key="{{item.id}}">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__desc">
+                        <view class="reply-middle-info consulting-middle-info">
+                            <view class="reply-name-info">
+                                <view class="consulting-name">{{item.name}}</view>
+                                <view class="consulting-job-text">已咨询</view>
+                                <view class="consulting-time">{{item.lastString}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="bottom-button">
+        <button class="bottom-left-button bottom-class" bindtap="goCooperateList">
+            <image src="/pages/img/home.png" class="bottom-img" />
+            <text class="bottom-txt"> 首页</text>
+        </button>
+        <button class="bottom-middle-button bottom-class" bindtap="consulting">
+            咨询
+        </button>
+        <button class="bottom-right-button bottom-class" bindtap="onGotUserInfo">
+            评价
+        </button>
+    </view>
+</view>

@@ -1,0 +1,370 @@
+.page,
+page {
+  background-color: #eee;
+}
+
+.main-panel,
+.pay-list,
+.cost-panel {
+  background-color: white;
+}
+
+.one-business {
+  padding: 10px 0 10px 15px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(228, 228, 228);
+  line-height: 23px;
+}
+
+.businesses{
+  position: relative;
+}
+
+.more{
+  position: absolute;
+  top: 5px;
+  right: 25px;
+  font-size: 13px;
+  padding: 5px;
+}
+
+.main-panel {
+  margin-top: -15px;
+}
+
+.main-panel {
+  padding-top: 20px;
+}
+
+.join-vip-image {
+  width: 100%;
+  height: 180px;
+}
+
+.cost-panel {
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.one-line {
+  padding: 5px 5px 0px 5px;
+}
+
+.left-txt,
+.right-txt {
+  display: inline-block;
+  font-size: 0.8em;
+}
+
+.left-txt {
+  text-align: left;
+}
+
+.pay-txt {
+  padding: 5px 5px 0px 5px;
+  text-align: center;
+  color: black;
+  font-size: 1.2em;
+}
+
+.pay-title {
+  margin-top: 20px;
+}
+
+.pay-list {
+  height: 60px;
+}
+
+.pay-left,
+.pay-right {
+  display: inline-block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.pay-left {
+  width: 80%;
+}
+
+.pay-right {
+  width: 20%;
+}
+
+.pay-left-img {
+  padding-left: 10px;
+  text-align: left;
+  width: 40px;
+  height: 40px;
+}
+
+.pay-right-img {
+  width: 25px;
+  height: 25px;
+  text-align: right;
+  padding-bottom: 10px;
+}
+
+.tips-txt-view {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.tips-txt {
+  color: rgb(245, 179, 94);
+  font-size: 0.9em;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.vip-rights {
+  padding: 0 15px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.join-conditions,
+.vip-fee {
+  padding: 0 15px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.limit-time-discount-title {
+  font-size: 15px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  color: red;
+  font-weight: bold;
+}
+
+.vip-tips {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  font-size: 14px;
+  padding: 0 15px;
+}
+
+.vip-cost,
+.limit-time-discount {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.vip-fee-content {
+  margin-left: 10px;
+  font-size: 14px;
+  padding: 0 15px;
+}
+
+.vip-rights-content,
+.join-conditions-content {
+  font-size: 14px;
+  padding: 0 15px;
+}
+
+.pay,
+.pay-count {
+  display: inline-block;
+  font-size: 13px;
+}
+
+.pay-rmb {
+  display: inline-block;
+  font-size: 17px;
+  margin-right: 2px;
+  color: red;
+}
+
+.pay-value {
+  display: inline-block;
+  font-size: 20px;
+  color: red;
+}
+
+.coupon {
+  font-size: 13px;
+  color: #ca5e30;
+}
+
+.coupon-title {
+  display: inline-block;
+}
+
+.coupon-content {
+  display: inline-block;
+}
+
+.contailer {
+  position: relative;
+  padding: 0 15px;
+}
+
+.confirm-btn {
+  position: absolute;
+  top: 35px;
+  right: 20px;
+  text-align: center;
+  width: 40%;
+  color: #725023;
+  background-color: #f1bd72;
+  border-radius: 30px;
+  font-weight: 550;
+}
+
+.one-business {
+  padding-left: 5px;
+  background-color: white;
+}
+
+.business-photo {
+  width: 120rpx;
+  height: 120rpx;
+  margin-left: 10rpx;
+  border-radius: 50%;
+}
+
+.contailer {
+  background-color: #eeeeee;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+.business-left-info,
+.business-middle-info,
+.business-right-info {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.business-left-info {
+  width: 22%;
+}
+
+.business-middle-info {
+  width: 70%;
+}
+
+/*
+.business-right-info{
+  width: 20%;
+}
+*/
+
+.business-desc-info {
+  margin: 0px;
+}
+
+.business-name {
+  font-size: 0.9em;
+}
+
+.business-job {
+  color: #777777;
+  font-size: 0.7em;
+}
+
+.business-company {
+  color: #777777;
+  font-size: 0.7em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.business-name,
+.business-job {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.business-name,
+.business-job {
+  width: 45%;
+}
+
+.leaguer-btn {
+  font-size: 0.6em;
+  font-weight: bold;
+  width: 36px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(184, 13, 13);
+  padding: 4px;
+  display: inline-block;
+  line-height: 0.8;
+  margin-left: 5px;
+}
+
+.leaguer_normal {
+  width: 17px;
+  height: 15px;
+  margin-left: 5px;
+}
+
+.business-button-info {
+  margin: 0px;
+}
+
+.business-btn-tag {
+  color: black;
+  font-size: 0.6em;
+  width: 60px;
+  height: 20px;
+  display: inline-block;
+  line-height: 1.8;
+  vertical-align: middle;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin-right: 3px;
+}
+
+.tag1 {
+  background-color: rgb(128, 214, 127);
+}
+
+.tag2 {
+  background-color: rgb(242, 184, 121);
+}
+
+.tag3 {
+  background-color: rgb(137, 218, 199);
+}
+
+.default-tag,
+.default-tag::after {
+  border: none;
+  background-color: white;
+}
+
+.business-btn-not-follow,
+.business-btn-follow {
+  font-size: 0.8em;
+  width: 70px;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 30%;
+}
+
+.business-btn-not-follow {
+  background-color: rgb(2, 143, 215);
+  color: white;
+}
+
+.business-btn-follow {
+  background-color: rgb(238, 238, 238);
+}
+
+.form_class_message {
+  width: 100%;
+}
+
+.businesses-title {
+  background-color: white;
+  padding-left: 15px;
+  padding-top: 5px;
+}

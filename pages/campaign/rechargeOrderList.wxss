@@ -1,0 +1,9 @@
+@import "../common/orderTemp.wxss";
+
+.page, page{
+  background-color: #eee;
+}
+
+.one-order{
+  margin-bottom: 10px;
+}

@@ -1,0 +1,20 @@
+var messageTypeStr = ['赞助招商', '项目合作', '招租转让', '资源互换', '求职招聘', '其它信息'];
+
+var levelStr = ['无', '5A级景区', '4A级景区', '3A级景区', '2A级景区', 'A级景区'];
+
+var districtStr = ['秦淮区', '玄武区', '建邺区', '雨花台区', '鼓楼区', '江宁区', '六合区', '浦口区', '栖霞区', '高淳区', '溧水区'];
+
+var translateMessageType = function (value) {
+  if (!!value || value == 0) {
+    var index = parseInt(value);
+    return '[' + messageTypeStr[index] + ']';
+  }
+  return '';
+}
+
+module.exports = {
+  messageTypeStr: messageTypeStr,
+  translateMessageType: translateMessageType,
+  levelStr: levelStr,
+  districtStr: districtStr
+}

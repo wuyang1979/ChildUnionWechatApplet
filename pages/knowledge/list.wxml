@@ -1,0 +1,80 @@
+<view class="knowledge">
+
+
+    <view class="qinzi-label">
+        <view class="{{activityPlanShowFlag?'activity-plan choosed':'activity-plan'}}" bindtap="activityPlanLab">活动方案
+        </view>
+        <view class="{{safetyPlanShowFlag?'safety-plan choosed':'safety-plan'}}" bindtap="safetyPlanLab">安全预案
+        </view>
+        <view class="{{activitySummaryShowFlag?'activity-summary choosed':'activity-summary'}}"
+            bindtap="activitySummaryLab">活动总结
+        </view>
+        <view class="{{researchManualShowFlag?'research-manual choosed':'research-manual'}}"
+            bindtap="researchManualLab">研学手册
+        </view>
+        <view class="{{agreementShowFlag?'agreement choosed':'agreement'}}" bindtap="agreementLab">相关协议
+        </view>
+    </view>
+
+
+    <view class="knowledge-area" wx:for="{{knowledgeList}}" data-url="{{item.url}}" data-id="{{item.id}}"
+        data-typeId="{{item.typeId}}" data-createTime="{{item.createTime}}" data-readCount="{{item.read_count}}"
+        data-title="{{item.title}}" data-cost="{{item.cost}}" wx:if="{{item.typeId == 1 && activityPlanShowFlag}}"
+        bindtap="previewDetail">
+        <view class="knowledge-title">{{item.title}}</view>
+        <view class="cost-tip">亲子币：</view>
+        <view class="{{item.cost==0?'cost-value cost-red':'cost-value'}}">{{item.cost == 0?'免费':item.cost}}</view>
+        <view class="read-tip">阅读量：</view>
+        <view class="read-num">{{item.read_count}}</view>
+        <view class="time">{{item.createTime}}</view>
+    </view>
+
+
+    <view class="knowledge-area" wx:for="{{knowledgeList}}" data-url="{{item.url}}" data-id="{{item.id}}"
+        data-typeId="{{item.typeId}}" data-createTime="{{item.createTime}}" data-readCount="{{item.read_count}}"
+        data-title="{{item.title}}" data-cost="{{item.cost}}" wx:if="{{item.typeId == 2 && safetyPlanShowFlag}}"
+        bindtap="previewDetail">
+        <view class="knowledge-title">{{item.title}}</view>
+        <view class="cost-tip">亲子币：</view>
+        <view class="{{item.cost==0?'cost-value cost-red':'cost-value'}}">{{item.cost == 0?'免费':item.cost}}</view>
+        <view class="read-tip">阅读量：</view>
+        <view class="read-num">{{item.read_count}}</view>
+        <view class="time">{{item.createTime}}</view>
+    </view>
+
+    <view class="knowledge-area" wx:for="{{knowledgeList}}" data-url="{{item.url}}" data-id="{{item.id}}"
+        data-typeId="{{item.typeId}}" data-createTime="{{item.createTime}}" data-readCount="{{item.read_count}}"
+        data-title="{{item.title}}" data-cost="{{item.cost}}" wx:if="{{item.typeId == 3 && activitySummaryShowFlag}}"
+        bindtap="previewDetail">
+        <view class="knowledge-title">{{item.title}}</view>
+        <view class="cost-tip">亲子币：</view>
+        <view class="{{item.cost==0?'cost-value cost-red':'cost-value'}}">{{item.cost == 0?'免费':item.cost}}</view>
+        <view class="read-tip">阅读量：</view>
+        <view class="read-num">{{item.read_count}}</view>
+        <view class="time">{{item.createTime}}</view>
+    </view>
+
+    <view class="knowledge-area" wx:for="{{knowledgeList}}" data-url="{{item.url}}" data-id="{{item.id}}"
+        data-typeId="{{item.typeId}}" data-createTime="{{item.createTime}}" data-readCount="{{item.read_count}}"
+        data-title="{{item.title}}" data-cost="{{item.cost}}" wx:if="{{item.typeId == 4 && researchManualShowFlag}}"
+        bindtap="previewDetail">
+        <view class="knowledge-title">{{item.title}}</view>
+        <view class="cost-tip">亲子币：</view>
+        <view class="{{item.cost==0?'cost-value cost-red':'cost-value'}}">{{item.cost == 0?'免费':item.cost}}</view>
+        <view class="read-tip">阅读量：</view>
+        <view class="read-num">{{item.read_count}}</view>
+        <view class="time">{{item.createTime}}</view>
+    </view>
+
+    <view class="knowledge-area" wx:for="{{knowledgeList}}" data-url="{{item.url}}" data-id="{{item.id}}"
+        data-typeId="{{item.typeId}}" data-createTime="{{item.createTime}}" data-readCount="{{item.read_count}}"
+        data-title="{{item.title}}" data-cost="{{item.cost}}" wx:if="{{item.typeId == 5 && agreementShowFlag}}"
+        bindtap="previewDetail">
+        <view class="knowledge-title">{{item.title}}</view>
+        <view class="cost-tip">亲子币：</view>
+        <view class="{{item.cost==0?'cost-value cost-red':'cost-value'}}">{{item.cost == 0?'免费':item.cost}}</view>
+        <view class="read-tip">阅读量：</view>
+        <view class="read-num">{{item.read_count}}</view>
+        <view class="time">{{item.createTime}}</view>
+    </view>
+</view>

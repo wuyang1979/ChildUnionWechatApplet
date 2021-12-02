@@ -1,0 +1,46 @@
+<view>
+
+<view class="banner">
+<image src="/pages/img/invite-banner.jpg"></image>
+</view>
+
+<view class="invite invite-1">
+<view class="left">
+<image src="/pages/img/invite-1.png" class="invite-image" mode="widthFix"></image>
+</view>
+<view class="right info">
+<text> \t\n </text>
+<text> \t\n </text>
+免费获取<text class="bold-text">1000+</text>亲子商家通讯录
+</view>
+</view>
+
+<view class="invite invite-2">
+<view class="left info">
+<text> \t\n </text>
+<text> \t\n </text>
+免费发布<text class="bold-text">商务合作</text>信息
+</view>
+<view class="right">
+<image src="/pages/img/invite-2.png" class="invite-image" mode="widthFix"></image>
+</view>
+</view>
+
+<view class="invite invite-3">
+<view class="left info">
+<image src="/pages/img/invite-3.png" class="invite-image" mode="widthFix"></image>
+</view>
+<view class="right">
+<text> \t\n </text>
+<text> \t\n </text>
+免费加入<text class="bold-text">亲子大联盟</text>合作交流群
+</view>
+</view>
+<view class="white-space"></view>
+
+<view class="bottom-info">
+<text> \t\n </text>
+<button class="bottom-btn " open-type='share' >现在邀请奖励100亲子币</button>
+</view>
+
+</view>

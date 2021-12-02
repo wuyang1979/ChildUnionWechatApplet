@@ -1,0 +1,97 @@
+.page,
+page {
+    background-color: #eee;
+}
+
+.knowledge-tip {
+    padding: 5px 0 5px 10px;
+    padding-top: 10px;
+}
+
+.knowledge-area {
+    position: relative;
+    background-color: white;
+    padding: 10px 10px 10px 15px;
+}
+
+.knowledge-area::before,
+.knowledge-area::after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    color: #e5e5e5;
+    top: 0;
+    border-top: 1rpx solid #e5e5e5;
+    border-top-width: 0.5px;
+    border-top-style: solid;
+    border-top-color: rgb(229, 229, 229);
+}
+
+.knowledge-title {
+    font-size: 1.1em;
+}
+
+.cost-tip,
+.cost-value,
+.read-tip,
+.read-num {
+    display: inline-block;
+    font-size: 12px;
+    color: #6b6b6b;
+}
+
+.cost-red {
+    color: red;
+    font-size: 14px;
+}
+
+.cost-tip {
+    margin-left: 5rpx;
+}
+
+.time {
+    font-size: 12px;
+    color: #6b6b6b;
+    position: absolute;
+    right: 55rpx;
+    bottom: 25rpx;
+}
+
+.read-tip {
+    margin-left: 20px;
+}
+
+.qinzi-label {
+    background-color: white;
+    padding: 8px 10px;
+    margin-top: 5px;
+    margin-bottom: 2px;
+}
+
+.activity-plan,
+.safety-plan,
+.activity-summary,
+.research-manual,
+.agreement {
+    display: inline-block;
+    text-align: center;
+    width: 20%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
+}
+
+.choosed {
+    font-weight: bold;
+}
+
+.choosed::after {
+    content: '';
+    width: 80%;
+    height: 0;
+    display: block;
+    margin: 0 auto;
+    border-bottom: 2px solid #ffb545;
+}

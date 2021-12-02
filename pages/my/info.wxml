@@ -1,0 +1,113 @@
+        <view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">姓名</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder=""   bindinput="bindRealnameInput" value="{{realname}}"/>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">性别</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <radio-group class="radio-group" bindchange="radioChange">
+                      <radio class="radio" value="0" checked="{{gender == 0}}">
+                        <text class="sexText">男</text>
+                      </radio>
+                      <radio class="radio" value="1" checked="{{gender == 1}}">
+                        <text class="sexText">女</text>
+                      </radio>
+                    </radio-group>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">公司</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder=""   bindinput="bindCompanyInput" value="{{company}}"/>
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">职务</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder=""   bindinput="bindJobInput" value="{{job}}" />
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">手机</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="" bindinput="bindPhoneInput" value="{{phone}}" maxlength="11" type="number" />
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">微信号</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="" bindinput="bindWeixinInput" value="{{weixincode}}" />
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">城市</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <button class="city-btn-select" bindtap="selectCity">{{cityName + ' ▾ '}} </button>
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">地址</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <input class="weui-input" placeholder="" bindinput="bindWorkaddressInput" value="{{workaddress}}" />
+                </view>
+            </view>
+
+            <view class="weui-cell weui-cell_input weui-cell_box">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">简介</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <textarea bindinput='bindIntroduceInput' class="boxInput"     maxlength='2048' placeholder='' value="{{introduce}}"   selection-end='-1' selection-start='-1' cursor='-1'></textarea>
+                </view>
+            </view>
+            
+        </view>
+
+<view class="submit-view">
+
+<form bindsubmit='saveFormId' report-submit="true">
+    <button form-type="submit" class='form_button'>
+	    <form bindsubmit='saveFormId' report-submit="true">
+          <button form-type="submit" class='form_button'>
+	    <form bindsubmit='saveFormId' report-submit="true">
+    <button form-type="submit" class='form_button'>
+	    <form bindsubmit='saveFormId' report-submit="true">
+		    <button form-type="submit" class='form_button'>
+			    <form bindsubmit='saveFormId' report-submit="true">
+
+  <button class="submit-btn" disabled="{{commited}}"  bindtap = "onGotUserInfo">提交</button>
+
+				</form>
+		    </button>
+		</form>
+    </button>
+    		</form>
+    </button>
+    		</form>
+    </button>
+</form>
+
+</view>

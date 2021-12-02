@@ -1,0 +1,66 @@
+<view class="active-base">
+    <view class="main-title">
+        <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                <input type="text" class="weui-search-bar__input" placeholder="输入活动基地" value="{{searchValue}}"
+                    focus="{{inputShowed}}" bindinput="inputTyping" />
+                <view class="weui-icon-clear" wx:if="{{searchValue.length > 0}}" bindtap="clearInput">
+                    <icon type="clear" size="14"></icon>
+                </view>
+            </view>
+            <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                <icon class="weui-icon-search" type="search" size="14" wx:if="{{searchValue==''}}"></icon>
+                <view class="weui-search-bar__text" wx:if="{{searchValue==''}}">活动基地</view>
+                <view class="weui-search-bar__text weui-search-bar-value" wx:if="{{searchValue!=''}}"
+                    bindtap="clearSearch">
+                    <view class="weui-search-bar-search-value">{{searchValue}}</view>
+                    <image class="weui-search-bar-value-close" src="/pages/img/close_2.png" mode="aspectFill"></image>
+                </view>
+            </label>
+        </view>
+        <view class="weui-search-bar__cancel-btn" bindtap="searchSubmit">搜索</view>
+        <view class="weui-search-bar__settled" bindtap="settled">基地入驻</view>
+    </view>
+    <view class="select-area">
+        <view class="select-lab">
+            <button class="{{selectDistrictFlag?'district-btn-select red':'district-btn-select'}}"
+                bindtap="selectDistrict">{{selectDistrictName + ' ▾ '}} </button>
+            <button class="{{selectTypFlag?'type-btn-select red':'type-btn-select'}}"
+                bindtap="selectType">{{selectTypeName + ' ▾ '}} </button>
+        </view>
+
+        <view class="select-district-area" wx:if="{{selectDistrictFlag}}">
+            <view class="select-item" wx:for="{{districtList}}" data-districtName="{{item.districtName}}"
+                data-districtCode="{{item.districtCode}}" bindtap="screenDistrict">
+                {{item.districtName}}
+            </view>
+        </view>
+
+        <view class="select-type-area" wx:if="{{selectTypFlag}}">
+            <view class="select-item" wx:for="{{typeList}}" data-typeName="{{item.typeName}}"
+                data-typeCode="{{item.typeCode}}" bindtap="screenType">
+                {{item.typeName}}
+            </view>
+        </view>
+    </view>
+
+    <view class="active-base-list" wx:for="{{baseList}}" wx:for-index="index" data-index="{{index}}"
+        data-id="{{item.id}}" data-name="{{item.name}}" data-topic_type_id="{{item.topic_type_id}}"
+        data-topic_type="{{item.topic_type}}" data-price="{{item.price}}" data-open_time="{{item.open_time}}"
+        data-traffic="{{item.traffic}}" data-workaddress="{{item.workaddress}}"
+        data-official_account_name="{{item.official_account_name}}" data-introduce="{{item.introduce}}"
+        data-card_id="{{item.card_id}}" data-main_image="{{item.main_image}}" data-longitude="{{item.longitude}}"
+        data-latitude="{{item.latitude}}" data-level="{{item.level}}" data-card_name="{{item.card_name}}"
+        data-city="{{item.city}}" data-district="{{item.district}}" data-districtName="{{item.districtName}}"
+        data-number="{{item.number}}" data-levelId="{{item.levelId}}" wx:key="{{item.id}}" bindtap="oneBase">
+        <image class="active-base-image" src="{{item.main_image}}" mode="aspectFill"></image>
+        <view class="active-base-name">{{item.name}}</view>
+        <view class="active-base-type">{{item.topic_type}}</view>
+        <!-- <view class="active-base-level" wx:if="{{item.levelId!='0'}}">{{item.level+'级景区'}}</view> -->
+        <view class="active-base-number">{{item.number}}人已联系</view>
+        <view class="active-base-address">{{item.workaddress}}</view>
+    </view>
+
+    <view class="none-data" wx:if="{{baseList.length==0}}">暂无数据</view>
+</view>
