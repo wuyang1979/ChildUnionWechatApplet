@@ -1,0 +1,145 @@
+<wxs src="../../utils/tool.wxs" module="tool" />
+
+<view class="base-settle">
+    <view class="title">机构入驻</view>
+
+    <view class="main-image-area">
+        <view class="add-main-image-area main-image-left" wx:if="{{mainImagePic.length==0}}" bindtap="uploadMainImage">
+            <image class="add-main-image" src="/pages/img/camera.png" mode="aspectFill"></image>
+            <view class="add-main-image-tip">LOGO<image src="/pages/img/needed.png" class="needed" mode="aspectFill">
+                </image>
+            </view>
+        </view>
+
+        <view class="upload-main-image-area main-image-left" wx:if="{{mainImagePic.length>0}}" bindtap="uploadMainImage">
+            <image class="main-image" wx:for="{{mainImagePic}}" src="{{item}}" mode="aspectFill"></image>
+        </view>
+
+        <view class="add-main-image-area" wx:if="{{licensePic.length==0}}" bindtap="uploadLicensePic">
+            <image class="add-main-image" src="/pages/img/camera.png" mode="aspectFill"></image>
+            <view class="add-main-image-tip">营业执照</view>
+            <view class="add-main-image-tip-1">（用于企业认证）</view>
+        </view>
+
+        <view class="upload-main-image-area" wx:if="{{licensePic.length>0}}" bindtap="uploadLicensePic">
+            <image class="main-image" wx:for="{{licensePic}}" src="{{item}}" mode="aspectFill"></image>
+        </view>
+    </view>
+
+    <!-- 机构名称 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">
+            <image src="/pages/img/needed.png" class="needed" mode="aspectFill"></image>
+            机构名称
+        </view>
+        <input type="text" maxlength="50" class="base-name-input" value="{{company}}" placeholder="请输入机构名称" bindinput="inputName" />
+        <view class="title-tip">
+            最多50字
+        </view>
+    </view>
+
+    <view class="base-name-area">
+        <picker bindchange="bindIndustryPickerChange" value="{{industry}}" range="{{tool.industryStr}}">
+            <view class="base-name-tip">
+                <image src="/pages/img/needed.png" class="needed" mode="aspectFill"></image>所属行业
+            </view>
+            <view class="topic-tpye-cont">
+                <view class="topic-tpye"> {{!!selectIndustry ? tool.industryStr[industry] : '请选择'}}</view>
+                <image class="right-icon" src="/pages/img/chevron-right.png" mode="widthFix"></image>
+            </view>
+        </picker>
+    </view>
+
+    <view class="base-name-area">
+        <picker bindchange="bindScopePickerChange" value="{{scope}}" range="{{tool.scopeStr}}">
+            <view class="base-name-tip">
+                <image src="/pages/img/needed.png" class="needed" mode="aspectFill"></image>员工人数
+            </view>
+            <view class="topic-tpye-cont">
+                <view class="topic-tpye"> {{!!selectScope ? tool.scopeStr[scope] : '请选择'}}</view>
+                <image class="right-icon" src="/pages/img/chevron-right.png" mode="widthFix"></image>
+            </view>
+        </picker>
+    </view>
+
+    <!-- 地址 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">
+            <image src="/pages/img/needed.png" class="needed" mode="aspectFill"></image>地址
+        </view>
+        <input type="text" class="base-name-input" value="{{address}}" placeholder="请输入地址" bindinput="inputAddress" />
+    </view>
+
+    <!-- 联系方式 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">
+            <image src="/pages/img/needed.png" class="needed" mode="aspectFill"></image>联系方式
+        </view>
+        <input type="text" class="base-name-input" value="{{companyTel}}" placeholder="请输入联系方式" bindinput="inputCompanyTel" />
+    </view>
+
+    <!-- 机构官网 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">机构官网</view>
+        <input type="text" class="base-name-input" value="{{companyWeb}}" placeholder="请输入机构官网" bindinput="inputCompanyWeb" />
+    </view>
+
+    <!-- 机构邮箱 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">
+            <image src="/pages/img/needed.png" class="needed" mode="aspectFill"></image>机构邮箱
+        </view>
+        <input type="text" class="base-name-input" value="{{email}}" placeholder="请输入机构邮箱" bindinput="inputEmail" />
+    </view>
+
+    <!-- 机构介绍 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">
+            <image src="/pages/img/needed.png" class="needed" mode="aspectFill"></image>机构介绍
+        </view>
+        <view class="tips">请勿填写QQ、微信、电话等联系方式及特殊符号、违反法律的相关内容，否则有可能会导致您的账号被封禁。</view>
+        <view class="message-input">
+            <textarea maxlength="2000" placeholder="请输入机构介绍" value="{{introduce}}" bindinput="inputIntroduce" class="message-content">
+        </textarea>
+
+        </view>
+        <view class="message-tip">
+            最多2000字(不支持表情包)
+        </view>
+    </view>
+
+    <!-- 主营业务 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">
+            <image src="/pages/img/needed.png" class="needed" mode="aspectFill"></image>主营业务
+        </view>
+        <view class="message-input">
+            <textarea maxlength="500" placeholder="请输入主营业务" value="{{mainBusiness}}" bindinput="inputMainBusiness" class="message-content-main-business">
+        </textarea>
+
+        </view>
+        <view class="message-tip">
+            最多500字(不支持表情包)
+        </view>
+    </view>
+
+    <!-- 企业需求 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">
+            <image src="/pages/img/needed.png" class="needed" mode="aspectFill"></image>企业需求
+        </view>
+        <view class="message-input">
+            <textarea maxlength="500" placeholder="请输入企业需求" value="{{mainDemand}}" bindinput="inputMainDemand" class="message-content-main-demand">
+        </textarea>
+
+        </view>
+        <view class="message-tip">
+            最多500字(不支持表情包)
+        </view>
+    </view>
+
+    <view class="submit-area">
+        <button bindtap="submit" class="submit-btn" formType="submit">提交</button>
+    </view>
+
+</view>

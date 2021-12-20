@@ -1,0 +1,48 @@
+<view>
+
+<!--view class="main-panel">
+
+  <view class="one-line">
+    <view class="left-txt">联系人</view>
+    <view class="right-txt">AAA</view>
+  </view>
+
+  <view class="one-line">
+    <view class="left-txt">手机号</view>
+    <view class="right-txt">20180000</view>
+  </view>
+
+  <view class="one-line">
+    <view class="left-txt">微信号</view>
+    <view class="right-txt">20180000</view>
+  </view>
+</view-->
+
+<view class="one-order">
+<include src="../common/orderTemp.wxml"></include>
+</view>
+
+<view wx:if="{{item.status == 0}}">
+  <button class="re-pay" bindtap="repay">重新支付</button>
+</view>
+
+<view class="order-detail">
+  <view class="detail-title">
+        <text class="title-desc" decode="emsp">&nbsp;&nbsp;订单信息 </text>
+  </view>
+  <view class="one-line">
+    <view class="left-txt">{{'订单编号:' + item.order_no}}</view>
+    <view class="right-txt"></view>
+  </view>
+  <view class="detail-msg">
+    {{'订单时间:' + item.create_time}}
+  </view>
+    <view class="call-btn" bindtap="callMe" >
+    <image class="call-image" src="/pages/img/order-phone.png"></image>
+    电话咨询
+  </view>
+</view>
+
+
+
+</view>

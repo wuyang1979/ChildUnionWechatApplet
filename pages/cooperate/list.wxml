@@ -1,0 +1,99 @@
+<wxs src="../../utils/tool.wxs" module="tool" />
+<add-tips />
+
+<view class="page">
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{imgUrls}}" wx:key="index">
+      <!--  是否是本地页面 -->
+      <swiper-item wx:if="{{item.isLocal}}">
+        <navigator url="{{item.link}}" hover-class="navigator-hover" open-type="switchTab" wx:if="{{item.isTab}}">
+          <image src="{{item.url}}" class="slide-image" width="355" height="150" />
+        </navigator>
+        <navigator url="{{item.link}}" hover-class="navigator-hover" open-type="navigate" wx:else>
+          <image src="{{item.url}}" class="slide-image" width="355" height="150" />
+        </navigator>
+      </swiper-item>
+      <!-- 跳转公众号页面 -->
+      <swiper-item wx:else>
+        <navigator url="{{bannerDefault + '?id=' + item.id}}" hover-class="navigator-hover" open-type="switchTab" wx:if="{{item.isTab}}">
+          <image src="{{item.url}}" class="slide-image" width="355" height="150" />
+        </navigator>
+        <navigator url="{{bannerDefault + '?id=' + item.id}}" hover-class="navigator-hover" open-type="navigate" wx:else>
+          <image src="{{item.url}}" class="slide-image" width="355" height="150" />
+        </navigator>
+      </swiper-item>
+
+    </block>
+  </swiper>
+
+  <!-- 导航栏 -->
+  <view class="navigation-bar">
+    <image class="navigation-bar-item" src="/pages/img/contacts.jpg" bindtap="findContacts" mode="aspectFill"></image>
+    <!-- <image class="navigation-bar-item" src="/pages/img/communities.jpg" bindtap="findCommunities"></image> -->
+    <image class="navigation-bar-item" src="/pages/img/establishment.jpg" bindtap="findEstablishments"></image>
+    <image class="navigation-bar-item" src="/pages/img/bases.jpg" bindtap="findBases"></image>
+    <image class="navigation-bar-item" src="/pages/img/cooperations.jpg" bindtap="findCooperations"></image>
+  </view>
+
+  <!-- 最新活动 -->
+  <view class="activity">
+    <view class="activity-title">最新活动</view>
+    <view class="avtivity-more" bindtap="moreActivities">更多</view>
+    <view>
+      <view class="one-campaign" wx:for="{{campaigns}}" wx:key="index" data-index="{{item.id}}" data-id="{{item.id}}" data-deadline="{{item.deadline}}" data-read="{{item.read_count}}" data-like="{{item.give_like}}" data-currency="{{item.currency}}" data-img="{{qinzi + item.main_image}}" bindtap="oneCampaign">
+        <view class="campaign-img">
+          <image class="one-campaign-img" src="{{qinzi + item.main_image}}" mode="aspectFill"></image>
+        </view>
+        <view class="campaign-title">
+          {{item.name}}
+        </view>
+        <view class="campaign-time">
+          {{item.create_time}}
+        </view>
+      </view>
+
+    </view>
+  </view>
+  <!-- 市场动态 -->
+  <view class="cooperation" id="cooperation">
+    <view class="cooperation-title">市场动态</view>
+    <view class="cooperation-more" bindtap="moreCooperations">更多</view>
+    <view class="one-message" wx:for="{{messageList}}" wx:for-index="index" data-index="{{index}}" data-id="{{item.id}}" data-title="{{item.title}}" data-message="{{item.message}}" data-type="{{item.messageType}}" data-last="{{item.lastString}}" data-card="{{item.cardId}}" data-realname="{{item.cardInfo.realname}}" realname data-job="{{item.cardInfo.job}}" data-company="{{item.cardInfo.company}}" data-headimgurl="{{item.cardInfo.headimgurl}}" data-phone="{{item.cardInfo.phone}}" data-read="{{item.readCount}}" data-like="{{item.giveLike}}" data-stype="{{item.sourceType}}" data-spath="{{item.sourcePath}}" wx:key="index" bindtap="oneMessage">
+
+      <view class="weui-panel weui-panel_access">
+        <!--view class="weui-panel__hd">
+                  <image bindtap="bindViewTap" class="userinfo-avatar" src="{{item.cardInfo.headimgurl}}" background-size="cover"></image>
+                  <text class="username">{{item.cardInfo.realname}}</text>
+                  <text class="time" >{{item.lastString}}</text>
+            </view-->
+        <view class="weui-panel__bd">
+          <view class="weui-media-box weui-media-box_text">
+            <view class="weui-media-box__title weui-media-box__title_in-text">
+              {{item.title}}</view>
+            <view class="weui-media-box__img" wx:if="{{!!item.sourcePath}}" class="source">
+              <view wx:if="{{item.sourceType == 0}}">
+                <image class="weui-media-box__image" src="{{'https://www.qinzi123.com/'+item.sourcePath}}" mode="aspectFill">
+                </image>
+              </view>
+            </view>
+            <view class="weui-media-box__bottom_info">
+              {{tool.translateMessageType(item.messageType)}}</view>
+            <view class="weui-media-box__bottom_info">
+              {{item.cardInfo.realname}}</view>
+            <view class="weui-media-box__bottom_info">
+              {{item.lastString}}</view>
+            <!-- <view class="weui-media-box__desc"><text class="text-message">{{item.message}}</text>
+          </view> -->
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- <button class="weui-btn btn-addmessage" bindtap="onGotUserInfo" wx:if="{{releaseFlag}}">
+    <image src="/pages/img/add-message1.jpg">
+    </image>
+
+  </button> -->
+
+</view>

@@ -1,0 +1,37 @@
+{
+    "setting": {},
+    "condition": {
+        "plugin": {
+            "list": []
+        },
+        "game": {
+            "list": []
+        },
+        "gamePlugin": {
+            "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "id": -1,
+                    "name": "new",
+                    "pathName": "pages/cooperate/list",
+                    "query": "cc=1",
+                    "scene": null
+                },
+                {
+                    "name": "pages/cooperate/list",
+                    "pathName": "pages/cooperate/list",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/cooperate/list",
+                    "pathName": "pages/cooperate/list",
+                    "query": "",
+                    "scene": null
+                }
+            ]
+        }
+    }
+}

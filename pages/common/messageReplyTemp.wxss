@@ -1,0 +1,86 @@
+.reply-photo {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 0;
+  border-radius: 50%;
+  margin-top: 5px;
+}
+
+.reply-left-info,
+.reply-middle-info,
+.reply-right-info {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.reply-left-info {
+  width: 15%;
+}
+
+.reply-middle-info {
+  width: 60%;
+}
+
+.reply-name {
+  font-size: 14px;
+  width: 50%;
+  color: #1d6eaf;
+}
+
+.job-text {
+  font-size: 14px;
+  width: 50%;
+  color: black;
+}
+
+.reply-time {
+  color: #777777;
+  font-size: 13px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.reply-name,
+.reply-time {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.reply-name,
+.reply-time {
+  width: 45%;
+}
+
+.reply-btn {
+  font-size: 0.8em;
+  background-color: white;
+  color: black;
+  /*display:inline-block;*/
+}
+
+.reply-name-info {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.reply-message {
+  padding-top: 5px;
+  font-size: 16px;
+  color: black;
+  margin-left: 10px;
+}
+
+.reply-message-inner {
+  margin: 5px;
+  padding: 5px;
+  background-color: #eee;
+}
+
+.inner-reply-message {
+  margin: 3px;
+  color: #777777;
+  font-size: 0.9em;
+}

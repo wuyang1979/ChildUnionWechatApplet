@@ -1,0 +1,35 @@
+        <!-- 头像 -->
+        <view class="order-left-info"  > 
+          <image class="order-photo" src="{{qinzi + item.main_image}}" background-size="cover"></image>
+        </view>
+        <!-- 信息 -->
+        <view class="order-right-info" > 
+          <!-- 活动名 -->
+          <view  class="order-desc-info"> 
+            <text class="order-name"> {{item.name}} </text>
+          </view>
+          <!-- 公司 -->
+          <view class="order-desc-info">
+            <text class="order-company" style="font-size:0.8em;"> {{item.company}} </text>
+          </view>
+          <!-- 价格 -->
+          <view class="order-price-info" > 
+              <view class="left-view" wx:if="{{ item.order_type == 0}}">{{'亲子币' + item.price}}</view>
+              <view class="left-view" wx:else>{{'￥' + item.price}}</view>
+    <view class="right-view"> {{'X' + item.num}}</view>
+          </view>
+        </view>
+
+    <view class="total-panel">
+      <!--view class="total-price">
+      {{'￥' + item.total}}
+      </view-->
+      <view class="one-line">
+        <view class="left-txt">
+          <button class="redy-pay" wx:if="{{ item.status == 1}}" disabled="true">已支付</button>
+          <button class="no-pay" wx:if="{{ item.status == 0}}">未支付</button>
+        </view>
+        <view class="right-txt" wx:if="{{ item.order_type == 0}}">{{'亲子币' + item.total}}</view>
+        <view class="right-txt" wx:else>{{'￥' + item.total}}</view>
+      </view>
+    </view>

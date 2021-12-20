@@ -1,0 +1,182 @@
+.page,
+page {
+    background-color: #eee;
+}
+
+.one-establishment {
+    position: relative;
+}
+
+.one-establishment-image {
+    width: 100%;
+    height: 200px;
+}
+
+.one-establishment-info {
+    width: 355px;
+    width: 95%;
+    position: absolute;
+    background-color: white;
+    margin: 10px 5px 10px 5px;
+    top: 175px;
+    left: 5px;
+    padding: 20px 20px 10px 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.one-establishment-name {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.one-establishment-type-area {
+    display: inline-flex;
+    width: 100%;
+    align-items: flex-end;
+}
+
+.one-establishment-type-area,
+.one-establishment-open-area,
+.card_name-area,
+.label-area {
+    margin-bottom: 10px;
+}
+
+.one-establishment-topic_type {
+    font-size: 14px;
+    background-color: #fef5d6;
+    border-radius: 10px;
+    text-align: center;
+    height: 25px;
+    line-height: 25px;
+    margin: 0 20px 0 5px;
+    box-sizing: border-box;
+    padding: 0 10px;
+    width: 30%;
+}
+
+.one-establishment-tip {
+    display: inline-block;
+    color: #737373;
+    width: 85px;
+    font-size: 15px;
+    vertical-align: top;
+    text-align: justify;
+}
+
+.one-establishment-open_time {
+    display: inline-block;
+    font-size: 15px;
+    margin-left: -15px;
+    width: 70%;
+    vertical-align: top
+}
+
+.one-establishment-workaddress-area,
+.one-establishment-traffic-area,
+.official_account_name-area,
+.one-establishment-price-area {
+    margin-bottom: 5px;
+    padding-bottom: 10px;
+}
+
+.traffic,
+.one-establishment-workaddress,
+.one-establishment-value {
+    display: inline-block;
+    font-size: 15px;
+    vertical-align: top;
+    width: 70%;
+}
+
+.one-establishment-picture-area {
+    margin-top: 5px;
+}
+
+.one-establishment-picture-item {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.one-establishment-picture-item:last-child {
+    margin-bottom: 35px;
+}
+
+.reply-content {
+    background-color: white;
+    padding: 10px;
+}
+
+.weui-media-box {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #eee;
+    padding: 0;
+}
+
+.reply-left-info,
+.reply-middle-info,
+.reply-right-info {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.reply-photo {
+    width: 80rpx;
+    height: 80rpx;
+    margin: 0;
+    border-radius: 50%;
+}
+
+.reply-left-info {
+    width: 15%;
+}
+
+.reply-middle-info {
+    width: 60%;
+}
+
+.reply-name-info {
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.reply-name {
+    font-size: 17px;
+    width: 50%;
+    color: #1d6eaf;
+}
+
+.job-text {
+    font-size: 17px;
+    width: 50%;
+    color: black;
+    margin-left: 15px;
+}
+
+.weui-media-box__desc {
+    display: flex;
+    align-items: center;
+}
+
+.member-item {
+    margin-bottom: 10px;
+}
+
+.member-item:last-child {
+    margin-bottom: 0;
+}
+
+.authentication-image {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+
+.authentication-id{
+    margin-left: 20px;
+    font-size: 13px;
+    color: #b9b9b9;
+}

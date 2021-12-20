@@ -1,0 +1,18 @@
+<view class="consulting">
+    <view class="title">咨询信息</view>
+
+    <!-- 姓名 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">姓名</view>
+        <input type="text" maxlength="50" class="base-name-input" placeholder="请输入姓名" bindinput="inputName" />
+    </view>
+    <!-- 手机号 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">手机号</view>
+        <input type="text" maxlength="50" class="base-name-input" placeholder="请输入手机号" bindinput="inputPhone" />
+    </view>
+
+    <view class="submit-area">
+        <button bindtap="submit" class="submit-btn" formType="submit">立即咨询</button>
+    </view>
+</view>

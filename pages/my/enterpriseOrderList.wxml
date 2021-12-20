@@ -1,0 +1,10 @@
+<view class="enterprise-order">
+    <view class="title">企业服务预订</view>
+    <view class="order-item" wx:for="{{enterpriseOrderList}}" wx:key="index">
+        <view class="order-title">{{item.title}}</view>
+        <view class="order-name">姓名：{{item.name}}</view>
+        <view class="order-phone">手机号：{{item.phone}}</view>
+        <!-- <view class="order-time">{{item.createTime}}</view> -->
+        <button class="read" disabled="{{item.read_status==1}}" bindtap="read" data-id="{{item.id}}">{{item.read_status==0?'未读':'已读'}}</button>
+    </view>
+</view>

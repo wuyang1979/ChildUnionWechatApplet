@@ -1,0 +1,14 @@
+<view class="detail-list">
+
+    <view class="title">{{typeName}}</view>
+
+    <view class="detail-item" wx:for="{{screenEnterpriseList}}" wx:key="index" data-name="{{item.name}}"
+        data-id="{{item.id}}" data-card_id="{{item.card_id}}" data-card_name="{{item.card_name}}"
+        data-business="{{item.business}}" data-requirement="{{item.requirement}}" data-resources="{{item.resources}}"
+        data-isHot="{{item.isHot}}" data-main_image="{{item.main_image}}" data-introduce="{{item.introduce}}"
+        data-title="{{item.title}}" data-score="{{item.score}}" bindtap="toDetailEnterprise">
+        <image class="detail-item-image" src="{{item.main_image}}" mode="aspectFill"></image>
+        <view class="detail-item-name">{{item.name}}</view>
+        <view class="detail-item-title">{{item.title}}</view>
+    </view>
+</view>

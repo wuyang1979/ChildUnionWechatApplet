@@ -1,0 +1,50 @@
+@import "../common/typeTemp.wxss";
+
+.title-big{
+  text-align: center;
+  font-size:1.2em;
+}
+
+.type-btn{
+  text-align: center;
+}
+
+.first-btn{
+  width: 30%;
+  display: inline-block;
+  margin: 5px;
+
+}
+
+.service-btn{
+  background-color: rgb(1, 143, 215);
+}
+
+.title-sub{
+  text-align: center;
+}
+
+.title-small{
+  color:  rgb(1, 143, 215);
+  font-size: 0.8em;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(228, 228, 228);
+}
+
+.desc-small{
+  font-size: 0.8em;
+}
+
+.next-view{
+  margin-top:15px;
+  text-align: center;
+}
+
+.next-step{
+  background-color:  rgb(1, 143, 215);
+  width: 60%;
+  border:2px solid;
+  border-radius:25px;
+  color: white;
+}

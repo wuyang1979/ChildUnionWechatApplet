@@ -1,0 +1,22 @@
+
+
+<view class="title-big">所属行业</view>
+
+<!--view  class="type-btn">
+  <button class="first-btn service-btn">服务类</button>
+  <button class="first-btn product-btn" disabled="true">产品类</button>
+</view-->
+
+<view class="title-sub">
+  <!--view class="title-small">我不在亲子行业, 但我想寻求商业合作</view-->
+  <view class="desc-small">
+    <image src="/pages/img/tip.png" style="width:10px;height:10px;"></image>
+    标签最多选择三项
+  </view>
+</view>
+
+<include src="../common/typeTemp.wxml"></include>
+
+<view class="next-view">
+  <button class="next-step" bindtap="nextStep">确定</button>
+</view>

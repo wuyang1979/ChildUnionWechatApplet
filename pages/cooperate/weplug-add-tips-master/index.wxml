@@ -1,0 +1,13 @@
+<cover-view class="guideBackground" wx:if="{{isTiptrue}}">
+  <cover-view class="guideInfo">
+    <cover-view class="guideText"> 点击右上角 </cover-view>
+    <cover-view class="curcleL"></cover-view>
+    <cover-view class="curcleM"></cover-view>
+    <cover-view class="curcleL"></cover-view>
+    <cover-view class="guideText"> 添加到我的小程序 </cover-view>
+  </cover-view>
+
+  <cover-view class="guideClose" bindtap="closeGuide">
+    <cover-view class="closeText"> × </cover-view>
+  </cover-view>
+</cover-view>

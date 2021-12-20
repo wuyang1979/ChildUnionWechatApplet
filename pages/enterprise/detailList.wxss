@@ -1,0 +1,48 @@
+.title{
+    font-size: 18px;
+    text-align: center;
+    padding: 15px;
+}
+
+.detail-item{
+    padding: 15px 10px 10px 20px;
+    border-bottom: 1px solid #ccc;
+    font-size: 14px;
+    position: relative;
+}
+
+.detail-item-image {
+    width: 100px;
+    height: 80px;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.detail-item-name {
+    margin-bottom: 5px;
+    position: absolute;
+    top:  75px;
+    left: 140px;
+    font-size: 15px;
+    width: 210px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.detail-item-title {
+    margin-left: auto;
+    font-weight: 550;
+    margin-right: 50rpx;
+    position: absolute;
+    top: 15px;
+    left: 140px;
+    font-size: 17px;
+    width: 58%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}

@@ -1,0 +1,54 @@
+<view class="establishment">
+    <view class="main-title">
+        <view class="weui-search-bar__form">
+            <view class="weui-search-bar__box">
+                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                <input type="text" class="weui-search-bar__input" placeholder="输入企业机构" value="{{searchValue}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+                <view class="weui-icon-clear" wx:if="{{searchValue.length > 0}}" bindtap="clearInput">
+                    <icon type="clear" size="14"></icon>
+                </view>
+            </view>
+            <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                <icon class="weui-icon-search" type="search" size="14" wx:if="{{searchValue==''}}"></icon>
+                <view class="weui-search-bar__text" wx:if="{{searchValue==''}}">企业机构</view>
+                <view class="weui-search-bar__text weui-search-bar-value" wx:if="{{searchValue!=''}}" bindtap="clearSearch">
+                    <view class="weui-search-bar-search-value">{{searchValue}}</view>
+                    <image class="weui-search-bar-value-close" src="/pages/img/close_2.png" mode="aspectFill"></image>
+                </view>
+            </label>
+        </view>
+        <view class="weui-search-bar__cancel-btn" bindtap="searchSubmit">搜索</view>
+        <view class="weui-search-bar__settled" bindtap="settled">机构入驻</view>
+    </view>
+
+    <view class="select-area">
+        <view class="select-lab">
+            <!-- <button class="{{selectDistrictFlag?'district-btn-select red':'district-btn-select'}}"
+                bindtap="selectDistrict">{{selectDistrictName + ' ▾ '}} </button> -->
+            <button class="{{selectTypeFlag?'type-btn-select red':'type-btn-select'}}" bindtap="selectType">{{selectTypeName + ' ▾ '}} </button>
+        </view>
+
+        <!-- <view class="select-district-area" wx:if="{{selectDistrictFlag}}">
+            <view class="select-item" wx:for="{{districtList}}" data-districtName="{{item.districtName}}"
+                data-districtCode="{{item.districtCode}}" bindtap="screenDistrict">
+                {{item.districtName}}
+            </view>
+        </view> -->
+
+        <view class="select-type-area" wx:if="{{selectTypeFlag}}">
+            <view class="select-item" wx:for="{{typeList}}" data-typeName="{{item.typeName}}" data-typeCode="{{item.typeCode}}" bindtap="screenType">
+                {{item.typeName}}
+            </view>
+        </view>
+    </view>
+
+    <view class="establishment-list" wx:for="{{establishmentList}}" wx:for-index="index" data-index="{{index}}" data-id="{{item.id}}" data-leaguetype="{{item.leaguetype}}" data-companydesc="{{item.companydesc}}" data-company="{{item.company}}" data-logopic="{{item.logopic}}" data-members="{{item.members}}" data-companyaddr="{{item.companyaddr}}" data-companytel="{{item.companytel}}" data-companyweb="{{item.companyweb}}" data-industry="{{item.industry}}" data-mainbussiness="{{item.mainbussiness}}" data-maindemand="{{item.maindemand}}" data-licensepic="{{item.licensepic}}" data-contactname="{{item.contactname}}" data-contactduty="{{item.contactduty}}" data-contacttel="{{item.contacttel}}" data-contactwx="{{item.contactwx}}" data-contactopenid="{{item.contactopenid}}" data-email="{{item.email}}" wx:key="index" bindtap="oneEstablishment">
+        <image class="establishment-image" src="{{item.logopic}}" mode="aspectFill"></image>
+        <view class="establishment-name">{{item.company}}</view>
+        <view class="establishment-auth">认证状态：{{item.leaguetype!=0?'已认证':'未认证'}}</view>
+        <view class="establishment-type">所属行业：{{item.industry}}</view>
+        <!-- <view class="active-base-number">{{item.number}}人已联系</view> -->
+        <view class="establishment-mainBusiness">主营业务：{{item.mainbussiness}}</view>
+        <view class="establishment-mainBusiness spe-color">合作需求：{{item.maindemand}}</view>
+    </view>
+</view>

@@ -1,0 +1,254 @@
+.page,
+page {
+    background-color: white;
+}
+
+.active-base {
+    margin-top: 5px;
+}
+
+.main-title {
+    font-size: 18px;
+    text-align: center;
+    position: relative;
+    margin-top: 10px;
+}
+
+.active-base-list {
+    padding: 10px 5px 10px 10px;
+    background-color: white;
+    position: relative;
+}
+
+.select-area {
+    position: relative;
+    background-color: white;
+    padding: 10px 0 0 10px;
+}
+
+.select-district-area,
+.select-type-area {
+    background-color: white;
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    padding: 0 0 0 10px;
+}
+
+.select-type-area,
+.select-district-area {
+    border: 1px solid #d6d6d6;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border-top: none;
+}
+
+.select-item {
+    font-size: 15px;
+    padding: 10px 0;
+}
+
+.select-item:first-child {
+    margin-top: 5px;
+}
+
+.district-btn-select,
+.type-btn-select {
+    color: rgb(0, 0, 0);
+    font-size: 0.9em;
+    width: 27%;
+    height: 30px;
+    display: inline-block;
+    line-height: 2;
+    padding: 2px;
+    vertical-align: middle;
+    margin-right: 3px;
+    background-color: white;
+}
+
+.district-btn-select {
+    margin-left: 20px;
+}
+
+.district-btn-select::after,
+.type-btn-select::after {
+    outline: none;
+    border: 0;
+}
+
+.select-lab {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.red {
+    color: #ff3307;
+}
+
+.active-base-image {
+    width: 120px;
+    height: 100px;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.active-base-name {
+    position: absolute;
+    top: 10px;
+    left: 140px;
+    font-size: 16px;
+    font-weight: 550;
+    width: 210px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.active-base-level {
+    position: absolute;
+    top: 40px;
+    left: 215px;
+    font-size: 13px;
+}
+
+.active-base-type {
+    position: absolute;
+    top: 40px;
+    left: 140px;
+    font-size: 13px;
+    width: 58%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hasLevel {
+    border-right: 1px solid #d4d3d4;
+    padding-right: 10px;
+}
+
+.active-base-number {
+    position: absolute;
+    top: 65px;
+    left: 140px;
+    font-size: 13px;
+    padding-right: 10px;
+    color: #5a5252;
+    font-style: italic;
+}
+
+.active-base-address {
+    position: absolute;
+    top: 90px;
+    left: 140px;
+    font-size: 13px;
+    width: 220px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.active-base-price {
+    position: absolute;
+    top: 90px;
+    left: 140px;
+    font-weight: 550;
+}
+
+.active-base-price-tip {
+    position: absolute;
+    top: 90px;
+    left: 170px;
+    font-style: oblique;
+    color: #fb4a54;
+}
+
+.active-base-value {
+    position: absolute;
+    top: 89px;
+    left: 185px;
+    font-style: oblique;
+    color: #fb4a54;
+    font-size: 17px;
+}
+
+.none-data {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.weui-search-bar__form {
+    width: 60%;
+    margin-left: 20rpx;
+    border-color: rgb(60, 184, 233);
+}
+
+.weui-search-bar__cancel-btn {
+    position: absolute;
+    top: 0;
+    left: 480rpx;
+    font-size: 15px;
+    padding: 5px;
+    margin-left: 0;
+    line-height: inherit;
+}
+
+.weui-search-bar__settled {
+    position: absolute;
+    top: 8rpx;
+    right: 30rpx;
+    font-size: 13px;
+    padding: 4px 10px;
+    line-height: inherit;
+    color: white;
+    background-color: rgb(60, 184, 233);
+    border-radius: 5px;
+}
+
+.weui-search-bar__label {
+    line-height: inherit;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.weui-search-bar__text {
+    margin-left: 10px;
+}
+
+.weui-search-bar__input {
+    height: 35px;
+    margin-left: 20px;
+    text-align: left;
+}
+
+.weui-icon-search_in-box {
+    position: absolute;
+    top: 24rpx;
+    left: 43rpx;
+}
+
+.weui-search-bar-value {
+    color: white;
+    background-color: #9a9a9a;
+    padding: 2px 12px;
+    border-radius: 10px;
+    margin-left: -200rpx;
+    margin-top: 4rpx;
+}
+
+.weui-search-bar-search-value {
+    display: inline-block;
+    font-size: 13px;
+}
+
+.weui-search-bar-value-close {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-left: 3px;
+}
+
+.weui-icon-clear {
+    position: absolute;
+    top: 8rpx;
+}

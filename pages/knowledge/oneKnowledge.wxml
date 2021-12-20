@@ -1,0 +1,20 @@
+<view class="one-knowledge">
+    <view class="one-knowledge-title">{{title}}</view>
+    <view class="preview-tip">章节预览</view>
+    <image class="preview-image" src="{{picUrl}}" data-src="{{picUrl}}" mode="widthFix" bindtap="previewImage"></image>
+
+    <view class="not-leaguer" wx:if="{{leaguer == 0 && !hasBoughtFlag}}">
+        <view class="cost-tip">查看全部所需：</view>
+        <view class="cost-value">{{cost}}</view>
+        <view class="cost-tip">亲子币，vip免费</view>
+    </view>
+
+    <view class="isLeaguer" wx:if="{{leaguer == 1}}">
+        <view class="cost-tip">vip免费查看</view>
+    </view>
+
+    <view class="isLeaguer" wx:if="{{leaguer == 0 && hasBoughtFlag}}">
+        <view class="cost-tip">您已购买，加入会员可免费查看所有文件</view>
+    </view>
+    <button class="view-all" bindtap="onGotUserInfo">查看全部</button>
+</view>

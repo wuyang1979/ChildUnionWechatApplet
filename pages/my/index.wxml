@@ -1,0 +1,83 @@
+<view>
+  <include src="../common/oneBusinessTemp.wxml"></include>
+
+  <view class="order" bindtap="myEstablishment">
+    <text>{{establishmentBtnName}}</text>
+    <text class="more-data"> > </text>
+  </view>
+  <view class="order" bindtap="manageBase" wx:if="{{isBaseAdministrator}}">
+    <text>我的基地</text>
+    <text class="more-data"> > </text>
+  </view>
+  <view class="order" bindtap="jumpOrderList">
+    <text>我的订单</text>
+    <text class="more-data"> > </text>
+  </view>
+
+  <view class="order" bindtap="toEnterpriseOrderList" wx:if="{{isEnterpriseAdministrator}}">
+    <text>企业服务订单</text>
+    <text class="more-data"> > </text>
+    <view class="order-num">{{enterpriseOrderUnreadNum}}</view>
+  </view>
+
+<!-- 现针对管理员开放，后针对基地管理员 -> isBaseAdministrator -->
+  <view class="order" bindtap="toBaseReserveList" wx:if="{{isEnterpriseAdministrator}}">
+    <text>基地预订信息</text>
+    <text class="more-data"> > </text>
+    <view class="order-num">{{baseReserveUnreadNum}}</view>
+  </view>
+
+  <!--view class="order" bindtap="jumpRechargeOrderList"-->
+  <!--image src="/pages/img/order.png" class="order-img"></image-->
+  <!--text>充值记录</text>
+<text class="more-data"> > </text>
+</view-->
+
+  <view>
+    <!-- <form bindsubmit="sign" report-submit="{{true}}">
+      <button class="sign" disabled="{{!needSign}}" formType="submit">每日签到</button>
+    </form> -->
+
+    <!--form bindsubmit='sign' report-submit="true">
+    <button form-type="submit" class='form_button'>
+	    <form bindsubmit='saveFormId' report-submit="true">
+          <button form-type="submit" class='form_button'>
+	    <form bindsubmit='saveFormId' report-submit="true">
+    <button form-type="submit" class='form_button'>
+	    <form bindsubmit='saveFormId' report-submit="true">
+		    <button form-type="submit" class='form_button'>
+			    <form bindsubmit='saveFormId' report-submit="true">
+				    <button form-type="submit" class='sign' disabled="{{!needSign}}">
+            每日签到
+				    </button>
+				</form>
+		    </button>
+		</form>
+    </button>
+    		</form>
+    </button>
+    		</form>
+    </button>
+</form-->
+    <view class="func-area" wx:if="{{!isIos}}">
+      <button class="confirm-btn" bindtap="payfor">加入会员</button>
+      <button class="welfare" bindtap="welfare">会员福利库</button>
+    </view>
+  </view>
+
+  <!-- 遮罩层 -->
+  <view class="float" wx:if="{{payFlag}}">
+    <view class="pay-tips-area">
+      <image class="qr-code" show-menu-by-longpress="true" src="/pages/img/enterpriseWechatQrCode.png" mode="widthFix">
+      </image>
+      <view class="pay-tips">ios系统暂不支持线上支付<text> \t\n </text>请长按识别加客服并加入会员</view>
+    </view>
+    <image class="close_float" src="/pages/img/close_1.png" mode="aspectFill" bindtap="closeFloat"></image>
+  </view>
+
+  <!-- <view class="invite" bindtap="jumpInvite" wx:if="{{id != -1}}">
+    <image src="/pages/img/invite.jpg" class="invite-img"></image>
+  </view> -->
+  <cell bind:startmessage='startmessage' bind:completemessage="completemessage"
+    plugid='34a7cc1cdfd3d0264ee128020cfbf807' />
+</view>

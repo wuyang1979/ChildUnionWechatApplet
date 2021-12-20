@@ -1,0 +1,62 @@
+/* pages/business/score.wxss */
+page,
+.page {
+  background-color: #eee;
+}
+
+.one-panel {
+  margin-top: 10px;
+  background-color: white;
+}
+
+.title {
+  margin-left: 5px;
+  border-left-width: 5px;
+  border-left-color: #008FD1;
+  border-left-style: solid;
+}
+
+.desc {
+  font-size: 0.7em;
+}
+
+.leader-qr-code {
+  width: 150px;
+  margin-bottom: 10px;
+}
+
+.community-title {
+  margin-bottom: 10px;
+}
+
+.save-image {
+  background-color: #09be01;
+  color: white;
+  width: 200px;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.community-tips {
+  font-size: 13px;
+  color: #838f90;
+}
+
+.newest-campaign {
+  margin-top: 40px;
+}
+
+.community-area {
+  margin-top: -10px;
+}
+
+
+.invite-img {
+  width: 100%;
+  height: 100px;
+}
+
+.invite {
+  margin-left: 0px;
+  margin-right: 0px;
+}

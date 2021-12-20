@@ -1,0 +1,67 @@
+<view>
+
+<view class="main-panel">
+  <!--view class="one-line">
+  <view class="left-txt">订单号</view>
+  <view class="right-txt">{{oneOrder.order_no}}</view>
+</view-->
+
+  <view class="one-line">
+    <view class="left-txt">订单内容</view>
+    <view class="right-txt">知识库订单</view>
+  </view>
+
+  <view class="one-line">
+    <view class="left-txt">需支付</view>
+    <view class="pay-txt">{{oneOrder.total }} {{currencyType}}</view>
+  </view>
+
+
+  <!--view class="one-line">
+  <view class="left-txt">手机号</view>
+  <view class="right-txt">20180000</view>
+</view>
+
+<view class="one-line">
+  <view class="left-txt">微信号</view>
+  <view class="right-txt">20180000</view>
+</view-->
+</view>
+
+
+<!--view class="pay-title">
+支付方式
+</view>
+
+<view class="pay-list">
+<view class="pay-left">
+<image class="pay-left-img" src="/pages/img/weixin-pay.png" ></image>
+</view>
+<view class="pay-right">
+<image class="pay-right-img" src="/pages/img/weixin-pay-select.png" style="width:25px;height:25px;"></image>
+</view>
+</view-->
+
+<view class="cost-panel" wx:if="{{currency == 2}}">
+  <view class="one-line">
+    <view class="left-txt">我的亲子币</view>
+    <view class="right-txt">{{ oneBusiness.score }}</view>
+  </view>
+</view>
+
+<button class="confirm-btn" hidden="{{currency == 2 && oneBusiness.score < oneOrder.total}}" open-type="getUserInfo"
+  bindtap="prepay">确认支付</button>
+<view class="charge-txt-view" wx:if="{{currency == 2}}">
+  <text class="charge-txt" hidden="{{oneBusiness.score >= oneOrder.total}}"
+    open-type="getUserInfo">余额不足，请到“我的-亲子币”充值亲子币！
+  </text>
+  <text class="charge-txt" hidden="{{oneBusiness.score >= oneOrder.total}}">（10元=100亲子币）
+  </text>
+</view>
+<!--button hidden="{{oneBusiness.score >= oneOrder.total}}" class="charge-btn" open-type="getUserInfo" bindtap="payfor">充值</button-->
+
+<!-- <view class="invite" bindtap="jumpInvite">
+  <image src="/pages/img/invite.jpg" class="invite-img"></image>
+</view> -->
+
+</view>

@@ -1,0 +1,209 @@
+<view class="qinzi-container">
+  <official-account></official-account>
+
+  <view class="qinzi-label">
+    <view class="{{qinziBusinessesShowFlag?'businesses choosed':'businesses'}}" bindtap="businessesLab">亲子名片</view>
+    <view class="{{qinziCommunitiesShowFlag?'communities choosed':'communities'}}" bindtap="communitiesLab">亲子社群</view>
+  </view>
+
+  <!-- 亲子名片 -->
+  <view class="qinzi-businesses" wx:if="{{qinziBusinessesShowFlag}}">
+    <view class="weui-search-bar">
+      <button class="city-btn-select" bindtap="selectCity">{{cityName + ' ▾ '}} </button>
+      <button class="industry-btn-select" bindtap="selectIndustry">{{industryName + ' ▾ '}} </button>
+      <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+          <input type="text" class="weui-search-bar__input" placeholder="输入姓名、公司" value="{{searchValue}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+          <view class="weui-icon-clear" wx:if="{{searchValue.length > 0}}" bindtap="clearInput">
+            <icon type="clear" size="14"></icon>
+          </view>
+        </view>
+        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+          <icon class="weui-icon-search" type="search" size="14"></icon>
+          <view class="weui-search-bar__text">姓名、公司、简介</view>
+        </label>
+      </view>
+      <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="searchSubmit">搜索</view>
+
+      <!-- 选择行业区域 -->
+      <view class="select-industry-area" wx:if="{{isSelectIndustryShow}}">
+        <view class="select-industry-left">
+          <view class="sub-service-item" wx:for="{{subServiceList}}" wx:key="index" data-subservice_id="{{item.subservice_id}}" bindtap="chooseSubService">
+            {{item.subservice_name}}
+            <image class="sub-service-item-image" wx:if="{{item.subservice_id==subserviceId && subserviceId!=0}}" src="/pages/img/chevron-right.png" mode="aspectFill"></image>
+          </view>
+        </view>
+        <view class="select-industry-right">
+          <view class="tag-item" wx:for="{{teachTagList}}" data-tag_id="{{item.tag_id}}" data-tag_name="{{item.tag_name}}" wx:key="index" wx:if="{{subserviceId == 11}}" bindtap="chooseTag">
+            {{item.tag_name}}
+          </view>
+          <view class="tag-item" wx:for="{{activityTagList}}" data-tag_id="{{item.tag_id}}" data-tag_name="{{item.tag_name}}" wx:key="index" wx:if="{{subserviceId == 12}}" bindtap="chooseTag">
+            {{item.tag_name}}
+          </view>
+          <view class="tag-item" wx:for="{{lifeTagList}}" data-tag_id="{{item.tag_id}}" data-tag_name="{{item.tag_name}}" wx:key="index" wx:if="{{subserviceId == 13}}" bindtap="chooseTag">
+            {{item.tag_name}}
+          </view>
+          <view class="tag-item" wx:for="{{baseTagList}}" data-tag_id="{{item.tag_id}}" data-tag_name="{{item.tag_name}}" wx:key="index" wx:if="{{subserviceId == 14}}" bindtap="chooseTag">
+            {{item.tag_name}}
+          </view>
+          <view class="tag-item" wx:for="{{otherTagList}}" data-tag_id="{{item.tag_id}}" data-tag_name="{{item.tag_name}}" wx:key="index" wx:if="{{subserviceId == 15}}" bindtap="chooseTag">
+            {{item.tag_name}}
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class=" card-display-bar">
+      已入驻亲子商家: <text class="card-display-text"> {{countDisplayCards}} </text>
+    </view>
+    <view class="one-business" wx:for="{{businessList}}" wx:for-index="index" data-index="{{index}}" data-id="{{item.id}}" wx:key="index">
+      <include src="../common/businessTemp.wxml"></include>
+    </view>
+  </view>
+
+
+  <!-- 亲子社群 -->
+  <view class="qinzi-communities" wx:if="{{qinziCommunitiesShowFlag}}">
+    <view class="one-community">
+      <!-- 群图片 -->
+      <image class="one-community-image" src="/pages/img/qinzi-community1.jpg" mode="aspectFill"></image>
+      <!-- 群名称 -->
+      <view class="one-community-name">南京亲子大联盟合作群1</view>
+      <!-- 群人数 -->
+      <view class="one-community-people">
+        <image class="people-image" src="/pages/img/people.png" mode="aspectFill"></image>
+        <view class="number-people">450+</view>
+      </view>
+      <!-- 费用 -->
+      <view class="one-community-cost" wx:if="{{!isIos}}">
+        <image class="cost-image" src="/pages/img/cost.png" mode="aspectFill"></image>
+        <view class="join-cost">￥500</view>
+      </view>
+      <!-- 会员价 -->
+      <view class="one-community-vip-cost" wx:if="{{!isIos}}">
+        <image class="vip-cost-image" src="/pages/img/vip-cost.png" mode="aspectFill"></image>
+        <view class="join-cost">￥250</view>
+      </view>
+      <!-- 群简介 -->
+      <view class="one-community-desc">南京地区亲子机构，包含：教育培训、早教机构、亲子景区、亲子活动平台、亲子俱乐部、亲子游旅行社、研学公司等。</view>
+      <!-- 加入 -->
+      <button class="join" bindtap="join" data-index="1">加入</button>
+    </view>
+
+    <view class="one-community">
+      <!-- 群图片 -->
+      <image class="one-community-image" src="/pages/img/qinzi-community1.jpg" mode="aspectFill"></image>
+      <!-- 群名称 -->
+      <view class="one-community-name">南京亲子大联盟合作群2</view>
+      <!-- 群人数 -->
+      <view class="one-community-people">
+        <image class="people-image" src="/pages/img/people.png" mode="aspectFill"></image>
+        <view class="number-people">450+</view>
+      </view>
+      <!-- 费用 -->
+      <view class="one-community-cost" wx:if="{{!isIos}}">
+        <image class="cost-image" src="/pages/img/cost.png" mode="aspectFill"></image>
+        <view class="join-cost">￥500</view>
+      </view>
+      <!-- 会员价 -->
+      <view class="one-community-vip-cost" wx:if="{{!isIos}}">
+        <image class="vip-cost-image" src="/pages/img/vip-cost.png" mode="aspectFill"></image>
+        <view class="join-cost">￥250</view>
+      </view>
+      <!-- 群简介 -->
+      <view class="one-community-desc">南京地区亲子机构，包含：教育培训、早教机构、亲子景区、亲子活动平台、亲子俱乐部、亲子游旅行社、研学公司等。</view>
+      <!-- 加入 -->
+      <button class="join" bindtap="join" data-index="2">加入</button>
+    </view>
+
+    <view class="one-community">
+      <!-- 群图片 -->
+      <image class="one-community-image" src="/pages/img/qinzi-community1.jpg" mode="aspectFill"></image>
+      <!-- 群名称 -->
+      <view class="one-community-name">南京亲子大联盟合作群3</view>
+      <!-- 群人数 -->
+      <view class="one-community-people">
+        <image class="people-image" src="/pages/img/people.png" mode="aspectFill"></image>
+        <view class="number-people">350+</view>
+      </view>
+      <!-- 费用 -->
+      <view class="one-community-cost" wx:if="{{!isIos}}">
+        <image class="cost-image" src="/pages/img/cost.png" mode="aspectFill"></image>
+        <view class="join-cost">￥400</view>
+      </view>
+      <!-- 会员价 -->
+      <view class="one-community-vip-cost" wx:if="{{!isIos}}">
+        <image class="vip-cost-image" src="/pages/img/vip-cost.png" mode="aspectFill"></image>
+        <view class="join-cost">￥200</view>
+      </view>
+      <!-- 群简介 -->
+      <view class="one-community-desc">南京地区亲子机构，包含：教育培训、早教机构、亲子景区、亲子活动平台、亲子俱乐部、亲子游旅行社、研学公司等。</view>
+      <!-- 加入 -->
+      <button class="join" bindtap="join" data-index="3">加入</button>
+    </view>
+
+    <view class="one-community">
+      <!-- 群图片 -->
+      <image class="one-community-image" src="/pages/img/qinzi-community1.jpg" mode="aspectFill"></image>
+      <!-- 群名称 -->
+      <view class="one-community-name">南京亲子大联盟合作群4</view>
+      <!-- 群人数 -->
+      <view class="one-community-people">
+        <image class="people-image" src="/pages/img/people.png" mode="aspectFill"></image>
+        <view class="number-people">50+</view>
+      </view>
+      <!-- 费用 -->
+      <view class="one-community-cost" wx:if="{{!isIos}}">
+        <image class="cost-image" src="/pages/img/cost.png" mode="aspectFill"></image>
+        <view class="join-cost">￥10</view>
+      </view>
+      <!-- 会员价 -->
+      <view class="one-community-vip-cost" wx:if="{{!isIos}}">
+        <image class="vip-cost-image" src="/pages/img/vip-cost.png" mode="aspectFill"></image>
+        <view class="join-cost">￥5</view>
+      </view>
+      <!-- 群简介 -->
+      <view class="one-community-desc">南京地区亲子机构，包含：教育培训、早教机构、亲子景区、亲子活动平台、亲子俱乐部、亲子游旅行社、研学公司等。</view>
+      <!-- 加入 -->
+      <button class="join" bindtap="join" data-index="4">加入</button>
+    </view>
+
+    <view class="one-community">
+      <!-- 群图片 -->
+      <image class="one-community-image" src="/pages/img/qinzi-community1.jpg" mode="aspectFill"></image>
+      <!-- 群名称 -->
+      <view class="one-community-name">南京亲子大联盟合作群5</view>
+      <!-- 群人数 -->
+      <view class="one-community-people">
+        <image class="people-image" src="/pages/img/people.png" mode="aspectFill"></image>
+        <view class="number-people">200+</view>
+      </view>
+      <!-- 费用 -->
+      <view class="one-community-cost" wx:if="{{!isIos}}">
+        <image class="cost-image" src="/pages/img/cost.png" mode="aspectFill"></image>
+        <view class="join-cost">￥200</view>
+      </view>
+      <!-- 会员价 -->
+      <view class="one-community-vip-cost" wx:if="{{!isIos}}">
+        <image class="vip-cost-image" src="/pages/img/vip-cost.png" mode="aspectFill"></image>
+        <view class="join-cost">￥100</view>
+      </view>
+      <!-- 群简介 -->
+      <view class="one-community-desc">南京地区亲子机构，包含：教育培训、早教机构、亲子景区、亲子活动平台、亲子俱乐部、亲子游旅行社、研学公司等。</view>
+      <!-- 加入 -->
+      <button class="join" bindtap="join" data-index="5">加入</button>
+    </view>
+  </view>
+
+  <!-- 遮罩层 -->
+  <view class="float" wx:if="{{iosJoinFlag}}">
+    <view class="pay-tips-area">
+      <image class="qr-code" show-menu-by-longpress="true" src="/pages/img/enterpriseWechatQrCode.png" mode="widthFix">
+      </image>
+      <view class="pay-tips">长按识别加客服</view>
+    </view>
+    <image class="close_float" src="/pages/img/close_1.png" mode="aspectFill" bindtap="close"></image>
+  </view>
+
+</view>

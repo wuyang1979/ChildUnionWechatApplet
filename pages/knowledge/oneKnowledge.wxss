@@ -1,0 +1,37 @@
+.one-knowledge {
+    padding: 0 15px;
+}
+
+.one-knowledge-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 auto;
+    margin-top: 20rpx;
+    text-indent: 2em;
+}
+
+.preview-tip,
+.cost-tip {
+    margin-top: 15px;
+    padding-left: 10px;
+}
+
+.cost-tip,.cost-value{
+    display: inline-block;
+}
+
+.preview-image {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.view-all{
+    text-align: center;
+    width: 90%;
+    color: #725023;
+    background-color: #f1bd72;
+    border-radius: 30px;
+    font-weight: 550;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}

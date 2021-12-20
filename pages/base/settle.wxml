@@ -1,0 +1,141 @@
+<wxs src="../../utils/tool.wxs" module="tool" />
+
+<view class="base-settle">
+    <view class="title">基地入驻</view>
+
+    <view class="main-image-area">
+        <view class="add-main-image-area" wx:if="{{mainImagePic.length==0}}" bindtap="uploadMainImage">
+            <image class="add-main-image" src="/pages/img/camera.png" mode="aspectFill"></image>
+            <view class="add-main-image-tip">主题图片</view>
+        </view>
+
+        <view class="upload-main-image-area" wx:if="{{mainImagePic.length>0}}" bindtap="uploadMainImage">
+            <image class="main-image" wx:for="{{mainImagePic}}" src="{{item}}" mode="aspectFill"></image>
+        </view>
+    </view>
+
+    <!-- 基地名称 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">基地名称</view>
+        <input type="text" maxlength="50" class="base-name-input" placeholder="请输入基地名称" bindinput="inputName" />
+        <view class="title-tip">
+            最多50字
+        </view>
+    </view>
+
+    <!-- 景区类型 -->
+    <view class="topic-tpye-area">
+        <view class="topic-tpye-tip">景区类型</view>
+        <!-- bindtap="selectTopicType" -->
+        <view class="topic-tpye-cont">
+            <view class="{{topicTypeName==''?'topic-tpye':'topic-tpye black'}}">
+                {{topicTypeName==''?'请选择':topicTypeName}}</view>
+            <!-- <image class="right-icon" src="/pages/img/chevron-right.png" mode="widthFix"></image> -->
+        </view>
+
+        <view class="topic-tpye-select-area">
+            <view class="item_container" wx:for="{{baseTopicTypeList}}" wx:key="topicTpyeId" data-index="{{index}}"
+                data-topicTpyeName="{{item.topicTpyeName}}" data-topicTpyeId="{{item.topicTpyeId}}"
+                data-isSelected="{{item.isSelected}}" bindtap="itemSelected">
+                <image class="select_icon"
+                    src="{{item.isSelected?'/pages/img/selected.png':'/pages/img/unselected1.png'}}" mode="aspectFill">
+                </image>
+                <view class="text">{{item.topicTpyeName}}</view>
+            </view>
+
+            <!-- <view class="select-confirm" bindtap="selectConfirm">确定</view> -->
+        </view>
+    </view>
+
+    <!-- 票价 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">票价</view>
+        <input type="text" class="base-name-input" placeholder="请输入票价" bindinput="inputPrice" />
+    </view>
+
+    <!-- 开放时间 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">开放时间</view>
+        <input type="text" class="base-name-input" placeholder="请输入开放时间" bindinput="inputOpenTime" />
+    </view>
+
+    <!-- 景区等级 -->
+    <view class="base-name-area">
+        <picker bindchange="bindLevelPickerChange" value="{{level}}" range="{{tool.levelStr}}">
+            <view class="base-name-tip">景区等级</view>
+            <view class="topic-tpye-cont">
+                <view class="topic-tpye"> {{!!selectLevel ? tool.levelStr[level] : '请选择'}}</view>
+                <image class="right-icon" src="/pages/img/chevron-right.png" mode="widthFix"></image>
+            </view>
+        </picker>
+    </view>
+
+    <!-- 交通 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">交通</view>
+        <input type="text" class="base-name-input" placeholder="请输入交通方式" bindinput="inputTraffic" />
+    </view>
+
+    <!-- 地址 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">地址</view>
+        <input type="text" class="base-name-input" placeholder="请输入地址" bindinput="inputAddress" />
+    </view>
+
+    <!-- 地图选点获取经纬度 -->
+    <view class="base-name-area">
+        <view class="location-top">
+            <view class="base-name-tip">请获取基地位置</view>
+            <button class="location-btn" bindtap="getLocation">地图选点</button>
+        </view>
+        <view class="location-bottom">
+            <view class="longitude-tip">经度：</view>
+            <view class="longitude-value">{{longitude}}</view>
+            <view class="latitude-tip">纬度：</view>
+            <view class="latitude-value">{{latitude}}</view>
+        </view>
+    </view>
+
+    <!-- 城市 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">城市</view>
+        <input type="text" class="base-name-input" placeholder="默认：南京市" bindinput="inputCity" />
+    </view>
+
+    <!-- 行政区 -->
+    <view class="base-name-area">
+        <picker bindchange="bindDistrictPickerChange" value="{{districtIndex}}" range="{{tool.districtStr}}">
+            <view class="base-name-tip">行政区</view>
+            <view class="topic-tpye-cont">
+                <view class="topic-tpye"> {{!!selectDistrict ? tool.districtStr[districtIndex] : '请选择'}}</view>
+                <image class="right-icon" src="/pages/img/chevron-right.png" mode="widthFix"></image>
+            </view>
+        </picker>
+    </view>
+
+    <!-- 公众号 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">公众号名称</view>
+        <input type="text" class="base-name-input" placeholder="请输入公众号名称" bindinput="inputOfficialAccountName" />
+    </view>
+
+    <!-- 详情介绍 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">详情</view>
+        <view class="tips">请勿填写QQ、微信、电话等联系方式及特殊符号、违反法律的相关内容，否则有可能会导致您的账号被封禁。</view>
+        <view class="message-input">
+            <textarea maxlength="2000" placeholder="请输入详情" bindinput="inputIntroduce" class="message-content">
+        <!-- <text wx:if="{{message==''}}" class="message-tips">1.已有的资源\n\n2.需要的资源\n\n3.其他资源</text> -->
+        </textarea>
+
+        </view>
+        <view class="message-tip">
+            最多2000字(不支持表情包)
+        </view>
+    </view>
+
+    <view class="submit-area">
+        <button bindtap="submit" class="submit-btn" formType="submit">提交</button>
+    </view>
+
+</view>

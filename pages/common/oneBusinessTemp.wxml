@@ -1,0 +1,120 @@
+<view class="page">
+  <view class="title">
+    <image bindtap="bindViewTap" class="userinfo-avatar" src="{{oneBusiness.headimgurl}}"
+      data-src="{{oneBusiness.headimgurl}}" background-size="cover" bindtap="previewImage"></image>
+
+    <view class="refresh-personal" wx:if="{{isMyPage == true && needShow == false}}">
+      <button class="weui-btn mini-btn button-personal" type="default" size="mini"
+        bindtap="onGotUserInfo">登录/注册</button>
+    </view>
+    <!-- 此处隐藏，该功能移动到基本资料处>
+      <!--image bindtap="modifyCard" class="modify-img" src="/pages/img/modify.png" wx:if="{{isMyPage == true && needShow == true}}"></image-->
+    <button class="btn-card-img" open-type="share" wx:if="{{isMyPage == true && needShow == true}}">
+      <image class="card-img" src="/pages/img/card.png" wx:if="{{isMyPage == true && needShow == true}}"></image>
+    </button>
+    <!--view class="join_leaguer"  open-type="share"    wx:if="{{isMyPage == true && needShow == true && oneBusiness.score < 2000}}">
+        <image src="/pages/img/leaguer_dark.png" class="leaguer_normal"></image>
+        <text>会员 ></text>
+      </view-->
+    <view class="basic-info">
+      <view class="user-desc">
+        <text class="userinfo-nickname">{{oneBusiness.realname}}</text>
+        <image src="/pages/img/women.png" class="gender" wx:if="{{oneBusiness.gender == 1}}"></image>
+        <image src="/pages/img/man.png" class="gender" wx:else></image>
+        <!--image src="/pages/img/leaguer_normal.png" class="leaguer_normal"  wx:if="{{oneBusiness.score >= 2000}}"></image-->
+        <image src="/pages/img/leaguer_normal.png" class="leaguer_normal" wx:if="{{oneBusiness.leaguer == 1}}"></image>
+      </view>
+      <view class="business-company">{{oneBusiness.company}}</view>
+      <view class="business-job">{{oneBusiness.job}}</view>
+      <view class="edit-info" wx:if="{{isOneSelf}}">
+        <view class="tag-image" bindtap="modifyCard"></view>
+        <image class="edit-info-image" src="/pages/img/edit-info.png" mode="aspectFill">
+        </image>
+      </view>
+    </view>
+  </view>
+  <view class="follow-count">
+    <view class="{{isOneSelf?'follow-left':'follow-left-other'}}" data-count=" {{oneBusiness.follow_count}}"
+      data-id="{{oneBusiness.id}}" bindtap="getFollowerById">
+      <view class="follow-desc">关注
+      </view>
+      <view class="follow-value">
+        {{oneBusiness.follow_count}}
+      </view>
+    </view>
+
+    <view class="{{isOneSelf?'follow-middle':'follow-middle-other'}}" data-count=" {{oneBusiness.fans_count}}"
+      data-id="{{oneBusiness.id}}" bindtap="getFansById">
+      <view class="follow-desc">粉丝
+      </view>
+      <view class="follow-value">
+        {{oneBusiness.fans_count}}
+      </view>
+    </view>
+
+    <view class="{{isOneSelf?'follow-middle':'follow-middle-other'}}" data-score=" {{oneBusiness.score}}"
+      data-id="{{oneBusiness.id}}" bindtap="jumpScore">
+      <view class="follow-desc">亲子币
+      </view>
+      <view class="follow-value">
+        {{!!oneBusiness.score ? oneBusiness.score : 0 }}
+      </view>
+    </view>
+
+    <view class="{{isOneSelf?'follow-right':'follow-right-other'}}" bindtap="sign1" wx:if="{{isOneSelf}}">
+      <image src="/pages/img/sign.png" class="sign-image" mode="aspectFill"></image>
+      <view class="sign-tip1" wx:if="{{needSign}}">每日签到</view>
+      <view class="sign-tip2" wx:if="{{!needSign}}">已签到</view>
+    </view>
+
+  </view>
+
+  <!-- <view class="baseInfo" bindtap="modifyCard">
+    <text>基本资料</text>
+    <text class="baseInfo_more"> > </text>
+    <view class="line"></view>
+  </view> -->
+
+  <view class="business-info">
+    <!-- 标签 -->
+    <view class="business-button-info">
+      <view class="business-btn-tag" wx:if="{{!!oneBusiness.tag1}}">{{oneBusiness.tag1}}</view>
+      <view class="business-btn-tag" wx:if="{{!!oneBusiness.tag2}}">{{oneBusiness.tag2}}</view>
+      <view class="business-btn-tag" wx:if="{{!!oneBusiness.tag3}}">{{oneBusiness.tag3}}</view>
+      <button class="business-btn-tag default-tag"
+        wx:if="{{!oneBusiness.tag1 && !oneBusiness.tag2 && !oneBusiness.tag3}}"></button>
+    </view>
+
+    <view class="desc-info">
+      <view wx:if="{{isLeaguer}}">
+        <image src="{{'/pages/img/phone-' + imageIndex + '.png'}}" class="desc-img"></image>
+        <text data-phone="{{oneBusiness.phone}}" bindtap="callMe">{{oneBusiness.phone}}</text>
+      </view>
+      <view wx:else>
+        <image src="{{'/pages/img/phone-' + imageIndex + '.png'}}" class="desc-img"></image>
+        <text data-phone="{{oneBusiness.phone}}">{{oneBusiness.phone}}</text>
+        <button class="hide-btn">会员可见</button>
+      </view>
+      <view wx:if="{{isLeaguer}}">
+        <image src="{{'/pages/img/wechat-' + imageIndex + '.png'}}" class="desc-img"></image>
+        <text>{{oneBusiness.weixincode}}</text>
+        <button class="hide-btn" wx:if="{{!!oneBusiness.weixincode}}" data-weixin="{{oneBusiness.weixincode}}"
+          bindtap="setClip">一键复制</button>
+      </view>
+      <view wx:else>
+        <image src="{{'/pages/img/wechat-' + imageIndex + '.png'}}" class="desc-img"></image>
+        <text>***************</text>
+        <button class="hide-btn">会员可见</button>
+      </view>
+      <view>
+        <image src="{{'/pages/img/addr-' + imageIndex + '.png'}}" class="desc-img"></image>
+        <text>{{oneBusiness.workaddress}}</text>
+      </view>
+      <view>
+        <image src="{{'/pages/img/intro-' + imageIndex + '.png'}}" class="desc-img"></image>
+        <text>{{oneBusiness.introduce}}</text>
+      </view>
+
+    </view>
+  </view>
+</view>

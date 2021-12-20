@@ -1,0 +1,53 @@
+<view>
+  <include src="../common/oneBusinessTemp.wxml"></include>
+
+  <view wx:if="{{!isLeaguer}}">
+    <button class="pay-score-btn" open-type="getUserInfo" bindgetuserinfo="payShowScore">查看联系方式</button>
+  </view>
+
+  <view class="message-area" wx:if="{{messageList.length>0}}">
+    <view class="message-banner">
+      合作信息({{isMoreMessageList?messageList.length:messageShowList.length}})
+    </view>
+    <view class="message-all" bindtap="showMoreMessageList">
+      更多
+    </view>
+  </view>
+
+  <view class="message-list">
+    <view wx:for="{{isMoreMessageList?messageList:messageShowList}}" wx:key="index" class="one-message"
+      data-id="{{item.id}}" data-title="{{item.title}}" data-message="{{item.message}}" data-last="{{item.lastString}}"
+      data-read="{{item.readCount}}" data-like="{{item.giveLike}}" data-stype="{{item.sourceType}}"
+      data-spath="{{item.sourcePath}}" bindtap="jump2OneMessage">
+      <view class="weui-panel weui-panel_access">
+        <view class="weui-panel__bd">
+          <view class="weui-media-box weui-media-box_text">
+            <view class="weui-media-box__title weui-media-box__title_in-text">{{item.title}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-button">
+    <button class="bottom-left-button bottom-class" bindtap="goHome">
+      <image src="/pages/img/home.png" class="bottom-img" />
+      <text class="bottom-txt"> 回首页</text>
+    </button>
+    <button class="{{isOneSelf?'bottom-middle-button bottom-class disabled-btn':'bottom-middle-button bottom-class'}}"
+      bindtap="onGotUserInfo" wx:if="{{follow == 0}}" disabled="{{isOneSelf}}">
+      <image src="/pages/img/follow.png" class="bottom-img" />
+      <text class="middle-bottom-txt"> 关注</text>
+    </button>
+    <button class="bottom-middle-button bottom-class" bindtap="cancel" wx:else="{{follow == 1}}"> 取消关注
+    </button>
+
+
+    <button class="bottom-right-button bottom-class" open-type="share">
+      <!-- <image src="/pages/img/share.png" class="bottom-img" /> -->
+      <!-- <text class="bottom-txt"> 转发名片</text> -->
+      建名片
+    </button>
+  </view>
+</view>

@@ -1,0 +1,27 @@
+<view>
+  <!--view class="one-panel weui-media-box weui-media-box_text">
+    <view class="title weui-media-box__title weui-media-box__title_in-text"> 亲子币的作用</view>
+    <view class="desc">
+      <text>\t 1、查看联系方式 \n </text>
+      <text>\t 2、兑换"云资源"里的产品 \n </text>
+    </view>
+  </view-->
+
+  <view class="one-panel weui-media-box weui-media-box_text">
+    <view class="title weui-media-box__title weui-media-box__title_in-text"> 如何获取亲子币？</view>
+    <view class="desc">
+      方式1：新人福利，新人注册亲子名片奖励100亲子币；<text> \t\n </text>
+    </view>
+    <!-- <view class="invite" bindtap="jumpInvite">
+      <image src="/pages/img/invite.jpg" class="invite-img"></image>
+    </view> -->
+    <view class="desc">
+      方式2：充值亲子币<text> \t\n </text>
+    </view>
+    <button class="charge-btn" bindtap="payfor">充值</button>
+    <view class="title weui-media-box__title weui-media-box__title_in-text"> 亲子币的作用：</view>
+    <view class="desc">
+      查看亲子名片中的联系方式和微信号，查看一个消耗100亲子币。<text> \t\n </text><text> \t\n </text>
+    </view>
+  </view>
+</view>
