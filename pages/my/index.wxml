@@ -13,7 +13,6 @@
     <text>我的订单</text>
     <text class="more-data"> > </text>
   </view>
-
   <view class="order" bindtap="toEnterpriseOrderList" wx:if="{{isEnterpriseAdministrator}}">
     <text>企业服务订单</text>
     <text class="more-data"> > </text>

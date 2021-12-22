@@ -1,42 +1,94 @@
 @import "../common/businessTemp.wxss";
 
-.one-business{
+page,
+.page {
+  background-color: #eee;
+}
+
+.one-business {
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: rgb(228, 228, 228);
 }
 
-.bottom-button{
+.bottom-button {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 35px;
+  height: 40px;
   background-color: white;
-  border-top:thick #c6c6c6;
+  border-top: thick #c6c6c6;
+  padding-bottom: 7px;
 }
 
-.bottom-left-button, .bottom-right-button{
+.bottom-left-button,
+.bottom-right-button {
   /*width: 45%;*/
   display: inline-block;
-  text-align: center;
+  background-color: white;
 }
 
-.bottom-class{
-  width:50%;
+.cell {
+  width: 70%;
+  margin-left: 52px;
+  margin-top: 7px;
+}
+
+.groupCell--arrow {
+  width: 10px;
+  margin-right: 5px;
+}
+
+.bottom-class {
+  width: 100%;
   height: 100%;
-  font-size: 0.9em;
+  font-size: 18px;
+  vertical-align: top;
 }
 
-.bottom-img{
+.bottom-img {
   width: 20px;
-  height: 20px;
-vertical-align: middle;
+  height: 23px;
+  vertical-align: middle;
+  margin-right: 5px;
+  margin-bottom: 5px;
 }
 
-.bottom-txt{
-  padding-top:0px;
+.bottom-txt {
+  padding-top: 0px;
 }
 
-.bottom-class::after{
+.bottom-class::after {
   border: 0rpx;
+}
+
+.float {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.pay-tips-area {
+  width: 85%;
+  background-color: #fdefd5;
+  margin: 0 auto;
+  margin-top: 170rpx;
+  border: 3px solid #fbcb65;
+  border-radius: 10px;
+  padding-bottom: 10px;
+}
+
+.qr-code {
+  width: 70%;
+  margin-top: 50rpx;
+  margin-left: 105rpx;
+}
+
+.pay-tips {
+  font-size: 20px;
+  text-align: center;
+  color: #d95a61;
+  margin-top: 10px;
 }

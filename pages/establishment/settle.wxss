@@ -28,7 +28,7 @@ page {
     align-items: center;
 }
 
-.main-image-left{
+.main-image-left {
     margin-right: 50rpx;
 }
 
@@ -44,7 +44,7 @@ page {
     position: relative;
 }
 
-.add-main-image-tip-1{
+.add-main-image-tip-1 {
     font-size: 12px;
     margin-top: 5px;
     position: relative;
@@ -208,10 +208,18 @@ textarea {
     height: 100px;
 }
 
-.needed{
+.needed {
     width: 15px;
     height: 15px;
     position: absolute;
     top: 5px;
     left: -15px;
+}
+
+.auth-tips {
+    background-color: white;
+    font-size: 14px;
+    color: #ff4e4e;
+    text-align: right;
+    padding-right: 35px;
 }

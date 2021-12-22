@@ -1,24 +1,24 @@
 <view class="container">
     <view class="resource-item" bindtap="showTips" data-type="1">
-        <image src="https://www.qinzi123.com/allimage/images/wx_download/sanguocun.jpg" mode="widthFix"></image>
+        <image src="https://www.qinzi123.com/file/sanguocun.jpg" mode="widthFix"></image>
         <view class="resource-title">入园门票</view>
         <view class="price-normal huaxian">市场价：30元</view>
         <view class="price-vip">会员价：0元</view>
     </view>
     <view class="resource-item" bindtap="showTips" data-type="2">
-        <image src="https://www.qinzi123.com/allimage/images/wx_download/maidige.jpg" mode="widthFix"></image>
+        <image src="https://www.qinzi123.com/file/maidige.jpg" mode="widthFix"></image>
         <view class="resource-title">麦迪格学生免费配镜卡</view>
         <view class="price-normal huaxian">市场价：99元</view>
         <view class="price-vip">会员价：0元</view>
     </view>
     <view class="resource-item" bindtap="showTips" data-type="3">
-        <image src="https://www.qinzi123.com/allimage/images/wx_download/huochelaisi.jpg" mode="widthFix"></image>
+        <image src="https://www.qinzi123.com/file/huochelaisi.jpg" mode="widthFix"></image>
         <view class="resource-title">火车来斯入园门票</view>
         <view class="price-normal huaxian">市场价：20元</view>
         <view class="price-vip">会员价：0元</view>
     </view>
     <view class="resource-item" bindtap="showTips" data-type="4">
-        <image src="https://www.qinzi123.com/allimage/images/wx_download/jichengkouqiang.jpg" mode="widthFix"></image>
+        <image src="https://www.qinzi123.com/file/jichengkouqiang.jpg" mode="widthFix"></image>
         <view class="resource-title">极橙口腔儿童预防性清洁套餐</view>
         <view class="price-normal huaxian">市场价：59元</view>
         <view class="price-vip">会员价：0元</view>

@@ -579,11 +579,13 @@ Page({
                     }
                     mainImage.push(establishmentInfo.logopic);
                 }
-                if (establishmentInfo.licensepic != "") {
-                    if (establishmentInfo.licensepic.indexOf('http') == -1) {
-                        establishmentInfo.licensepic = app.qinzi + establishmentInfo.licensepic;
+                if (app.hasData(establishmentInfo.licensepic)) {
+                    if (establishmentInfo.licensepic != "") {
+                        if (establishmentInfo.licensepic.indexOf('http') == -1) {
+                            establishmentInfo.licensepic = app.qinzi + establishmentInfo.licensepic;
+                        }
+                        license.push(establishmentInfo.licensepic);
                     }
-                    license.push(establishmentInfo.licensepic);
                 }
 
                 op.setData({

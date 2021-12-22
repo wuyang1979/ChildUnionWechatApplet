@@ -12,19 +12,21 @@
         </view>
 
         <view class="upload-main-image-area main-image-left" wx:if="{{mainImagePic.length>0}}" bindtap="uploadMainImage">
-            <image class="main-image" wx:for="{{mainImagePic}}" src="{{item}}" mode="aspectFill"></image>
+            <image class="main-image" wx:for="{{mainImagePic}}" wx:key="index" src="{{item}}" mode="aspectFill"></image>
         </view>
 
         <view class="add-main-image-area" wx:if="{{licensePic.length==0}}" bindtap="uploadLicensePic">
             <image class="add-main-image" src="/pages/img/camera.png" mode="aspectFill"></image>
             <view class="add-main-image-tip">营业执照</view>
-            <view class="add-main-image-tip-1">（用于企业认证）</view>
+            <view class="add-main-image-tip-1">（用于机构认证）</view>
         </view>
 
         <view class="upload-main-image-area" wx:if="{{licensePic.length>0}}" bindtap="uploadLicensePic">
-            <image class="main-image" wx:for="{{licensePic}}" src="{{item}}" mode="aspectFill"></image>
+            <image class="main-image" wx:for="{{licensePic}}" wx:key="index" src="{{item}}" mode="aspectFill"></image>
         </view>
+
     </view>
+    <view class="auth-tips">已认证的机构优先展示</view>
 
     <!-- 机构名称 -->
     <view class="base-name-area">

@@ -1,1 +1,5 @@
-{}
+{
+    "usingComponents": {
+        "cell": "plugin://materialPlugin/cell"
+    }
+}
