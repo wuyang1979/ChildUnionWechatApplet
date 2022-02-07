@@ -1,7 +1,7 @@
 <view class="cont">
     <view class="title">我的基地</view>
     <view class="base-area">
-        <view class="base-item" wx:for="{{baseList}}" wx:key="{{item.id}}">
+        <view class="base-item" wx:for="{{baseList}}" wx:key="index">
             <view class="base-item-name">{{item.name}}</view>
             <view class="modify-btn" bindtap="modify" data-card_id="{{item.card_id}}" data-city="{{item.city}}"
                 data-id="{{item.id}}" data-district="{{item.district}}" data-introduce="{{item.introduce}}"

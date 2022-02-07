@@ -23,6 +23,10 @@ Page({
       message = "发布成功！";
     } else if (type == "2") {
       message = "入驻成功";
+    } else if (type == '3') {
+      message = "入驻成功，待管理员审核";
+    } else if (type == '4') {
+      message = "发布成功，待管理员审核";
     }
 
     this.setData({

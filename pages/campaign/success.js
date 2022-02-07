@@ -84,7 +84,6 @@ Page({
             });
           },
           fail: function (err) {
-            console.log(err);
             if (err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
               wx.openSetting({
                 success(settingdata) {

@@ -63,7 +63,6 @@ Page({
           wx.showToast({
             title: '后台处理失败',
           })
-          console.log(data);
           return;
         }
         if (app.hasData(data)) {
@@ -75,7 +74,6 @@ Page({
             'signType': data.signType,
             'paySign': data.paySign,
             'success': function (res) {
-              console.log(res);
               if (op.data.toLeaguerFlag) {
                 app.post('/order/toLeaguer', {
                   id: card
@@ -104,7 +102,6 @@ Page({
 
             },
             'fail': function (res) {
-              console.log(res.errMsg)
             }
           })
         }
@@ -122,7 +119,6 @@ Page({
           wx.showToast({
             title: '后台处理失败',
           })
-          console.log(data);
           return;
         } else {
           var allUrl = util.fillUrlParams('/pages/campaign/success', {

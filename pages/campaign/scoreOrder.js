@@ -12,6 +12,8 @@ Page({
     type: 0,
     activeType: 0,
     toLeaguerFlag: false,
+    toEnterpriseLeaguerFlag: false,
+    toGoldEnterpriseLeaguerFlag: false,
   },
 
 
@@ -39,65 +41,184 @@ Page({
       return;
     }
     var op = this;
-    app.post('/order/prepay', {
-      id: op.data.oneOrder.id,
-      card: card,
-      body: op.data.oneOrder.name + '订单',
-      order: op.data.oneOrder.order_no,
-      total: op.data.oneOrder.total,
-    }, function (data) {
-      if (!!data && !!data.status) {
-        wx.showToast({
-          title: '后台处理失败',
-        })
-        console.log(data);
-        return;
-      }
-      if (app.hasData(data)) {
-        // 发起微信支付
-        wx.requestPayment({
-          'timeStamp': data.timeStamp,
-          'nonceStr': data.nonceStr,
-          'package': data.package,
-          'signType': data.signType,
-          'paySign': data.paySign,
-          'success': function (res) {
-            console.log(res);
-            if (op.data.toLeaguerFlag) {
-              app.post('/order/toLeaguer', {
-                id: card
-              }, function (data) {
-                if (data.result == 1) {
-                  var allUrl = util.fillUrlParams('/pages/campaign/success', {
-                    id: op.data.oneOrder.id,
-                    type: op.data.type,
-                    communityIndex: op.data.communityIndex,
-                    activeType: op.data.activeType,
-                  });
-                  wx.navigateTo({
-                    url: allUrl
-                  });
-                }
-              });
-            } else {
-              var allUrl = util.fillUrlParams('/pages/campaign/success', {
-                id: op.data.oneOrder.id,
-                type: op.data.type,
-                communityIndex: op.data.communityIndex,
-                activeType: op.data.activeType,
-              });
-              wx.navigateTo({
-                url: allUrl
-              });
-            }
+    if (op.data.toLeaguerFlag || op.data.toEnterpriseLeaguerFlag || op.data.toGoldEnterpriseLeaguerFlag) {
+      app.post('/order/leaguePrepay', {
+        id: op.data.oneOrder.id,
+        card: card,
+        body: op.data.oneOrder.name,
+        order: op.data.oneOrder.order_no,
+        total: op.data.oneOrder.total,
+      }, function (data) {
+        if (!!data && !!data.status) {
+          wx.showToast({
+            title: '后台处理失败',
+          })
+          return;
+        }
+        if (app.hasData(data)) {
+          // 发起微信支付
+          wx.requestPayment({
+            'timeStamp': data.timeStamp,
+            'nonceStr': data.nonceStr,
+            'package': data.package,
+            'signType': data.signType,
+            'paySign': data.paySign,
+            'success': function (res) {
+              if (op.data.toLeaguerFlag) {
+                app.post('/order/toLeaguer', {
+                  id: card
+                }, function (data) {
+                  if (data.result == 1) {
+                    var allUrl = util.fillUrlParams('/pages/campaign/success', {
+                      id: op.data.oneOrder.id,
+                      type: op.data.type,
+                      communityIndex: op.data.communityIndex,
+                      activeType: op.data.activeType,
+                    });
+                    wx.navigateTo({
+                      url: allUrl
+                    });
+                  }
+                });
+              } else if (op.data.toEnterpriseLeaguerFlag) {
+                app.post('/order/toEnterpriseLeaguer', {
+                  id: card
+                }, function (data) {
+                  if (app.hasData(data)) {
+                    var allUrl = util.fillUrlParams('/pages/campaign/success', {
+                      id: op.data.oneOrder.id,
+                      type: op.data.type,
+                      communityIndex: op.data.communityIndex,
+                      activeType: op.data.activeType,
+                    });
+                    wx.navigateTo({
+                      url: allUrl
+                    });
+                  }
+                });
+              } else if (op.data.toGoldEnterpriseLeaguerFlag) {
+                app.post('/order/toGoldEnterpriseLeaguer', {
+                  id: card
+                }, function (data) {
+                  if (app.hasData(data)) {
+                    var allUrl = util.fillUrlParams('/pages/campaign/success', {
+                      id: op.data.oneOrder.id,
+                      type: op.data.type,
+                      communityIndex: op.data.communityIndex,
+                      activeType: op.data.activeType,
+                    });
+                    wx.navigateTo({
+                      url: allUrl
+                    });
+                  }
+                });
+              } else {
+                var allUrl = util.fillUrlParams('/pages/campaign/success', {
+                  id: op.data.oneOrder.id,
+                  type: op.data.type,
+                  communityIndex: op.data.communityIndex,
+                  activeType: op.data.activeType,
+                });
+                wx.navigateTo({
+                  url: allUrl
+                });
+              }
 
-          },
-          'fail': function (res) {
-            console.log(res.errMsg)
-          }
-        })
-      }
-    });
+            },
+            'fail': function (res) {}
+          })
+        }
+      });
+    } else {
+      app.post('/order/prepay', {
+        id: op.data.oneOrder.id,
+        card: card,
+        body: op.data.oneOrder.name,
+        order: op.data.oneOrder.order_no,
+        total: op.data.oneOrder.total,
+      }, function (data) {
+        if (!!data && !!data.status) {
+          wx.showToast({
+            title: '后台处理失败',
+          })
+          return;
+        }
+        if (app.hasData(data)) {
+          // 发起微信支付
+          wx.requestPayment({
+            'timeStamp': data.timeStamp,
+            'nonceStr': data.nonceStr,
+            'package': data.package,
+            'signType': data.signType,
+            'paySign': data.paySign,
+            'success': function (res) {
+              if (op.data.toLeaguerFlag) {
+                app.post('/order/toLeaguer', {
+                  id: card
+                }, function (data) {
+                  if (data.result == 1) {
+                    var allUrl = util.fillUrlParams('/pages/campaign/success', {
+                      id: op.data.oneOrder.id,
+                      type: op.data.type,
+                      communityIndex: op.data.communityIndex,
+                      activeType: op.data.activeType,
+                    });
+                    wx.navigateTo({
+                      url: allUrl
+                    });
+                  }
+                });
+              } else if (op.data.toEnterpriseLeaguerFlag) {
+                app.post('/order/toEnterpriseLeaguer', {
+                  id: card
+                }, function (data) {
+                  if (data.result == 1) {
+                    var allUrl = util.fillUrlParams('/pages/campaign/success', {
+                      id: op.data.oneOrder.id,
+                      type: op.data.type,
+                      communityIndex: op.data.communityIndex,
+                      activeType: op.data.activeType,
+                    });
+                    wx.navigateTo({
+                      url: allUrl
+                    });
+                  }
+                });
+              } else if (op.data.toGoldEnterpriseLeaguerFlag) {
+                app.post('/order/toGoldEnterpriseLeaguer', {
+                  id: card
+                }, function (data) {
+                  if (data.result == 1) {
+                    var allUrl = util.fillUrlParams('/pages/campaign/success', {
+                      id: op.data.oneOrder.id,
+                      type: op.data.type,
+                      communityIndex: op.data.communityIndex,
+                      activeType: op.data.activeType,
+                    });
+                    wx.navigateTo({
+                      url: allUrl
+                    });
+                  }
+                });
+              } else {
+                var allUrl = util.fillUrlParams('/pages/campaign/success', {
+                  id: op.data.oneOrder.id,
+                  type: op.data.type,
+                  communityIndex: op.data.communityIndex,
+                  activeType: op.data.activeType,
+                });
+                wx.navigateTo({
+                  url: allUrl
+                });
+              }
+
+            },
+            'fail': function (res) {}
+          })
+        }
+      });
+    }
+
 
   },
 
@@ -106,16 +227,20 @@ Page({
    */
   onLoad: function (options) {
     let op = this;
-    var id = options.id;
-    var communityIndex = options.communityIndex;
-    var type = options.type || 0;
-    var activeType = options.activeType || 0;
-    var toLeaguerFlag = options.toLeaguerFlag || false;
+    let id = options.id;
+    let communityIndex = options.communityIndex;
+    let type = options.type || 0;
+    let activeType = options.activeType || 0;
+    let toLeaguerFlag = options.toLeaguerFlag || false;
+    let toEnterpriseLeaguerFlag = options.toEnterpriseLeaguerFlag || false;
+    let toGoldEnterpriseLeaguerFlag = options.toGoldEnterpriseLeaguerFlag || false;
     op.setData({
       communityIndex: communityIndex,
       type: type,
       activeType: activeType,
       toLeaguerFlag: toLeaguerFlag,
+      toEnterpriseLeaguerFlag: toEnterpriseLeaguerFlag,
+      toGoldEnterpriseLeaguerFlag: toGoldEnterpriseLeaguerFlag,
     })
     this.loadOneOrder(id);
   },

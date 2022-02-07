@@ -11,7 +11,7 @@
 .main-image {
     width: 100%;
     margin-top: 10px;
-    height: 150px;
+    height: 250px;
 }
 
 .authentication {
@@ -93,9 +93,9 @@
 .detail {
     font-size: 15px;
     margin-top: 5px;
-    text-indent: 2em;
     text-align: justify;
     margin-bottom: 10px;
+    padding: 0 15px;
 }
 
 .enterprise-name {
@@ -126,6 +126,7 @@
 
 .weui-media-box__desc {
     -webkit-line-clamp: initial;
+    position: relative;
 }
 
 .reply-photo {
@@ -152,9 +153,11 @@
 }
 
 .reply-name {
+    position: absolute;
     font-size: 14px;
     width: 50%;
     color: #1d6eaf;
+    top: 5px;
 }
 
 .job-text {
@@ -177,6 +180,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    margin-left: 10px;
 }
 
 .reply-name,
@@ -198,8 +202,7 @@
 }
 
 .reply-message {
-    padding-top: 5px;
-    font-size: 16px;
+    font-size: 13px;
     color: black;
     margin-left: 10px;
 }
@@ -335,4 +338,8 @@
 
 .consulting-middle-info {
     width: 100%;
+}
+
+.none-reply-tip{
+    margin-left: 24rpx;
 }

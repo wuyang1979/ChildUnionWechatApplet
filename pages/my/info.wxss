@@ -1,54 +1,67 @@
-.weui-cells{
-  margin-top:15px;
+.weui-cells {
+  margin-top: 15px;
 }
 
-.weui-cell{
-  height:40px;
+.weui-cell {
+  height: 40px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
-.weui-label, .weui-cell__bd{
+.weui-label,
+.weui-cell__bd {
   font-size: 0.8em;
 }
 
-.weui-label{
+.weui-cell__bd {
+  padding-left: 10px;
+}
+
+.weui-label {
   width: 70px;
 }
-.submit-view{
-  margin-top:30px;
+
+.submit-view {
+  margin-top: 30px;
   text-align: center;
 }
 
-.submit-btn{
-  background-color:  rgb(1, 143, 215);
+.submit-btn {
+  background-color: rgb(1, 143, 215);
   width: 60%;
-  border:2px solid;
-  border-radius:25px;
+  border: 2px solid;
+  border-radius: 25px;
   color: white;
 }
 
-.weui-cell_box{
+.weui-cell_box {
   height: 35%;
 }
 
-.boxInput{
+.boxInput {
   margin-top: 10px;
   width: 98%;
 }
 
-.sexCell{
+.sexCell {
   padding-top: 10px;
   margin-bottom: 10px;
 }
+
 .radio {
-  transform:scale(0.8);
-  margin-left: 10px;
+  transform: scale(0.8);
+  margin-right: 10px;
 }
 
-.sexText{
+.man {
+  margin-left: -7px;
+}
+
+.sexText {
   font-size: 1.3em;
 }
 
-.city-btn-select{
+.city-btn-select {
   color: rgb(0, 0, 0);
   font-size: 0.9em;
   width: 70px;
@@ -58,10 +71,18 @@
   padding-left: 2px;
   padding-right: 2px;
   vertical-align: middle;
-  margin-right: 3px;
+  margin-left: -3px;
   background-color: rgb(238, 238, 238);
 }
-.city-btn-select::after{
-    outline:none;
-    border:0;
+
+.city-btn-select::after {
+  outline: none;
+  border: 0;
+}
+
+.tag-name {
+  font-size: 14px;
+  width: 80%;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }

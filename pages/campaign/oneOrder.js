@@ -27,10 +27,8 @@ Page({
     wx.makePhoneCall({
       phoneNumber: '18913388884',
       success: function () {
-        console.log("拨打电话成功！")
       },
       fail: function () {
-        console.log("拨打电话失败！")
       }
     })
   },

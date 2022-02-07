@@ -28,7 +28,7 @@
             "outputPath": ""
         },
         "enableEngineNative": false,
-        "useIsolateContext": true,
+        "useIsolateContext": false,
         "userConfirmedBundleSwitch": false,
         "packNpmManually": false,
         "packNpmRelationList": [],
@@ -39,7 +39,7 @@
         "useCompilerPlugins": false
     },
     "compileType": "miniprogram",
-    "libVersion": "2.21.0",
+    "libVersion": "2.22.0",
     "appid": "wx2f3e800fce3fd438",
     "projectname": "qinzi123_new",
     "isGameTourist": false,

@@ -78,7 +78,6 @@ Page({
     },
 
     bindLevelPickerChange: function (e) {
-        console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({
             level: e.detail.value,
             selectLevel: true
@@ -86,13 +85,11 @@ Page({
     },
 
     bindDistrictPickerChange: function (e) {
-        console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({
             district: parseInt(e.detail.value) + 1 + "",
             districtIndex: e.detail.value,
             selectDistrict: true
         });
-        console.log(this.data.district)
     },
 
     inputTraffic: function (e) {
@@ -134,7 +131,7 @@ Page({
         let op = this;
         wx.chooseImage({
             count: 1,
-            sizeType: ['original', 'compressed'],
+            sizeType: ['compressed'],
             sourceType: ['album', 'camera'],
             success(res) {
                 op.data.mainImagePic = [];
@@ -189,12 +186,11 @@ Page({
             },
             complete: () => {
                 i++;
-                if (i == data.path.length) { //当图片传完时，停止调用 
-                    console.log('成功：' + success + " 失败：" + fail);
+                if (i == data.path.length) {
+                    //当图片传完时，停止调用 
                     // that.setData({
                     //   showResult: '上传成功'
                     // });
-                    console.log(that.data.mainImage)
                 } else { //若图片还没有传完，则继续调用函数
                     data.i = i;
                     data.success = success;

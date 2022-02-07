@@ -1,17 +1,36 @@
 <view>
   <include src="../common/oneBusinessTemp.wxml"></include>
 
-  <view class="order" bindtap="jumpOrderList">
-    <!--image src="/pages/img/order.png" class="order-img"></image-->
-    <text>我的订单</text>
+  <view class="order" bindtap="myEstablishment" wx:if="{{id!=-1}}">
+    <text>{{establishmentBtnName}}</text>
     <text class="more-data"> > </text>
   </view>
-
+  <view class="order" bindtap="manageProduct" wx:if="{{id!=-1}}">
+    <text>产品管理</text>
+    <text class="more-data"> > </text>
+  </view>
   <view class="order" bindtap="manageBase" wx:if="{{isBaseAdministrator}}">
     <text>我的基地</text>
     <text class="more-data"> > </text>
   </view>
+  <view class="order" bindtap="jumpOrderList" wx:if="{{id!=-1}}">
+    <text>我的订单</text>
+    <text class="more-data"> > </text>
+  </view>
+  <view class="order" bindtap="toEnterpriseOrderList" wx:if="{{isEnterpriseAdministrator}}">
+    <text>企业服务订单</text>
+    <text class="more-data"> > </text>
+    <view class="order-num">{{enterpriseOrderUnreadNum}}</view>
+  </view>
 
+  <!-- 现针对管理员开放，后针对基地管理员 -> isBaseAdministrator -->
+  <view class="order" bindtap="toBaseReserveList" wx:if="{{isEnterpriseAdministrator}}">
+    <text>基地预订信息</text>
+    <text class="more-data"> > </text>
+    <view class="order-num">{{baseReserveUnreadNum}}</view>
+  </view>
+
+  <!-- <button bindtap="test">测试</button> -->
   <!--view class="order" bindtap="jumpRechargeOrderList"-->
   <!--image src="/pages/img/order.png" class="order-img"></image-->
   <!--text>充值记录</text>
@@ -44,8 +63,9 @@
     		</form>
     </button>
 </form-->
-    <view class="func-area" wx:if="{{!isIos}}">
-      <button class="confirm-btn" bindtap="payfor">加入会员</button>
+    <!-- wx:if="{{!isIos}}" -->
+    <view class="func-area">
+      <button class="confirm-btn" bindtap="payfor">{{vipBtnName}}</button>
       <button class="welfare" bindtap="welfare">会员福利库</button>
     </view>
   </view>
@@ -63,6 +83,5 @@
   <!-- <view class="invite" bindtap="jumpInvite" wx:if="{{id != -1}}">
     <image src="/pages/img/invite.jpg" class="invite-img"></image>
   </view> -->
-  <cell bind:startmessage='startmessage' bind:completemessage="completemessage"
-    plugid='34a7cc1cdfd3d0264ee128020cfbf807' />
+  <cell bind:startmessage='startmessage' bind:completemessage="completemessage" plugid='34a7cc1cdfd3d0264ee128020cfbf807' />
 </view>

@@ -1,0 +1,10 @@
+<view class="base-reserve">
+    <view class="title">活动基地预订</view>
+    <view class="reserve-item" wx:for="{{baseReserveList}}" wx:key="index">
+        <view class="reserve-base-name">{{item.baseName}}</view>
+        <view class="reserve-name">姓名：{{item.cardName}}</view>
+        <view class="reserve-phone">手机号：{{item.phone}}</view>
+        <!-- <view class="order-time">{{item.createTime}}</view> -->
+        <button class="read" disabled="{{item.read_status==1}}" bindtap="read" data-id="{{item.id}}">{{item.read_status==0?'未读':'已读'}}</button>
+    </view>
+</view>

@@ -12,7 +12,7 @@ Page({
   oneBusiness: businessTemp.oneBusiness,
   onGotUserInfo: businessTemp.onGotUserInfo,
   addFollower: businessTemp.addFollower,
-  
+
   saveFormId: function (v) {
     app.formIdInput(v, this);
   },
@@ -25,15 +25,17 @@ Page({
     // 加载商户
     app.getUrl('/business/list/' + app.getUserId() + '-' + start + '-' + pageSize, function (data) {
       if (app.hasData(data)) {
-        op.setData({ businessList: data});
+        op.setData({
+          businessList: data
+        });
       }
     });
   },
 
-  batchAddFollower:function(event){
+  batchAddFollower: function (event) {
     var op = this;
     var idList = [];
-    for(var index = 0; index < this.data.businessList.length; index ++){
+    for (var index = 0; index < this.data.businessList.length; index++) {
       idList.push(this.data.businessList[index]["id"]);
     }
     var followerList = idList.join(",");
@@ -42,13 +44,14 @@ Page({
         app.globalData.listDataUpdated = true;
 
         var businessList = op.data.businessList;
-        for (var index = 0; index < businessList.length; index++){
+        for (var index = 0; index < businessList.length; index++) {
           businessList[index]["isFollow"] = 1
         }
-        op.setData({ businessList: businessList});
-
-        var allUrl = util.fillUrlParams('/pages/business/success', {
+        op.setData({
+          businessList: businessList
         });
+
+        var allUrl = util.fillUrlParams('/pages/business/success', {});
         wx.navigateTo({
           url: allUrl
         });
@@ -56,9 +59,9 @@ Page({
     });
   },
 
-  backHome:function(event){
+  backHome: function (event) {
     wx.switchTab({
-      url: "/pages/business/list",
+      url: "/pages/cooperate/list",
     });
   },
 
@@ -66,22 +69,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.loadCommendBusiness();
+    // this.loadCommendBusiness();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
-  },
+  onReady: function () {},
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
-  },
+  onShow: function () {},
 
   /**
    * 生命周期函数--监听页面隐藏

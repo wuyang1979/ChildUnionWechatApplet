@@ -17,8 +17,10 @@ Page({
     last: '',
     read: 0,
     like: 0,
+    isFollow: false,
 
     card: 0,
+    selfCard: app.getUserId(),
     phone: '',
     realname: '',
     job: '',
@@ -39,10 +41,12 @@ Page({
   onGotUserInfo: function (e) {
     var op = this;
     var replyId = e.currentTarget.dataset.id;
+    var replyCard = op.data.card;
     app.onGotUserInfo(e, function () {
       var allUrl = util.fillUrlParams('/pages/cooperate/reply', {
         messageId: op.data.id,
-        replyId: !!replyId ? replyId : 0
+        replyId: !!replyId ? replyId : 0,
+        replyCard: replyCard,
       });
       wx.navigateTo({
         url: allUrl
@@ -62,10 +66,16 @@ Page({
 
   guanzhu: function (e) {
     var op = this;
-    app.onGotUserInfo(e, function () {
+    let card = wx.getStorageSync('id');
+    if (card == '') {
+      app.onGotUserInfo(e, function () {});
+    } else {
+      op.setData({
+        selfCard: app.getUserId(),
+      })
       op.addFollower(e);
       app.batchAddFormId(op);
-    });
+    }
     if (this.data.recommandFlag) {
       wx.showToast({
         title: '已关注',
@@ -76,20 +86,30 @@ Page({
   },
 
   addFollower: function (event) {
-    var op = this;
+    let op = this;
+    let templateId = '01EMtrNhQzLgkppeVZf0PtmoOk812HevdmwKDZQqkUE';
     var userId = app.getUserId();
     var id = event.currentTarget.dataset.id;
-    app.getUrl('/business/addFollower/' + userId + '-' + id, function (data) {
-      if (app.hasData(data)) {
-        app.globalData.listDataUpdated = true;
-        //判断是否有打开过页面
-        if (getCurrentPages().length != 0) {
-          //刷新当前页面的数据
-          getCurrentPages()[getCurrentPages().length - 1].onShow()
-        }
+    wx.requestSubscribeMessage({
+      tmplIds: [templateId],
+      success: (res) => {
+        // 如果用户点击允许
+        if (res[templateId] == 'accept') {} else {}
+      },
+      fail: (res) => {},
+      complete: (res) => {
+        app.getUrl('/business/addFollower/' + userId + '-' + id, function (data) {
+          if (app.hasData(data)) {
+            app.globalData.listDataUpdated = true;
+            //判断是否有打开过页面
+            op.setData({
+              isFollow: true
+            });
+          }
+        });
+        this.data.recommandFlag = true;
       }
-    });
-    this.data.recommandFlag = true;
+    })
   },
 
   saveFormId: function (v) {
@@ -187,12 +207,8 @@ Page({
     var call = this.data.phone;
     wx.makePhoneCall({
       phoneNumber: call, //此号码并非真实电话号码，仅用于测试  
-      success: function () {
-        console.log("拨打电话成功！")
-      },
-      fail: function () {
-        console.log("拨打电话失败！")
-      }
+      success: function () {},
+      fail: function () {}
     })
   },
 
@@ -208,6 +224,27 @@ Page({
     });
   },
 
+  getFollower: function (selfCard, card) {
+    let op = this;
+    app.post("/cooperate/getFollower", {
+      userId: selfCard,
+      followerId: card
+    }, function (data) {
+      if (app.hasData(data)) {
+        if (data.length == 0) {
+          op.setData({
+            isFollow: false,
+          })
+        } else {
+          op.setData({
+            isFollow: true,
+          })
+        }
+
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -216,14 +253,14 @@ Page({
     var id = options.id;
     var title = options.title;
     var message = options.message;
-    var messageType = options.messageType;
+    var messageType = options.messageType || 0;
     var shareFlag = options.shareFlag || false;
-    var sourceType = options.sourceType;
+    var sourceType = options.sourceType || 0;
     var sourcePath;
     if (shareFlag) {
-      sourcePath = options.sourcePath;
+      sourcePath = options.sourcePath || "";
     } else {
-      sourcePath = !!options.sourcePath && options.sourcePath != 'null' ? app.qinzi + "/" + options.sourcePath : null;
+      sourcePath = !!options.sourcePath && options.sourcePath != 'null' ? app.qinzi + "/" + options.sourcePath : "";
     }
     var last = options.last;
     var read = options.read;
@@ -234,7 +271,7 @@ Page({
     var job = options.job;
     var company = options.company;
     var headimgurl = options.headimgurl;
-    var newMessageList = JSON.parse(options.messageList);
+    var newMessageList = options.messageList ? JSON.parse(options.messageList) : [];
 
     this.setData({
       id: id,
@@ -271,6 +308,10 @@ Page({
 
 
     this.loadReply4MessageId(id);
+    var selfCard = app.getUserId();
+    if (selfCard != -1) {
+      op.getFollower(selfCard, card);
+    }
     this.updateRead();
     wx.showShareMenu({
       withShareTicket: true,
@@ -352,7 +393,6 @@ Page({
       title: op.data.realname + '发布了一条市场动态！',
       path: allUrl,
       success: function (res) {
-        console.log(res)
         // 转发成功
       },
       fail: function (res) {

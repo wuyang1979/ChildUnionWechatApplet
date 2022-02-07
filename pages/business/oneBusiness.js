@@ -34,8 +34,8 @@ Page({
   setClip: oneBusinessTemp.setClip,
 
   goHome: function (event) {
-    wx.navigateTo({
-      url: '/pages/business/list',
+    wx.switchTab({
+      url: '/pages/cooperate/list',
     })
   },
 
@@ -66,7 +66,6 @@ Page({
     var job = this.data.oneBusiness.job;
     var company = this.data.oneBusiness.company;
     var headimgurl = this.data.oneBusiness.headimgurl;
-    console.log(event.currentTarget.dataset.sourceType)
 
     var allUrl = util.fillUrlParams('/pages/cooperate/oneMessage', {
       id: id,
@@ -133,7 +132,7 @@ Page({
             seeCardId: userId,
             seenCardId: op.data.id,
           }, function (data) {
-            if (typeof data == 'number' && data > 0 ) {
+            if (typeof data == 'number' && data > 0) {
               app.getUrl('/card/show/payScore/' + userId + '-' + op.data.id, function (data) {
                 if (app.hasData(data)) {
                   wx.showToast({
@@ -146,14 +145,12 @@ Page({
                     id: op.data.id,
                     follow: op.data.follow
                   })
-                  console.log('用户查看联系方式成功')
                 }
               });
             }
           });
           // });
         } else if (sm.cancel) {
-          console.log('用户取消查看联系方式');
           return;
         }
       }
@@ -163,22 +160,33 @@ Page({
   },
 
   addFollower: function (event) {
-    // 加载一个商户
-    var op = this;
+    let op = this;
+    let templateId = '01EMtrNhQzLgkppeVZf0PtmoOk812HevdmwKDZQqkUE';
     var userId = app.getUserId();
-    app.getUrl('/business/addFollower/' + userId + '-' + this.data.id, function (data) {
-      if (app.hasData(data)) {
-        op.setData({
-          follow: 1
-        });
-        app.globalData.listDataUpdated = true;
+    wx.requestSubscribeMessage({
+      tmplIds: [templateId],
+      success: (res) => {
+        // 如果用户点击允许
+        if (res[templateId] == 'accept') {} else {}
+      },
+      fail: (res) => {},
+      complete: (res) => {
+        app.getUrl('/business/addFollower/' + userId + '-' + this.data.id, function (data) {
+          if (app.hasData(data)) {
+            op.setData({
+              follow: 1
+            });
+            app.globalData.listDataUpdated = true;
 
-        var allUrl = util.fillUrlParams('/pages/business/success', {});
-        wx.navigateTo({
-          url: allUrl
+            var allUrl = util.fillUrlParams('/pages/business/success', {});
+            wx.navigateTo({
+              url: allUrl
+            });
+          }
         });
+        app.batchAddFormId(op);
       }
-    });
+    })
   },
 
   loadTempShowInfo: function (id) {
@@ -368,7 +376,6 @@ Page({
       title: '分享名片',
       path: allUrl,
       success: function (res) {
-        console.log(res)
         // 转发成功
       },
       fail: function (res) {

@@ -10,7 +10,7 @@ Page({
     bannerDefault: '/pages/cooperate/banner',
     messageList: [],
     start: 0,
-    pageSize: 30,
+    pageSize: 20,
     hasMoreData: true,
     cooperationScrollTop: 0,
     releaseFlag: false,
@@ -106,13 +106,19 @@ Page({
     this.setData({
       messageList: [],
       start: 0,
-      pageSize: 30,
+      pageSize: 20,
       hasMoreData: true,
     });
     this.loadMessage();
   },
 
   oneMessage: function (event) {
+    let cardId = wx.getStorageSync('id');
+    if (cardId == "") {
+      app.onGotUserInfo(event, function () {});
+      return;
+    }
+
     var id = event.currentTarget.dataset.id;
     var title = event.currentTarget.dataset.title;
     var message = event.currentTarget.dataset.message;
@@ -128,13 +134,17 @@ Page({
     var job = event.currentTarget.dataset.job;
     var company = event.currentTarget.dataset.company;
     var headimgurl = event.currentTarget.dataset.headimgurl;
-    for (let i = this.data.messageList.length - 1; i > 0; i--) {
-      let randomIndex = Math.floor(Math.random() * (i + 1));
-      let itemAtIndex = this.data.messageList[randomIndex];
-      this.data.messageList[randomIndex] = this.data.messageList[i];
-      this.data.messageList[i] = itemAtIndex;
+    let messageListTemp = [];
+    for (let j = 0; j < this.data.messageList.length; j++) {
+      messageListTemp.push(this.data.messageList[j]);
     }
-    var messageList = JSON.stringify(this.data.messageList);
+    for (let i = messageListTemp.length - 1; i > 0; i--) {
+      let randomIndex = Math.floor(Math.random() * (i + 1));
+      let itemAtIndex = messageListTemp[randomIndex];
+      messageListTemp[randomIndex] = messageListTemp[i];
+      messageListTemp[i] = itemAtIndex;
+    }
+    var messageList = JSON.stringify(messageListTemp);
 
     var allUrl = util.fillUrlParams('/pages/cooperate/oneMessage', {
       id: id,
@@ -273,12 +283,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.globalData.findContactsFlag = false;
-    app.globalData.findCommunitiesFlag = false;
-    if (app.globalData.messageDataUpdated) {
-      this.refreshAllMessage();
-      app.globalData.messageDataUpdated = false;
-    }
+    // app.globalData.findContactsFlag = false;
+    // app.globalData.findCommunitiesFlag = false;
+    // if (app.globalData.messageDataUpdated) {
+    //   //this.refreshAllMessage();
+    //   app.globalData.messageDataUpdated = false;
+    // }
   },
 
   /**

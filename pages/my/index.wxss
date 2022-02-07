@@ -117,10 +117,15 @@
   background-color: white;
   padding: 10px 0 10px 10px;
   border-bottom: 1px solid #eee;
+  font-size: 0.8em;
+  position: relative;
 }
 
-.order {
-  font-size: 0.8em;
+.order-num{
+  position: absolute;
+  color: red;
+  top: 0;
+  left: 85px;
 }
 
 .more-data {

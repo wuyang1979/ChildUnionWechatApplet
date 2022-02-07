@@ -1,18 +1,19 @@
 /**app.wxss**/
 @import "style/weui.wxss";
+
 .container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-} 
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	padding: 200rpx 0;
+	box-sizing: border-box;
+}
 
 button.form_button {
 	background-color: transparent;
-	padding:0;
+	padding: 0;
 	margin: 0;
 	display: inline;
 	position: static;
@@ -20,17 +21,16 @@ button.form_button {
 	padding-right: 0;
 	padding-left: 0;
 	border-radius: 0;
-	font-size:0rpx;
-	color:transparent;
+	font-size: 0rpx;
+	color: transparent;
 }
+
 button.form_button::after {
-	content:'';
+	content: '';
 	width: 0;
-	height:0;
+	height: 0;
 	-webkit-transform: scale(1);
 	transform: scale(1);
-	display:none;
+	display: none;
 	background-color: transparent;
 }
-
-

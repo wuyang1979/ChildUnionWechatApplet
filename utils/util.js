@@ -144,6 +144,10 @@ function translateUrl(value) {
   return value;
 }
 
+function IsNum(value){
+  return (value-0)==value && value.length>0;
+  }
+
 /* 加载动画相关 */
 const showLoading = (tips = '加载中...') => {
   wx.showNavigationBarLoading()
@@ -184,4 +188,5 @@ module.exports = {
   hideLoading: hideLoading,
   hideLoadingWithErrorTips: hideLoadingWithErrorTips,
   checkInvoiceMobile: checkInvoiceMobile,
+  IsNum: IsNum,
 }

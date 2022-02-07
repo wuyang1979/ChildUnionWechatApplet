@@ -1,28 +1,4 @@
 <view class="enterprise">
-    <!-- <view class="weui-search-bar__settled" bindtap="settled">企业入驻</view> -->
-    <!-- <view class="main-title"> -->
-    <!-- <view class="weui-search-bar__form">
-            <view class="weui-search-bar__box">
-                <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-                <input type="text" class="weui-search-bar__input" placeholder="输入企业名称" value="{{searchValue}}"
-                    focus="{{inputShowed}}" bindinput="inputTyping" />
-                <view class="weui-icon-clear" wx:if="{{searchValue.length > 0}}" bindtap="clearInput">
-                    <icon type="clear" size="14"></icon>
-                </view>
-            </view>
-            <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
-                <icon class="weui-icon-search" type="search" size="14" wx:if="{{searchValue==''}}"></icon>
-                <view class="weui-search-bar__text" wx:if="{{searchValue==''}}">企业名称</view>
-                <view class="weui-search-bar__text weui-search-bar-value" wx:if="{{searchValue!=''}}"
-                    bindtap="clearSearch">
-                    <view class="weui-search-bar-search-value">{{searchValue}}</view>
-                    <image class="weui-search-bar-value-close" src="/pages/img/close_2.png" mode="aspectFill"></image>
-                </view>
-            </label>
-        </view>
-        <view class="weui-search-bar__cancel-btn" bindtap="searchSubmit">搜索</view> -->
-    <!-- </view> -->
-
     <!-- 选择类型区域 -->
     <view class="select-area">
         <view class="select-item" data-type="a" data-typeName="资格考证" bindtap="screenEnterpriseList">
@@ -65,9 +41,9 @@
             <image class="select-item-image" src="/pages/img/graphic-production.png" mode="aspectFill"></image>
             <view class="select-item-tip">图文制作</view>
         </view>
-        <!-- <view class="select-item" data-type="k" data-typeName="旅行社挂靠" bindtap="screenEnterpriseList">
-            <image class="select-item-image" src="/pages/img/station-wagon-attachment.png" mode="aspectFill"></image>
-            <view class="select-item-tip">旅行社挂靠</view>
+        <!-- <view class="select-item" data-type="k" data-typeName="软件开发" bindtap="screenEnterpriseList">
+            <image class="select-item-image" src="/pages/img/software.png" mode="aspectFill"></image>
+            <view class="select-item-tip">软件开发</view>
         </view> -->
     </view>
 
@@ -82,7 +58,7 @@
             data-requirement="{{item.requirement}}" data-resources="{{item.resources}}" data-isHot="{{item.isHot}}"
             data-main_image="{{item.main_image}}" data-introduce="{{item.introduce}}" data-title="{{item.title}}"
             data-score="{{item.score}}" wx:if="{{item.isHot==1}}" bindtap="toDetailEnterprise">
-            <image class="enterprise-item-image" src="{{item.main_image}}" mode="aspectFill"></image>
+            <image class="enterprise-item-image" src="{{item.main_image}}" mode="scaleToFill"></image>
             <view class="enterprise-item-title">{{item.title}}</view>
             <view class="enterprise-item-name">{{item.name}}</view>
         </view>

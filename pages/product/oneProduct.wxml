@@ -1,0 +1,81 @@
+<view class="one-base">
+    <image class="one-base-image" src="{{main_image}}" mode="aspectFill"></image>
+    <view class="one-base-info">
+        <view class="one-base-name">{{name}}</view>
+        <view class="price-area">
+            <view class="price-tip">￥</view>
+            <view class="present-price">{{present_price}}</view>
+            <view class="original-price">{{'￥'+original_price}}</view>
+        </view>
+        <view class="one-base-workaddress-area">
+            <view class="one-base-workaddress-tip">库存数量：</view>
+            <view class="one-base-workaddress">{{inventory}}</view>
+        </view>
+        <view class="one-base-workaddress-area">
+            <view class="one-base-workaddress-tip">重复购买：</view>
+            <view class="one-base-workaddress">{{repeat_purchase==0?'允许':'不允许'}}</view>
+        </view>
+        <view class="one-base-workaddress-area">
+            <view class="one-base-traffic-tip">单次最大购买数量：</view>
+            <view class="one-base-workaddress">{{once_max_purchase_count==-1?'不限':once_max_purchase_count}}</view>
+        </view>
+        <view class="one-base-workaddress-area">
+            <view class="one-base-workaddress-tip">截止时间：</view>
+            <view class="one-base-workaddress">{{deadlineTimeBuXianFlag?'不限':deadline_time}}</view>
+        </view>
+        <view class="one-base-workaddress-area">
+            <view class="one-base-workaddress-tip">客服电话：</view>
+            <view class="one-base-workaddress">{{phone}}</view>
+        </view>
+
+        <view class="one-base-workaddress-area" style=" border-top: 2px solid #eee;border-bottom: 2px solid #eee;padding: 10px 0 0 0;">
+            <view class="one-base-workaddress-tip">适用门店</view>
+            <view class="reply-content">
+                <view class="weui-panel__bd">
+                    <view class="member-item" data-company_id="{{company_id}}" bindtap="jumpEstablishment">
+                        <view class="weui-media-box weui-media-box_text">
+                            <view class="weui-media-box__desc">
+                                <!-- 头像 -->
+                                <view class="reply-left-info">
+                                    <image class="reply-photo" src="{{logopic}}" background-size="cover">
+                                    </image>
+                                </view>
+                                <view class="reply-middle-info">
+                                    <view class="reply-name-info">
+                                        <text class="reply-name">{{company}}</text>
+                                    </view>
+                                </view>
+                                <image class="chevron-right" src="/pages/img/chevron-right.png" mode="aspectFill"></image>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <view style="margin-bottom:10px;border-bottom: 2px solid #eee;padding-bottom: 15px;">
+            <view class="base-introduce-tip">购买须知：</view>
+
+            <view class="one-base-introduce-lab">
+                <view class="one-base-introduce" wx:if="{{instruction!=''}}">
+                    {{instruction}}
+                </view>
+            </view>
+        </view>
+        <view class="base-introduce-tip">产品介绍：</view>
+        <!-- 产品介绍 -->
+        <view class="one-base-introduce-lab">
+            <view class="one-base-introduce" wx:if="{{introduce!=''}}">
+                {{introduce}}
+            </view>
+
+            <view class="{{pictureList.length>0?'one-base-video-area':''}}" wx:if="{{video_path!=''}}">
+                <video class="one-base-video-item" src="{{video_path}}"></video>
+            </view>
+
+            <view class="one-base-picture-area" wx:if="{{pictureList.length>0}}">
+                <image wx:for="{{pictureList}}" wx:key="index" class="one-base-picture-item" src="{{item}}" data-src="{{item}}" mode="widthFix" bindtap="previewImage"></image>
+            </view>
+        </view>
+    </view>
+</view>

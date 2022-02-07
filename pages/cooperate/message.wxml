@@ -8,9 +8,7 @@
     <view class="title-input">
       <view class="title-title">标题</view>
       <!-- <button formType="submit" class='form_button_message'> -->
-      <input maxlength="50" placeholder="请输入标题" bindinput="bindTitleInput"
-        class="{{titleFocusStatus?'inputClass inputClass-focus':'inputClass'}}" bindblur="titleBlur"
-        bindfocus="titleFocus"></input>
+      <input maxlength="50" placeholder="请输入标题" bindinput="bindTitleInput" class="{{titleFocusStatus?'inputClass inputClass-focus':'inputClass'}}" bindblur="titleBlur" bindfocus="titleFocus" value="{{title}}"></input>
       <!-- </button> -->
 
     </view>
@@ -33,10 +31,10 @@
   <view class="upload-area">
     <checkbox-group class="radio-group">
       <view class="radio-type">文件类型:</view>
-      <checkbox class="radio" data-value="0" disabled="{{!canCheckPic}}" bindtap="choosePic">
+      <checkbox class="radio" data-value="0" checked="{{sourceType==0}}" bindtap="choosePic">
         <text class="sexText">图片</text>
       </checkbox>
-      <checkbox class="radio" data-value="1" disabled="{{!canCheckVideo}}" bindtap="chooseVideo">
+      <checkbox class="radio" data-value="1" checked="{{sourceType==1}}" bindtap="chooseVideo">
         <text class="sexText">视频</text>
       </checkbox>
       <button bindtap="uploadFile" class="uploadBtnClass">
@@ -47,8 +45,7 @@
 
     <text>{{showResult}}</text>
     <view class="one-pic-area">
-      <image class="one-pic" wx:if="{{sourceType == 0 && pics.length>0}}" wx:for="{{pics}}" src="{{item}}"
-        data-index="{{index}}" mode="aspectFill" bindlongpress="delectPic"></image>
+      <image class="one-pic" wx:if="{{sourceType == 0 && pics.length>0}}" wx:for="{{pics}}" wx:key="index" src="{{item}}" data-index="{{index}}" mode="aspectFill" bindlongpress="delectPic"></image>
     </view>
     <view class="one-pic-tip" wx:if="{{sourceType == 0 && pics.length>0}}">图片长按以删除</view>
   </view>
@@ -67,9 +64,7 @@
     <view class="message-input">
 
       <!-- <button formType="submit" class='form_button_message'> -->
-      <textarea maxlength="2000" bindinput="bindMessageInput"
-        class="{{messageFocusStatus?'message-content message-content-focus':'message-content'}}"
-        bindfocus="messageFocus" bindblur="messageBlur">
+      <textarea style="margin-bottom:{{bottom}}px" maxlength="2000" bindinput="bindMessageInput" class="{{messageFocusStatus?'message-content message-content-focus':'message-content'}}" bindfocus="messageFocus" bindblur="messageBlur" value="{{message}}">
         <text wx:if="{{message==''}}" class="message-tips">1.已有的资源\n\n2.需要的资源\n\n3.其他资源</text></textarea>
       <!-- </button> -->
 

@@ -2,7 +2,6 @@ var util = require('../../utils/util.js');
 const app = getApp()
 
 var types = {
-  
   btnSelect: function (data) {
     var subArray = [];
     var tagMap = {};
@@ -10,7 +9,10 @@ var types = {
       var tagList = data[subIndex]["tagList"];
       var tagArray = [];
       for (var tagIndex = 0; tagIndex < tagList.length; tagIndex++) {
-        tagMap[tagList[tagIndex]["tagId"]] = { parent: subIndex, index: tagIndex };
+        tagMap[tagList[tagIndex]["tagId"]] = {
+          parent: subIndex,
+          index: tagIndex
+        };
         tagArray.push("not-click");
       }
       subArray.push(tagArray);
@@ -37,8 +39,7 @@ var types = {
       currentTagList.splice(dataIndex, 1);
       btnServiceSelected[parent][index] = "not-click";
     } else {
-      if (currentTagList.length >= this.data.canPushCount) {
-      } else {
+      if (currentTagList.length >= this.data.canPushCount) {} else {
         currentTagList.push(tagId);
         currentTagName.push(tagName);
         btnServiceSelected[parent][index] = "click";
@@ -47,6 +48,7 @@ var types = {
 
     this.setData({
       tagList: currentTagList,
+      tagNameList: currentTagName,
       btnServiceSelected: btnServiceSelected
     });
   },
@@ -81,7 +83,9 @@ var types = {
         for (var index = 0; index < data.length; index++) {
           if (data[index].serviceId == 1) {
             var service = data[index]['subserviceList'];
-            op.setData({ service: service });
+            op.setData({
+              service: service
+            });
             var select = op.btnSelect(service);
             op.setData({
               btnServiceSelected: select.array,

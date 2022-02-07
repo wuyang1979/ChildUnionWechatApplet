@@ -17,6 +17,7 @@ Page({
     workaddress: '',
     introduce: '',
     weixincode: '',
+    tagName: "",
 
     tag: [],
     invite: -1,
@@ -106,8 +107,28 @@ Page({
     // 加载一个商户
     app.getUrl('/business/info/' + id, function (data) {
       if (app.hasData(data)) {
-        if (data == null || data.length == 0) return;
+        if (data == null || data.length == 0) {
+          op.setData({
+            tagName: "请选择 >"
+          })
+          return;
+        }
         var oneBusiness = data[0];
+        let tagName = "";
+        let tag = [];
+        if (data[0].tag1 != "" && data[0].tag2 != "" && data[0].tag3 != "") {
+          tagName = data[0].tag1 + "/" + data[0].tag2 + "/" + data[0].tag3;
+          tag.push(data[0].tagid1);
+          tag.push(data[0].tagid2);
+          tag.push(data[0].tagid3);
+        } else if (data[0].tag1 != "" && data[0].tag2 != "" && data[0].tag3 == "") {
+          tagName = data[0].tag1 + "/" + data[0].tag2;
+          tag.push(data[0].tagid1);
+          tag.push(data[0].tagid2);
+        } else if (data[0].tag1 != "" && data[0].tag2 == "" && data[0].tag3 == "") {
+          tagName = data[0].tag1;
+          tag.push(data[0].tagid1);
+        }
         op.setData({
           realname: oneBusiness.realname,
           gender: oneBusiness.gender == undefined ? -1 : oneBusiness.gender,
@@ -117,11 +138,18 @@ Page({
           weixincode: !!oneBusiness.weixincode ? oneBusiness.weixincode : '',
           workaddress: oneBusiness.workaddress,
           introduce: oneBusiness.introduce,
+          tagName: tagName,
+          tag: tag,
         });
       }
     });
   },
 
+  selectTag: function (event) {
+    wx.navigateTo({
+      url: '/pages/my/type'
+    });
+  },
 
   checkInput: function () {
     if (!this.data.realname || this.data.realname.length < 1) {
@@ -148,15 +176,15 @@ Page({
       });
       return false;
     }
-    if (!this.data.phone || this.data.phone.length == 0) {
+    if (!this.data.tag || this.data.tag.length == 0) {
       wx.showToast({
-        title: '手机不能为空'
+        title: '行业标签不能为空'
       });
       return false;
     }
-    if (!this.data.weixincode || this.data.weixincode.length == 0) {
+    if (!this.data.phone || this.data.phone.length == 0) {
       wx.showToast({
-        title: '微信号不能为空'
+        title: '手机不能为空'
       });
       return false;
     }
@@ -233,8 +261,8 @@ Page({
    */
   onLoad: function (options) {
     if (!!options.tag) {
-      var tag = options.tag;
-      var invite = options.invite;
+      var tag = options.tag || [];
+      var invite = options.invite || -1;
       this.setData({
         tag: tag,
         invite: invite,

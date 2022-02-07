@@ -9,8 +9,10 @@ Page({
     data: {
         baseList: [],
         start: 0,
-        pageSize: 30,
+        screenStart: 0,
+        pageSize: 10,
         hasMoreData: true,
+        screenHasMoreData: true,
         selectDistrictName: "行政区",
         selectDistrictCode: 0,
         selectTypeName: "类型",
@@ -35,6 +37,8 @@ Page({
             baseList: [],
             start: 0,
             hasMoreData: true,
+            screenStart: 0,
+            screenHasMoreData: true,
             inputShowed: false
         });
         this.loadSearchBase();
@@ -69,6 +73,8 @@ Page({
             selectDistrictCode: 0,
             selectTypeName: "类型",
             selectTypeCode: 0,
+            screenStart: 0,
+            screenHasMoreData: true,
         });
         this.loadAllBase();
     },
@@ -123,6 +129,8 @@ Page({
             selectDistrictCode: 0,
             selectTypeName: "类型",
             selectTypeCode: 0,
+            screenStart: 0,
+            screenHasMoreData: true,
         });
         op.loadAllBase();
     },
@@ -183,6 +191,10 @@ Page({
             selectDistrictFlag: false,
             selectDistrictName: districtName,
             selectDistrictCode: districtCode,
+            screenStart: 0,
+            screenHasMoreData: true,
+            hasMoreData: true,
+            baseList: [],
         });
         op.screenBaseList();
     },
@@ -195,30 +207,51 @@ Page({
             selectTypFlag: false,
             selectTypeName: typeName,
             selectTypeCode: typeCode,
+            screenStart: 0,
+            hasMoreData: true,
+            screenHasMoreData: true,
+            baseList: [],
         });
         op.screenBaseList();
     },
 
     screenBaseList: function (e) {
         let op = this;
+        let baseList = op.data.baseList;
         app.post('/base/screenBaseList', {
             districtCode: op.data.selectDistrictCode,
             typeCode: op.data.selectTypeCode,
-            start: op.data.start,
+            start: op.data.screenStart,
             num: op.data.pageSize,
         }, function (data) {
             if (app.hasData(data)) {
                 for (let i = 0; i < data.length; i++) {
                     data[i].main_image = app.qinzi + data[i].main_image;
                 }
-                op.setData({
-                    baseList: data,
-                });
+
+                if (data.length < op.data.pageSize) {
+                    op.setData({
+                        baseList: baseList.concat(data),
+                        screenHasMoreData: false
+                    });
+                } else {
+                    op.setData({
+                        baseList: baseList.concat(data),
+                        screenHasMoreData: true,
+                        start: op.data.screenStart + op.data.pageSize
+                    })
+                }
             }
         });
     },
 
     oneBase: function (e) {
+        let card = wx.getStorageSync('id');
+        if (card == "") {
+          app.onGotUserInfo(e, function () {});
+          return;
+        }
+        
         let id = e.currentTarget.dataset.id;
         let name = e.currentTarget.dataset.name;
         let topic_type_id = e.currentTarget.dataset.topic_type_id;
@@ -240,6 +273,8 @@ Page({
         let levelId = e.currentTarget.dataset.levelid;
         let districtName = e.currentTarget.dataset.districtname;
         let number = e.currentTarget.dataset.number;
+        let leaguetype = e.currentTarget.dataset.leaguetype;
+        let phone = e.currentTarget.dataset.phone;
 
         var allUrl = util.fillUrlParams('/pages/base/oneBase', {
             id: id,
@@ -263,10 +298,26 @@ Page({
             levelId: levelId,
             districtName: districtName,
             number: number,
+            leaguetype: leaguetype,
+            phone: phone,
         });
         wx.navigateTo({
             url: allUrl
         });
+    },
+
+    toBaseMap: function (e) {
+        app.post("/base/allBaseMapInfo", {}, function (data) {
+            if (app.hasData(data)) {
+                let allUrl = util.fillUrlParams("/pages/base/baseMap", {
+                    baseMapData: JSON.stringify(data),
+                });
+                wx.navigateTo({
+                    url: allUrl,
+                })
+            }
+        })
+
     },
 
     /**
@@ -341,10 +392,10 @@ Page({
         }, {
             typeCode: 8,
             typeName: "国际营地"
-        },{
+        }, {
             typeCode: 9,
             typeName: "其它景点"
-        } ];
+        }];
 
         this.setData({
             districtList: districtList,
@@ -397,6 +448,8 @@ Page({
             selectDistrictCode: 0,
             selectTypeName: "类型",
             selectTypeCode: 0,
+            screenStart: 0,
+            screenHasMoreData: true,
         });
         this.loadAllBase();
     },
@@ -406,6 +459,25 @@ Page({
      */
     onReachBottom: function () {
 
+        if (this.data.selectTypeCode == 0 && this.data.selectDistrictCode == 0) {
+            if (this.data.hasMoreData) {
+                this.loadAllBase();
+            } else {
+                wx.showToast({
+                    title: '没有更多数据',
+                    duration: 500,
+                })
+            }
+        } else {
+            if (this.data.screenHasMoreData) {
+                this.screenBaseList();
+            } else {
+                wx.showToast({
+                    title: '没有更多数据',
+                    duration: 500,
+                })
+            }
+        }
     },
 
     /**
@@ -429,13 +501,14 @@ Page({
             typeList: op.data.typeList,
             searchValue: op.data.searchValue,
             inputShowed: op.data.inputShowed,
+            screenStart: 0,
+            screenHasMoreData: true,
         });
 
         return {
             title: '分享了一些活动基地！',
             path: allUrl,
             success: function (res) {
-                console.log(res)
                 // 转发成功
             },
             fail: function (res) {

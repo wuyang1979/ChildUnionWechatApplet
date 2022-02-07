@@ -1,0 +1,79 @@
+<view class="one-establishment">
+    <image class="one-establishment-image" src="{{logopic}}" mode="scaleToFill"></image>
+    <view class="one-establishment-info">
+    <view class="one-establishment-title-area">
+        <view class="one-establishment-name">{{company}}</view>
+        <image class="enterprise-vip" src="/pages/img/enterpriseVip.png" mode="aspectFill" wx:if="{{leaguetype==2}}" bindtap="toBeEstablishmentVip"></image>
+        <image class="enterprise-vip" src="/pages/img/goldEnterpriseVip.png" mode="aspectFill" wx:if="{{leaguetype==3}}" bindtap="toBeEstablishmentVip"></image>
+    </view>
+        <view class="one-establishment-type-area">
+            <view class="one-establishment-topic_type">{{industry}}</view>
+            <image class="authentication-image" wx:if="{{leaguetype!=0}}" src="/pages/img/authentication.png" mode="aspectFill"></image>
+            <image class="authentication-image" wx:if="{{leaguetype==0}}" src="/pages/img/none-authentication.png" mode="aspectFill"></image>
+            <view class="authentication-content">{{leaguetype!=0?'已认证':'未认证'}}</view>
+            <view class="authentication-id">机构编号：{{id}}</view>
+        </view>
+        <view class="one-establishment-open-area">
+            <view class="one-establishment-tip">机构规模：</view>
+            <view class="one-establishment-workaddress">{{members}}人</view>
+        </view>
+        <view class="one-establishment-workaddress-area">
+            <view class="one-establishment-tip">机构地址：</view>
+            <view class="one-establishment-value">{{companyaddr}}</view>
+        </view>
+        <view class="one-establishment-traffic-area">
+            <view class="one-establishment-tip">联系方式：</view>
+            <view class="traffic">{{isLeague?companytel:"***********"}}</view>
+            <view class="vip-visible" wx:if="{{!isLeague}}" bindtap="toBeEstablishmentVip">会员可见</view>
+        </view>
+        <view class="one-establishment-price-area" wx:if="{{companyweb!=''}}">
+            <view class="one-establishment-tip">机构官网：</view>
+            <view class="one-establishment-value">{{companyweb}}</view>
+        </view>
+        <view class="one-establishment-price-area" wx:if="{{email!=''}}">
+            <view class="one-establishment-tip">机构邮箱：</view>
+            <view class="one-establishment-value">{{email}}</view>
+        </view>
+        <view class="one-establishment-price-area">
+            <view class="one-establishment-tip">机构介绍：</view>
+            <view class="one-establishment-value">{{companydesc}}</view>
+        </view>
+        <view class="one-establishment-price-area">
+            <view class="one-establishment-tip">主营业务：</view>
+            <view class="one-establishment-value">{{mainbussiness}}</view>
+        </view>
+        <view class="one-establishment-price-area">
+            <view class="one-establishment-tip">合作需求：</view>
+            <view class="one-establishment-value">{{maindemand}}</view>
+        </view>
+        <view class="one-establishment-member-area" wx:if="{{memberList.length>0}}">
+            <view class="one-establishment-tip">机构成员：</view>
+            <view class="reply-content" wx:if="{{memberList.length > 0}}">
+                <view class="weui-panel__bd">
+                    <view class="member-item" wx:for="{{memberList}}" wx:key="index" data-card="{{item.cardId}}" bindtap="jumpBusiness">
+                        <view class="weui-media-box weui-media-box_text">
+                            <view class="weui-media-box__desc">
+                                <!-- 头像 -->
+                                <view class="reply-left-info" data-card="{{item.cardId}}">
+                                    <image class="reply-photo" src="{{item.headimgurl}}" background-size="cover">
+                                    </image>
+                                </view>
+                                <view class="reply-middle-info">
+                                    <view class="reply-name-info">
+                                        <text class="reply-name">{{item.realname}}</text>
+                                        <text class="job-text">{{item.job}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- 其他图片展示 -->
+        <!-- <view class="one-establishment-picture-area" wx:if="{{pictureList.length>0}}">
+            <image wx:for="{{pictureList}}" wx:key="index" class="one-establishment-picture-item" src="{{item.src}}"
+                data-src="{{item.src}}" mode="widthFix" bindtap="previewImage"></image>
+        </view> -->
+    </view>
+</view>

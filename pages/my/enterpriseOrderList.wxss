@@ -1,0 +1,49 @@
+.enterprise-order {
+    padding: 10px 0 10px 20px;
+}
+
+.title {
+    font-size: 18px;
+    text-align: center;
+}
+
+.order-name,
+.order-phone,
+.order-time,
+.read {
+    display: inline-flex;
+}
+
+.read {
+    font-size: 12px;
+    padding: 0 10px;
+    color: white;
+    background-color: rgb(60, 184, 233);
+    border-radius: 5px;
+
+}
+
+.order-item {
+    margin-top: 10px;
+    border-bottom: 1px solid #e4e4e4;
+    padding-bottom: 10px;
+}
+
+.order-title {
+    margin-bottom: 5px;
+    font-size: 17px;
+}
+
+.order-name {
+    width: 25%;
+}
+
+.order-name {
+    margin-right: 20px;
+    font-size: 14px;
+}
+
+.order-phone {
+    margin-right: 30px;
+    font-size: 14px;
+}

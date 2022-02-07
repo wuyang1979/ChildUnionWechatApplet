@@ -10,6 +10,7 @@ Page({
     templateId: '9mY0ssY4O1iSnG9c3hPID4BQxVBHA_GWWjBZ43-HEl4',
     messageId: 0,
     replyId: 0,
+    replyCard: 0,
     message: '',
     formIdArray: [],
     authClick: false,
@@ -39,8 +40,22 @@ Page({
 
   auth: function () {
     // this.data.authClick = false;
+    let op = this;
+    let templateId = op.data.templateId;
     if (!this.data.authClick) {
-      app.getAuth2PushMessage(this.data.templateId);
+
+      wx.requestSubscribeMessage({
+        tmplIds: [templateId],
+        success: (res) => {
+          // 如果用户点击允许
+          if (res[templateId] == 'accept') {} else {}
+        },
+        fail: (res) => {},
+        complete: (res) => {
+          op.addReply();
+        }
+      })
+
       this.setData({
         authClick: true
       })
@@ -56,6 +71,7 @@ Page({
       //formId: formId,
       formIdList: op.data.formIdArray,
       replyId: op.data.replyId,
+      replyCard: op.data.replyCard,
       replyMessage: replyMessage,
     }, function (data) {
       /** 
@@ -80,7 +96,6 @@ Page({
     if (!this.checkInput()) return;
     //var formId = e.detail.formId;
     this.auth();
-    this.addReply();
   },
 
   /**
@@ -89,9 +104,11 @@ Page({
   onLoad: function (options) {
     var messageId = options.messageId;
     var replyId = options.replyId;
+    var replyCard = parseInt(options.replyCard);
     this.setData({
       messageId: messageId,
-      replyId: replyId
+      replyId: replyId,
+      replyCard: replyCard,
     })
   },
 

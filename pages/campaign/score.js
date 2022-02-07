@@ -8,7 +8,10 @@ Page({
    */
   data: {
     id: -1,
+    companyId: -1,
     value: 798,
+    enterpriseValue: 2000,
+    goldEnterpriseValue: 10000,
     num: 1,
     businessList: [],
     start: 0,
@@ -16,6 +19,11 @@ Page({
     searchValue: "",
     tag: -1,
     cityCode: -1,
+    individualShowFlag: true,
+    enterpriseShowFlag: false,
+    isIndividualLeague: false,
+    isGoldEstablishmentLeague: false,
+    enterpriseOtherShowFlag: true,
     randomBusinessList: []
   },
 
@@ -56,12 +64,12 @@ Page({
       return;
     }
     var op = this;
-    app.post('/rechargeOrder/data', {
+    app.post('/rechargeOrder/leagueData', {
       cardId: card,
       price: op.data.value,
       num: op.data.num,
       total: op.data.value,
-      body: '充值订单',
+      body: '会员充值订单',
     }, function (data) {
       if (typeof data == 'number') {
         var allUrl = util.fillUrlParams('/pages/campaign/scoreOrder', {
@@ -80,6 +88,96 @@ Page({
       }
     });
 
+  },
+
+  toBeEnterpriseVip: function (e) {
+    let op = this;
+    let card = wx.getStorageSync('id');
+    if (card == '') {
+
+      app.onGotUserInfo(e, function () {
+        var id = app.getUserId();
+        op.setData({
+          id: id
+        });
+      });
+      return;
+    }
+    // if (op.data.companyId == -1) {
+    //   wx.showToast({
+    //     title: '请完善企业信息',
+    //   });
+    //   return;
+    // }
+
+    app.post('/rechargeOrder/data', {
+      cardId: card,
+      price: op.data.enterpriseValue,
+      num: op.data.num,
+      total: op.data.enterpriseValue,
+      body: '会员充值订单',
+    }, function (data) {
+      if (typeof data == 'number') {
+        var allUrl = util.fillUrlParams('/pages/campaign/scoreOrder', {
+          id: data,
+          type: 4,
+          activeType: 4,
+          toEnterpriseLeaguerFlag: true,
+        });
+        wx.navigateTo({
+          url: allUrl
+        });
+      } else {
+        wx.showToast({
+          title: '订单创建失败',
+        })
+      }
+    });
+  },
+
+  toBeGoldEnterpriseVip: function (e) {
+    let op = this;
+    let card = wx.getStorageSync('id');
+    if (card == '') {
+
+      app.onGotUserInfo(event, function () {
+        var id = app.getUserId();
+        op.setData({
+          id: id
+        });
+      });
+      return;
+    }
+    // if (op.data.companyId == -1) {
+    //   wx.showToast({
+    //     title: '请完善企业信息',
+    //   });
+    //   return;
+    // }
+
+    app.post('/rechargeOrder/data', {
+      cardId: card,
+      price: op.data.goldEnterpriseValue,
+      num: op.data.num,
+      total: op.data.goldEnterpriseValue,
+      body: '会员充值订单',
+    }, function (data) {
+      if (typeof data == 'number') {
+        var allUrl = util.fillUrlParams('/pages/campaign/scoreOrder', {
+          id: data,
+          type: 4,
+          activeType: 4,
+          toGoldEnterpriseLeaguerFlag: true,
+        });
+        wx.navigateTo({
+          url: allUrl
+        });
+      } else {
+        wx.showToast({
+          title: '订单创建失败',
+        })
+      }
+    });
   },
 
   loadAllBusiness: function () {
@@ -123,10 +221,58 @@ Page({
     });
   },
 
+  individualLab: function (e) {
+    let op = this;
+    op.setData({
+      individualShowFlag: true,
+      enterpriseShowFlag: false
+    });
+  },
+
+  enterpriseLab: function (e) {
+    let op = this;
+    op.setData({
+      individualShowFlag: false,
+      enterpriseShowFlag: true
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let companyId = options.companyId;
+    let individualShowFlag = app.hasData(options.individualShowFlag) ? JSON.parse(options.individualShowFlag) : true;
+    let enterpriseShowFlag = app.hasData(options.enterpriseShowFlag) ? JSON.parse(options.enterpriseShowFlag) : false;
+    let myPageEnterFlag = app.hasData(options.myPageEnterFlag) ? JSON.parse(options.myPageEnterFlag) : false;
+    let isIndividualLeague = app.hasData(options.isIndividualLeague) ? JSON.parse(options.isIndividualLeague) : false;
+    let isGoldEstablishmentLeague = app.hasData(options.isGoldEstablishmentLeague) ? JSON.parse(options.isGoldEstablishmentLeague) : false;
+    let enterpriseOtherShowFlag;
+
+    if (myPageEnterFlag) {
+      if (!isIndividualLeague) {
+        individualShowFlag = true;
+        enterpriseShowFlag = false;
+        enterpriseOtherShowFlag = true;
+      } else if (!isGoldEstablishmentLeague) {
+        individualShowFlag = false;
+        enterpriseShowFlag = true;
+        enterpriseOtherShowFlag = true;
+      } else {
+        individualShowFlag = false;
+        enterpriseShowFlag = true;
+        enterpriseOtherShowFlag = false;
+      }
+    }
+
+    this.setData({
+      companyId: companyId,
+      individualShowFlag: individualShowFlag,
+      enterpriseShowFlag: enterpriseShowFlag,
+      isIndividualLeague: isIndividualLeague,
+      isGoldEstablishmentLeague: isGoldEstablishmentLeague,
+      enterpriseOtherShowFlag: enterpriseOtherShowFlag,
+    })
     this.loadAllBusiness();
   },
 

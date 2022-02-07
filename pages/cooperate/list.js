@@ -7,10 +7,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    followerTemplateId: '01EMtrNhQzLgkppeVZf0PtmoOk812HevdmwKDZQqkUE',
+    cardMessageTemplateId: 'uwhiRcacULuqIySAIE8salPOKd3muX8GIAorF4_b8kk',
     bannerDefault: '/pages/cooperate/banner',
     messageList: [],
+    latestEstablishmentList: [],
     start: 0,
     pageSize: 10,
+    latestEstablishmentPageSize: 10,
     hasMoreData: true,
     cooperationScrollTop: 0,
     releaseFlag: false,
@@ -25,20 +29,175 @@ Page({
     qinzi: app.qinzi,
     campaigns: [],
 
+    visitCount: -1,
+    businessCount: -1,
+    establishmentCount: -1,
   },
 
   moreActivities: function (e) {
-    var allUrl = util.fillUrlParams('/pages/campaign/list', {});
-    wx.navigateTo({
-      url: allUrl
-    });
+    let op = this;
+    let card = wx.getStorageSync('id');
+    if (card == "") {
+      app.onGotUserInfo(e, function () {});
+      return;
+    }
+
+    let followerTemplateId = op.data.followerTemplateId;
+    let cardMessageTemplateId = op.data.cardMessageTemplateId;
+    app.post("/cooperate/getUnAuthRecordList", {
+      card: app.getUserId()
+    }, function (data) {
+      if (app.hasData(data)) {
+        if (data.length < 2) {
+          //无授权记录
+          wx.requestSubscribeMessage({
+            tmplIds: [followerTemplateId, cardMessageTemplateId],
+            success: (res) => {
+              // 如果用户点击允许
+              if (res[followerTemplateId] == 'accept') {
+                app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                  card: app.getUserId()
+                }, function (data) {})
+              }
+              if (res[cardMessageTemplateId] == 'accept') {
+                app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                  card: app.getUserId()
+                }, function (data) {})
+              }
+            },
+            fail: (res) => {},
+            complete: (res) => {
+              var allUrl = util.fillUrlParams('/pages/campaign/list', {});
+              wx.navigateTo({
+                url: allUrl
+              });
+            }
+          })
+        } else {
+          let authFlag = true;
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].auth_status == 0) {
+              authFlag = false;
+            }
+          }
+
+          if (!authFlag) {
+            //有未授权记录
+            wx.requestSubscribeMessage({
+              tmplIds: [followerTemplateId, cardMessageTemplateId],
+              success: (res) => {
+                // 如果用户点击允许
+                if (res[followerTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+                if (res[cardMessageTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+              },
+              fail: (res) => {},
+              complete: (res) => {
+                var allUrl = util.fillUrlParams('/pages/campaign/list', {});
+                wx.navigateTo({
+                  url: allUrl
+                });
+              }
+            })
+          } else {
+            var allUrl = util.fillUrlParams('/pages/campaign/list', {});
+            wx.navigateTo({
+              url: allUrl
+            });
+          }
+        }
+      }
+    })
   },
 
   moreCooperations: function (e) {
-    var allUrl = util.fillUrlParams('/pages/cooperate/marketNews', {});
-    wx.navigateTo({
-      url: allUrl
-    });
+    let op = this;
+    let card = wx.getStorageSync('id');
+    if (card == "") {
+      app.onGotUserInfo(e, function () {});
+      return;
+    }
+
+    let followerTemplateId = op.data.followerTemplateId;
+    let cardMessageTemplateId = op.data.cardMessageTemplateId;
+    app.post("/cooperate/getUnAuthRecordList", {
+      card: app.getUserId()
+    }, function (data) {
+      if (app.hasData(data)) {
+        if (data.length < 2) {
+          //无授权记录
+          wx.requestSubscribeMessage({
+            tmplIds: [followerTemplateId, cardMessageTemplateId],
+            success: (res) => {
+              // 如果用户点击允许
+              if (res[followerTemplateId] == 'accept') {
+                app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                  card: app.getUserId()
+                }, function (data) {})
+              }
+              if (res[cardMessageTemplateId] == 'accept') {
+                app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                  card: app.getUserId()
+                }, function (data) {})
+              }
+            },
+            fail: (res) => {},
+            complete: (res) => {
+              var allUrl = util.fillUrlParams('/pages/cooperate/marketNews', {});
+              wx.navigateTo({
+                url: allUrl
+              });
+            }
+          })
+        } else {
+          let authFlag = true;
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].auth_status == 0) {
+              authFlag = false;
+            }
+          }
+
+          if (!authFlag) {
+            //有未授权记录
+            wx.requestSubscribeMessage({
+              tmplIds: [followerTemplateId, cardMessageTemplateId],
+              success: (res) => {
+                // 如果用户点击允许
+                if (res[followerTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+                if (res[cardMessageTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+              },
+              fail: (res) => {},
+              complete: (res) => {
+                var allUrl = util.fillUrlParams('/pages/cooperate/marketNews', {});
+                wx.navigateTo({
+                  url: allUrl
+                });
+              }
+            })
+          } else {
+            var allUrl = util.fillUrlParams('/pages/cooperate/marketNews', {});
+            wx.navigateTo({
+              url: allUrl
+            });
+          }
+        }
+      }
+    })
   },
 
   translateMessageType: function (value) {
@@ -46,44 +205,516 @@ Page({
   },
 
   findContacts: function (e) {
-    app.globalData.findContactsFlag = true;
-    wx.navigateTo({
-      url: '/pages/business/list',
-    })
+    let op = this;
+    let card = wx.getStorageSync('id');
+    if (card == "") {
+      app.globalData.findContactsFlag = true;
+      wx.navigateTo({
+        url: '/pages/business/list',
+      })
+    } else {
+
+      let followerTemplateId = op.data.followerTemplateId;
+      let cardMessageTemplateId = op.data.cardMessageTemplateId;
+      app.post("/cooperate/getUnAuthRecordList", {
+        card: app.getUserId()
+      }, function (data) {
+        if (app.hasData(data)) {
+          if (data.length < 2) {
+            //无授权记录
+            wx.requestSubscribeMessage({
+              tmplIds: [followerTemplateId, cardMessageTemplateId],
+              success: (res) => {
+                // 如果用户点击允许
+                if (res[followerTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+                if (res[cardMessageTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+              },
+              fail: (res) => {},
+              complete: (res) => {
+                app.globalData.findContactsFlag = true;
+                wx.navigateTo({
+                  url: '/pages/business/list',
+                })
+              }
+            })
+          } else {
+            let authFlag = true;
+            for (let i = 0; i < data.length; i++) {
+              if (data[i].auth_status == 0) {
+                authFlag = false;
+              }
+            }
+
+            if (!authFlag) {
+              //有未授权记录
+              wx.requestSubscribeMessage({
+                tmplIds: [followerTemplateId, cardMessageTemplateId],
+                success: (res) => {
+                  // 如果用户点击允许
+                  if (res[followerTemplateId] == 'accept') {
+                    app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                      card: app.getUserId()
+                    }, function (data) {})
+                  }
+                  if (res[cardMessageTemplateId] == 'accept') {
+                    app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                      card: app.getUserId()
+                    }, function (data) {})
+                  }
+                },
+                fail: (res) => {},
+                complete: (res) => {
+                  app.globalData.findContactsFlag = true;
+                  wx.navigateTo({
+                    url: '/pages/business/list',
+                  })
+                }
+              })
+            } else {
+              app.globalData.findContactsFlag = true;
+              wx.navigateTo({
+                url: '/pages/business/list',
+              })
+            }
+          }
+        }
+      })
+    }
   },
 
   findCommunities: function (e) {
-    app.globalData.findCommunitiesFlag = true;
-    wx.navigateTo({
-      url: '/pages/business/list',
-    })
+    let op = this;
+    let card = wx.getStorageSync('id');
+    if (card == "") {
+      app.globalData.findCommunitiesFlag = true;
+      wx.navigateTo({
+        url: '/pages/business/list',
+      })
+    } else {
+
+      let followerTemplateId = op.data.followerTemplateId;
+      let cardMessageTemplateId = op.data.cardMessageTemplateId;
+      app.post("/cooperate/getUnAuthRecordList", {
+        card: app.getUserId()
+      }, function (data) {
+        if (app.hasData(data)) {
+
+          if (data.length < 2) {
+            //无授权记录
+            wx.requestSubscribeMessage({
+              tmplIds: [followerTemplateId, cardMessageTemplateId],
+              success: (res) => {
+                // 如果用户点击允许
+                if (res[followerTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+                if (res[cardMessageTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+              },
+              fail: (res) => {},
+              complete: (res) => {
+                app.globalData.findCommunitiesFlag = true;
+                wx.navigateTo({
+                  url: '/pages/business/list',
+                })
+              }
+            })
+          } else {
+            let authFlag = true;
+            for (let i = 0; i < data.length; i++) {
+              if (data[i].auth_status == 0) {
+                authFlag = false;
+              }
+            }
+
+            if (!authFlag) {
+              //有未授权记录
+              wx.requestSubscribeMessage({
+                tmplIds: [followerTemplateId, cardMessageTemplateId],
+                success: (res) => {
+                  // 如果用户点击允许
+                  if (res[followerTemplateId] == 'accept') {
+                    app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                      card: app.getUserId()
+                    }, function (data) {})
+                  }
+                  if (res[cardMessageTemplateId] == 'accept') {
+                    app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                      card: app.getUserId()
+                    }, function (data) {})
+                  }
+                },
+                fail: (res) => {},
+                complete: (res) => {
+                  app.globalData.findCommunitiesFlag = true;
+                  wx.navigateTo({
+                    url: '/pages/business/list',
+                  })
+                }
+              })
+            } else {
+              app.globalData.findCommunitiesFlag = true;
+              wx.navigateTo({
+                url: '/pages/business/list',
+              })
+            }
+          }
+        }
+      })
+    }
+  },
+
+  findKnowledge: function (e) {
+    let op = this;
+    let card = wx.getStorageSync('id');
+    if (card == "") {
+      wx.navigateTo({
+        url: '/pages/knowledge/list',
+      })
+    } else {
+
+      let followerTemplateId = op.data.followerTemplateId;
+      let cardMessageTemplateId = op.data.cardMessageTemplateId;
+      app.post("/cooperate/getUnAuthRecordList", {
+        card: app.getUserId()
+      }, function (data) {
+        if (app.hasData(data)) {
+          if (data.length < 2) {
+            //无授权记录
+            wx.requestSubscribeMessage({
+              tmplIds: [followerTemplateId, cardMessageTemplateId],
+              success: (res) => {
+                // 如果用户点击允许
+                if (res[followerTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+                if (res[cardMessageTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+              },
+              fail: (res) => {},
+              complete: (res) => {
+                wx.navigateTo({
+                  url: '/pages/knowledge/list',
+                })
+              }
+            })
+          } else {
+            let authFlag = true;
+            for (let i = 0; i < data.length; i++) {
+              if (data[i].auth_status == 0) {
+                authFlag = false;
+              }
+            }
+
+            if (!authFlag) {
+              //有未授权记录
+              wx.requestSubscribeMessage({
+                tmplIds: [followerTemplateId, cardMessageTemplateId],
+                success: (res) => {
+                  // 如果用户点击允许
+                  if (res[followerTemplateId] == 'accept') {
+                    app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                      card: app.getUserId()
+                    }, function (data) {})
+                  }
+                  if (res[cardMessageTemplateId] == 'accept') {
+                    app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                      card: app.getUserId()
+                    }, function (data) {})
+                  }
+                },
+                fail: (res) => {},
+                complete: (res) => {
+                  wx.navigateTo({
+                    url: '/pages/knowledge/list',
+                  })
+                }
+              })
+            } else {
+              wx.navigateTo({
+                url: '/pages/knowledge/list',
+              })
+            }
+          }
+        }
+      })
+    }
   },
 
   findCooperations: function (e) {
-    //非锚点滚动条转
-    // const query = wx.createSelectorQuery();
-    // query.select("#cooperation").boundingClientRect();
-    // query.selectViewport().scrollOffset();
-    // query.exec((res) => {
-    //   if (res[0] && res[1]) {
-    //     wx.pageScrollTo({
-    //       scrollTop: res[0].top + res[1].scrollTop,
-    //       duration: 300,
-    //     })
-    //   }
-    // });
+    let op = this;
+    let card = wx.getStorageSync('id');
+    if (card == "") {
+      var allUrl = util.fillUrlParams('/pages/cooperate/marketNews', {});
+      wx.navigateTo({
+        url: allUrl
+      });
+    } else {
 
-    var allUrl = util.fillUrlParams('/pages/cooperate/marketNews', {});
-    wx.navigateTo({
-      url: allUrl
-    });
+      let followerTemplateId = op.data.followerTemplateId;
+      let cardMessageTemplateId = op.data.cardMessageTemplateId;
+      app.post("/cooperate/getUnAuthRecordList", {
+        card: app.getUserId()
+      }, function (data) {
+        if (app.hasData(data)) {
+          if (data.length < 2) {
+            //无授权记录
+            wx.requestSubscribeMessage({
+              tmplIds: [followerTemplateId, cardMessageTemplateId],
+              success: (res) => {
+                // 如果用户点击允许
+                if (res[followerTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+                if (res[cardMessageTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+              },
+              fail: (res) => {},
+              complete: (res) => {
+                var allUrl = util.fillUrlParams('/pages/cooperate/marketNews', {});
+                wx.navigateTo({
+                  url: allUrl
+                });
+              }
+            })
+          } else {
+            let authFlag = true;
+            for (let i = 0; i < data.length; i++) {
+              if (data[i].auth_status == 0) {
+                authFlag = false;
+              }
+            }
+
+            if (!authFlag) {
+              //有未授权记录
+              wx.requestSubscribeMessage({
+                tmplIds: [followerTemplateId, cardMessageTemplateId],
+                success: (res) => {
+                  // 如果用户点击允许
+                  if (res[followerTemplateId] == 'accept') {
+                    app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                      card: app.getUserId()
+                    }, function (data) {})
+                  }
+                  if (res[cardMessageTemplateId] == 'accept') {
+                    app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                      card: app.getUserId()
+                    }, function (data) {})
+                  }
+                },
+                fail: (res) => {},
+                complete: (res) => {
+                  var allUrl = util.fillUrlParams('/pages/cooperate/marketNews', {});
+                  wx.navigateTo({
+                    url: allUrl
+                  });
+                }
+              })
+            } else {
+              var allUrl = util.fillUrlParams('/pages/cooperate/marketNews', {});
+              wx.navigateTo({
+                url: allUrl
+              });
+            }
+          }
+        }
+      })
+    }
   },
 
   findBases: function (e) {
-    var allUrl = util.fillUrlParams('/pages/base/list', {});
-    wx.navigateTo({
-      url: allUrl
-    });
+    let op = this;
+    let card = wx.getStorageSync('id');
+    if (card == "") {
+      var allUrl = util.fillUrlParams('/pages/base/list', {});
+      wx.navigateTo({
+        url: allUrl
+      });
+    } else {
+
+      let followerTemplateId = op.data.followerTemplateId;
+      let cardMessageTemplateId = op.data.cardMessageTemplateId;
+      app.post("/cooperate/getUnAuthRecordList", {
+        card: app.getUserId()
+      }, function (data) {
+        if (app.hasData(data)) {
+          if (data.length < 2) {
+            //无授权记录
+            wx.requestSubscribeMessage({
+              tmplIds: [followerTemplateId, cardMessageTemplateId],
+              success: (res) => {
+                // 如果用户点击允许
+                if (res[followerTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+                if (res[cardMessageTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+              },
+              fail: (res) => {},
+              complete: (res) => {
+                var allUrl = util.fillUrlParams('/pages/base/list', {});
+                wx.navigateTo({
+                  url: allUrl
+                });
+              }
+            })
+          } else {
+            let authFlag = true;
+            for (let i = 0; i < data.length; i++) {
+              if (data[i].auth_status == 0) {
+                authFlag = false;
+              }
+            }
+
+            if (!authFlag) {
+              //有未授权记录
+              wx.requestSubscribeMessage({
+                tmplIds: [followerTemplateId, cardMessageTemplateId],
+                success: (res) => {
+                  // 如果用户点击允许
+                  if (res[followerTemplateId] == 'accept') {
+                    app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                      card: app.getUserId()
+                    }, function (data) {})
+                  }
+                  if (res[cardMessageTemplateId] == 'accept') {
+                    app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                      card: app.getUserId()
+                    }, function (data) {})
+                  }
+                },
+                fail: (res) => {},
+                complete: (res) => {
+                  var allUrl = util.fillUrlParams('/pages/base/list', {});
+                  wx.navigateTo({
+                    url: allUrl
+                  });
+                }
+              })
+            } else {
+              var allUrl = util.fillUrlParams('/pages/base/list', {});
+              wx.navigateTo({
+                url: allUrl
+              });
+            }
+          }
+        }
+      })
+    }
+  },
+
+  findEstablishments: function (e) {
+    let op = this;
+    let card = wx.getStorageSync('id');
+    if (card == "") {
+      var allUrl = util.fillUrlParams('/pages/establishment/list', {});
+      wx.navigateTo({
+        url: allUrl
+      });
+    } else {
+
+      let followerTemplateId = op.data.followerTemplateId;
+      let cardMessageTemplateId = op.data.cardMessageTemplateId;
+      app.post("/cooperate/getUnAuthRecordList", {
+        card: app.getUserId()
+      }, function (data) {
+        if (app.hasData(data)) {
+          if (data.length < 2) {
+            //无授权记录
+            wx.requestSubscribeMessage({
+              tmplIds: [followerTemplateId, cardMessageTemplateId],
+              success: (res) => {
+                // 如果用户点击允许
+                if (res[followerTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+                if (res[cardMessageTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+              },
+              fail: (res) => {},
+              complete: (res) => {
+                var allUrl = util.fillUrlParams('/pages/establishment/list', {});
+                wx.navigateTo({
+                  url: allUrl
+                });
+              }
+            })
+          } else {
+            let authFlag = true;
+            for (let i = 0; i < data.length; i++) {
+              if (data[i].auth_status == 0) {
+                authFlag = false;
+              }
+            }
+
+            if (!authFlag) {
+              //有未授权记录
+              wx.requestSubscribeMessage({
+                tmplIds: [followerTemplateId, cardMessageTemplateId],
+                success: (res) => {
+                  // 如果用户点击允许
+                  if (res[followerTemplateId] == 'accept') {
+                    app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                      card: app.getUserId()
+                    }, function (data) {})
+                  }
+                  if (res[cardMessageTemplateId] == 'accept') {
+                    app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                      card: app.getUserId()
+                    }, function (data) {})
+                  }
+                },
+                fail: (res) => {},
+                complete: (res) => {
+                  var allUrl = util.fillUrlParams('/pages/establishment/list', {});
+                  wx.navigateTo({
+                    url: allUrl
+                  });
+                }
+              })
+            } else {
+              var allUrl = util.fillUrlParams('/pages/establishment/list', {});
+              wx.navigateTo({
+                url: allUrl
+              });
+            }
+          }
+        }
+      })
+    }
   },
 
   loadBanner: function () {
@@ -134,51 +765,209 @@ Page({
   },
 
   oneMessage: function (event) {
-    var id = event.currentTarget.dataset.id;
-    var title = event.currentTarget.dataset.title;
-    var message = event.currentTarget.dataset.message;
-    var messageType = event.currentTarget.dataset.type;
-    var sourceType = event.currentTarget.dataset.stype;
-    var sourcePath = event.currentTarget.dataset.spath;
-    var last = event.currentTarget.dataset.last;
-    var read = event.currentTarget.dataset.read;
-    var like = event.currentTarget.dataset.like;
-    var card = event.currentTarget.dataset.card;
-    var phone = event.currentTarget.dataset.phone;
-    var realname = event.currentTarget.dataset.realname;
-    var job = event.currentTarget.dataset.job;
-    var company = event.currentTarget.dataset.company;
-    var headimgurl = event.currentTarget.dataset.headimgurl;
-    for (let i = this.data.messageList.length - 1; i > 0; i--) {
-      let randomIndex = Math.floor(Math.random() * (i + 1));
-      let itemAtIndex = this.data.messageList[randomIndex];
-      this.data.messageList[randomIndex] = this.data.messageList[i];
-      this.data.messageList[i] = itemAtIndex;
+    let op = this;
+    let card = wx.getStorageSync('id');
+    if (card == "") {
+      app.onGotUserInfo(event, function () {});
+      return;
     }
-    var messageList = JSON.stringify(this.data.messageList);
 
-    var allUrl = util.fillUrlParams('/pages/cooperate/oneMessage', {
-      id: id,
-      title: title,
-      message: message,
-      messageType: messageType,
-      sourceType: sourceType,
-      sourcePath: sourcePath,
-      last: last,
-      read: read,
-      like: like,
+    let followerTemplateId = op.data.followerTemplateId;
+    let cardMessageTemplateId = op.data.cardMessageTemplateId;
+    app.post("/cooperate/getUnAuthRecordList", {
+      card: app.getUserId()
+    }, function (data) {
+      if (app.hasData(data)) {
+        if (data.length < 2) {
+          //无授权记录
+          wx.requestSubscribeMessage({
+            tmplIds: [followerTemplateId, cardMessageTemplateId],
+            success: (res) => {
+              // 如果用户点击允许
+              if (res[followerTemplateId] == 'accept') {
+                app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                  card: app.getUserId()
+                }, function (data) {})
+              }
+              if (res[cardMessageTemplateId] == 'accept') {
+                app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                  card: app.getUserId()
+                }, function (data) {})
+              }
+            },
+            fail: (res) => {},
+            complete: (res) => {
+              var id = event.currentTarget.dataset.id;
+              var title = event.currentTarget.dataset.title;
+              var message = event.currentTarget.dataset.message;
+              var messageType = event.currentTarget.dataset.type;
+              var sourceType = event.currentTarget.dataset.stype;
+              var sourcePath = event.currentTarget.dataset.spath;
+              var last = event.currentTarget.dataset.last;
+              var read = event.currentTarget.dataset.read;
+              var like = event.currentTarget.dataset.like;
+              var card = event.currentTarget.dataset.card;
+              var phone = event.currentTarget.dataset.phone;
+              var realname = event.currentTarget.dataset.realname;
+              var job = event.currentTarget.dataset.job;
+              var company = event.currentTarget.dataset.company;
+              var headimgurl = event.currentTarget.dataset.headimgurl;
+              for (let i = op.data.messageList.length - 1; i > 0; i--) {
+                let randomIndex = Math.floor(Math.random() * (i + 1));
+                let itemAtIndex = op.data.messageList[randomIndex];
+                op.data.messageList[randomIndex] = op.data.messageList[i];
+                op.data.messageList[i] = itemAtIndex;
+              }
+              var messageList = JSON.stringify(op.data.messageList);
 
-      card: card,
-      phone: phone,
-      realname: realname,
-      job: job,
-      company: company,
-      headimgurl: headimgurl,
-      messageList: messageList
-    });
-    wx.navigateTo({
-      url: allUrl
-    });
+              var allUrl = util.fillUrlParams('/pages/cooperate/oneMessage', {
+                id: id,
+                title: title,
+                message: message,
+                messageType: messageType,
+                sourceType: sourceType,
+                sourcePath: sourcePath,
+                last: last,
+                read: read,
+                like: like,
+
+                card: card,
+                phone: phone,
+                realname: realname,
+                job: job,
+                company: company,
+                headimgurl: headimgurl,
+                messageList: messageList
+              });
+              wx.navigateTo({
+                url: allUrl
+              });
+            }
+          })
+        } else {
+          let authFlag = true;
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].auth_status == 0) {
+              authFlag = false;
+            }
+          }
+
+          if (!authFlag) {
+            //有未授权记录
+            wx.requestSubscribeMessage({
+              tmplIds: [followerTemplateId, cardMessageTemplateId],
+              success: (res) => {
+                // 如果用户点击允许
+                if (res[followerTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+                if (res[cardMessageTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+              },
+              fail: (res) => {},
+              complete: (res) => {
+                var id = event.currentTarget.dataset.id;
+                var title = event.currentTarget.dataset.title;
+                var message = event.currentTarget.dataset.message;
+                var messageType = event.currentTarget.dataset.type;
+                var sourceType = event.currentTarget.dataset.stype;
+                var sourcePath = event.currentTarget.dataset.spath;
+                var last = event.currentTarget.dataset.last;
+                var read = event.currentTarget.dataset.read;
+                var like = event.currentTarget.dataset.like;
+                var card = event.currentTarget.dataset.card;
+                var phone = event.currentTarget.dataset.phone;
+                var realname = event.currentTarget.dataset.realname;
+                var job = event.currentTarget.dataset.job;
+                var company = event.currentTarget.dataset.company;
+                var headimgurl = event.currentTarget.dataset.headimgurl;
+                for (let i = op.data.messageList.length - 1; i > 0; i--) {
+                  let randomIndex = Math.floor(Math.random() * (i + 1));
+                  let itemAtIndex = op.data.messageList[randomIndex];
+                  op.data.messageList[randomIndex] = op.data.messageList[i];
+                  op.data.messageList[i] = itemAtIndex;
+                }
+                var messageList = JSON.stringify(op.data.messageList);
+
+                var allUrl = util.fillUrlParams('/pages/cooperate/oneMessage', {
+                  id: id,
+                  title: title,
+                  message: message,
+                  messageType: messageType,
+                  sourceType: sourceType,
+                  sourcePath: sourcePath,
+                  last: last,
+                  read: read,
+                  like: like,
+
+                  card: card,
+                  phone: phone,
+                  realname: realname,
+                  job: job,
+                  company: company,
+                  headimgurl: headimgurl,
+                  messageList: messageList
+                });
+                wx.navigateTo({
+                  url: allUrl
+                });
+              }
+            })
+          } else {
+            var id = event.currentTarget.dataset.id;
+            var title = event.currentTarget.dataset.title;
+            var message = event.currentTarget.dataset.message;
+            var messageType = event.currentTarget.dataset.type;
+            var sourceType = event.currentTarget.dataset.stype;
+            var sourcePath = event.currentTarget.dataset.spath;
+            var last = event.currentTarget.dataset.last;
+            var read = event.currentTarget.dataset.read;
+            var like = event.currentTarget.dataset.like;
+            var card = event.currentTarget.dataset.card;
+            var phone = event.currentTarget.dataset.phone;
+            var realname = event.currentTarget.dataset.realname;
+            var job = event.currentTarget.dataset.job;
+            var company = event.currentTarget.dataset.company;
+            var headimgurl = event.currentTarget.dataset.headimgurl;
+            for (let i = op.data.messageList.length - 1; i > 0; i--) {
+              let randomIndex = Math.floor(Math.random() * (i + 1));
+              let itemAtIndex = op.data.messageList[randomIndex];
+              op.data.messageList[randomIndex] = op.data.messageList[i];
+              op.data.messageList[i] = itemAtIndex;
+            }
+            var messageList = JSON.stringify(op.data.messageList);
+
+            var allUrl = util.fillUrlParams('/pages/cooperate/oneMessage', {
+              id: id,
+              title: title,
+              message: message,
+              messageType: messageType,
+              sourceType: sourceType,
+              sourcePath: sourcePath,
+              last: last,
+              read: read,
+              like: like,
+
+              card: card,
+              phone: phone,
+              realname: realname,
+              job: job,
+              company: company,
+              headimgurl: headimgurl,
+              messageList: messageList
+            });
+            wx.navigateTo({
+              url: allUrl
+            });
+          }
+        }
+      }
+    })
   },
 
   goMessage: function () {
@@ -203,9 +992,7 @@ Page({
             app.post('/order/membershipExpiration', {
               id: id
             }, function (data) {
-              if (data.result == 1) {
-                console.log("会员已失效")
-              }
+              if (data.result == 1) {}
             });
           }
         }
@@ -258,25 +1045,152 @@ Page({
   },
 
   oneCampaign: function (event) {
-    app.onGotUserInfo(event, function () {
-      var id = event.currentTarget.dataset.id;
-      var img = event.currentTarget.dataset.img;
-      var deadline = event.currentTarget.dataset.deadline;
-      var currency = event.currentTarget.dataset.currency;
-      var read = event.currentTarget.dataset.read;
-      var like = event.currentTarget.dataset.like;
-      var allUrl = util.fillUrlParams('/pages/campaign/oneCampaign', {
-        id: id,
-        img: img,
-        deadline: deadline,
-        currency: currency,
-        read: read,
-        like: like,
-      });
-      wx.navigateTo({
-        url: allUrl
-      });
-    });
+    let op = this;
+    let card = wx.getStorageSync('id');
+    if (card == "") {
+      app.onGotUserInfo(event, function () {});
+      return;
+    }
+
+    let followerTemplateId = op.data.followerTemplateId;
+    let cardMessageTemplateId = op.data.cardMessageTemplateId;
+    app.post("/cooperate/getUnAuthRecordList", {
+      card: app.getUserId()
+    }, function (data) {
+      if (app.hasData(data)) {
+        if (data.length < 2) {
+          //无授权记录
+          wx.requestSubscribeMessage({
+            tmplIds: [followerTemplateId, cardMessageTemplateId],
+            success: (res) => {
+              // 如果用户点击允许
+              if (res[followerTemplateId] == 'accept') {
+                app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                  card: app.getUserId()
+                }, function (data) {})
+              }
+              if (res[cardMessageTemplateId] == 'accept') {
+                app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                  card: app.getUserId()
+                }, function (data) {})
+              }
+            },
+            fail: (res) => {},
+            complete: (res) => {
+              var id = event.currentTarget.dataset.id;
+              var img = event.currentTarget.dataset.img;
+              var deadline = event.currentTarget.dataset.deadline;
+              var currency = event.currentTarget.dataset.currency;
+              var read = event.currentTarget.dataset.read;
+              var like = event.currentTarget.dataset.like;
+              var allUrl = util.fillUrlParams('/pages/campaign/oneCampaign', {
+                id: id,
+                img: img,
+                deadline: deadline,
+                currency: currency,
+                read: read,
+                like: like,
+              });
+              wx.navigateTo({
+                url: allUrl
+              });
+            }
+          })
+        } else {
+          let authFlag = true;
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].auth_status == 0) {
+              authFlag = false;
+            }
+          }
+
+          if (!authFlag) {
+            //有未授权记录
+            wx.requestSubscribeMessage({
+              tmplIds: [followerTemplateId, cardMessageTemplateId],
+              success: (res) => {
+                // 如果用户点击允许
+                if (res[followerTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+                if (res[cardMessageTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+              },
+              fail: (res) => {},
+              complete: (res) => {
+                var id = event.currentTarget.dataset.id;
+                var img = event.currentTarget.dataset.img;
+                var deadline = event.currentTarget.dataset.deadline;
+                var currency = event.currentTarget.dataset.currency;
+                var read = event.currentTarget.dataset.read;
+                var like = event.currentTarget.dataset.like;
+                var allUrl = util.fillUrlParams('/pages/campaign/oneCampaign', {
+                  id: id,
+                  img: img,
+                  deadline: deadline,
+                  currency: currency,
+                  read: read,
+                  like: like,
+                });
+                wx.navigateTo({
+                  url: allUrl
+                });
+              }
+            })
+          } else {
+            var id = event.currentTarget.dataset.id;
+            var img = event.currentTarget.dataset.img;
+            var deadline = event.currentTarget.dataset.deadline;
+            var currency = event.currentTarget.dataset.currency;
+            var read = event.currentTarget.dataset.read;
+            var like = event.currentTarget.dataset.like;
+            var allUrl = util.fillUrlParams('/pages/campaign/oneCampaign', {
+              id: id,
+              img: img,
+              deadline: deadline,
+              currency: currency,
+              read: read,
+              like: like,
+            });
+            wx.navigateTo({
+              url: allUrl
+            });
+          }
+        }
+      }
+    })
+  },
+
+  loadLatestEstablishmentList: function (e) {
+    let op = this;
+    app.post("/establishment/getLatestEstablishmentList", {
+      start: 0,
+      num: op.data.latestEstablishmentPageSize,
+    }, function (data) {
+      if (app.hasData(data)) {
+        op.setData({
+          latestEstablishmentList: data,
+        })
+      }
+    })
+  },
+
+  loadShowDataCount: function () {
+    let op = this;
+    app.post("/cooperate/getShowDataCount", {}, function (data) {
+      if (app.hasData(data)) {
+        op.setData({
+          visitCount: data.visitCount,
+          businessCount: data.businessCount,
+          establishmentCount: data.establishmentCount,
+        })
+      }
+    })
   },
 
   /**
@@ -289,6 +1203,8 @@ Page({
     this.loadBanner();
     this.loadMessage();
     this.loadAllCampaign();
+    this.loadLatestEstablishmentList();
+    this.loadShowDataCount();
     //判断该用户会员是否过期
     this.isLeaguerExpired(id);
     wx.showShareMenu({

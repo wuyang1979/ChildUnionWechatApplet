@@ -1,6 +1,6 @@
 .page,
 page {
-  background-color: #eee;
+  background-color: #f7f7f7;
 }
 
 .main-panel,
@@ -17,11 +17,11 @@ page {
   line-height: 23px;
 }
 
-.businesses{
+.businesses {
   position: relative;
 }
 
-.more{
+.more {
   position: absolute;
   top: 5px;
   right: 25px;
@@ -31,10 +31,8 @@ page {
 
 .main-panel {
   margin-top: -15px;
-}
-
-.main-panel {
   padding-top: 20px;
+  padding-bottom: 10px;
 }
 
 .join-vip-image {
@@ -154,6 +152,10 @@ page {
   margin-bottom: 10px;
 }
 
+.vip-cost {
+  position: relative;
+}
+
 .vip-fee-content {
   margin-left: 10px;
   font-size: 14px;
@@ -205,7 +207,7 @@ page {
 
 .confirm-btn {
   position: absolute;
-  top: 35px;
+  top: 15px;
   right: 20px;
   text-align: center;
   width: 40%;
@@ -213,6 +215,23 @@ page {
   background-color: #f1bd72;
   border-radius: 30px;
   font-weight: 550;
+}
+
+.enterprise-confirm-btn {
+  text-align: center;
+  width: 43%;
+  color: #725023;
+  background-color: #f1bd72;
+  border-radius: 30px;
+  font-weight: 550;
+  display: inline-block;
+  margin-left: 15px;
+}
+
+.spec-btn {
+  background-color: white;
+  border: 1px solid #f1bd72;
+  color: #bd7c26;
 }
 
 .one-business {
@@ -367,4 +386,37 @@ page {
   background-color: white;
   padding-left: 15px;
   padding-top: 5px;
+}
+
+.qinzi-label {
+  background-color: white;
+  padding: 8px 8px 8px 8px;
+  margin-bottom: 5px;
+}
+
+.individual-vip,
+.enterprise-vip {
+  display: inline-block;
+  text-align: center;
+  width: 50%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 15px;
+}
+
+.choosed {
+  font-weight: bold;
+}
+
+.choosed::after {
+  content: '';
+  width: 35%;
+  height: 0;
+  display: block;
+  margin: 0 auto;
+  border-bottom: 4px solid #ffb545;
+}
+
+.red {
+  color: red;
 }

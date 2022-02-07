@@ -11,7 +11,7 @@
 
   <view>
 
-    <view class="one-campaign" wx:for="{{campaigns}}" wx:key="{{item.id}}" data-index="{{item.id}}"
+    <view class="one-campaign" wx:for="{{campaigns}}" wx:key="index" data-index="{{item.id}}"
       data-id="{{item.id}}" data-read="{{item.read_count}}" data-like="{{item.give_like}}"
       data-img="{{qinzi + item.main_image}}" data-deadline="{{item.deadline}}" data-currency="{{item.currency}}"
       bindtap="oneCampaign">

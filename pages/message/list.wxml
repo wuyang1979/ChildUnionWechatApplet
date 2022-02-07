@@ -1,0 +1,10 @@
+<view class="message-list">
+    <view class="message-title">消息列表</view>
+    <view class="message-item" wx:for="{{messageList}}" wx:key="index" wx:for-item="item" data-id="{{item.id}}" data-message_behavior="{{item.message_behavior}}" data-card_message_id="{{item.card_message_id}}" data-send_person_card="{{item.send_person_card}}" data-read_status="{{item.read_status}}" bindtap="readMessage">
+        <view class="message-item-name">{{item.send_person_name}}</view>
+        <view class="message-item-behavior">{{item.behaviorName}}</view>
+        <view class="message-item-time">{{item.createTime}}</view>
+        <image class="chevron-right" src="/pages/img/chevron-right.png" mode="aspectFill" wx:if="{{item.read_status==1}}"></image>
+        <image class="point" src="/pages/img/point.png" mode="aspectFill" wx:if="{{item.read_status==0}}"></image>
+    </view>
+</view>

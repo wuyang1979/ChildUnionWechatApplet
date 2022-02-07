@@ -10,7 +10,7 @@
         </view>
 
         <view class="upload-main-image-area" wx:if="{{mainImagePic.length>0}}" bindtap="uploadMainImage">
-            <image class="main-image" wx:for="{{mainImagePic}}" src="{{item}}" mode="aspectFill"></image>
+            <image class="main-image" wx:for="{{mainImagePic}}" wx:key="index" src="{{item}}" mode="aspectFill"></image>
         </view>
     </view>
 
@@ -34,7 +34,7 @@
         </view>
 
         <view class="topic-tpye-select-area">
-            <view class="item_container" wx:for="{{baseTopicTypeList}}" wx:key="topicTpyeId" data-index="{{index}}"
+            <view class="item_container" wx:for="{{baseTopicTypeList}}" wx:key="index" data-index="{{index}}"
                 data-topicTpyeName="{{item.topicTpyeName}}" data-topicTpyeId="{{item.topicTpyeId}}"
                 data-isSelected="{{item.isSelected}}" bindtap="itemSelected">
                 <image class="select_icon"
@@ -80,6 +80,12 @@
     <view class="base-name-area">
         <view class="base-name-tip">地址</view>
         <input type="text" class="base-name-input" placeholder="请输入地址" bindinput="inputAddress" />
+    </view>
+
+    <!-- 地址 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">景区联系方式</view>
+        <input type="text" class="base-name-input" placeholder="请输入联系方式" bindinput="inputPhone" />
     </view>
 
     <!-- 地图选点获取经纬度 -->

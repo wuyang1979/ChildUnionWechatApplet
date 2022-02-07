@@ -1,0 +1,307 @@
+.page,
+page {
+    background-color: #f7f7f7;
+}
+
+.title {
+    padding: 10px;
+    font-size: 17px;
+    text-align: center;
+    background-color: white;
+    border-bottom: 1px solid #eee;
+}
+
+.main-image-area {
+    background-color: white;
+    padding: 15px 20px;
+}
+
+.add-video-area,
+.upload-video-area {
+    background-color: #eee;
+    width: 100%;
+    height: 200px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.add-main-image-area,
+.upload-main-image-area {
+    background-color: #eee;
+    width: 100%;
+    height: 150px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-other-image-area {
+    display: inline-block;
+    background-color: #eee;
+    width: 30%;
+    height: 90px;
+    vertical-align: bottom;
+    padding: 0 5px;
+    margin-top: 10px;
+}
+
+.one-pic-tip {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.add-main-image {
+    width: 50px;
+    height: 50px;
+    margin-top: 70rpx;
+}
+
+.add-video {
+    width: 80px;
+    height: 60px;
+    margin-top: 140rpx;
+}
+
+.add-other-image {
+    width: 50px;
+    height: 50px;
+    margin-top: 40rpx;
+    margin-left: 50rpx;
+}
+
+.add-main-image-tip {
+    font-size: 14px;
+    margin-top: 5px;
+    position: relative;
+}
+
+.main-image,
+.upload-video {
+    width: 100%;
+    height: 100%;
+}
+
+.other-image {
+    width: 30%;
+    height: 90px;
+    display: inline-block;
+    padding: 0 5px;
+    vertical-align: bottom;
+    margin-top: 5px;
+}
+
+.base-name-area,
+.topic-tpye-area {
+    background-color: white;
+    margin-top: 10px;
+    padding: 15px 20px;
+}
+
+.location-btn {
+    font-size: 13px;
+    padding: 4px 10px;
+    line-height: inherit;
+    color: white;
+    background-color: rgb(60, 184, 233);
+    border-radius: 5px;
+}
+
+.location-top,
+.location-bottom {
+    display: inline-flex;
+}
+
+.location-top {
+    margin-bottom: 10px;
+}
+
+.base-name-tip {
+    position: relative;
+    margin-right: 270rpx;
+}
+
+.vedio-special {
+    position: relative;
+    margin-right: 0;
+}
+
+.delete-vedio {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    color: red;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.max-tip {
+    position: relative;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.special-input {
+    border: 1px solid black;
+    box-sizing: border-box;
+    width: 50px;
+    display: inline-block;
+    vertical-align: text-bottom;
+    text-align: center;
+    margin-right: 16px;
+}
+
+.zhuyi {
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: red;
+}
+
+.gray {
+    border-color: #c5c5c5;
+    color: #c5c5c5;
+}
+
+.repeat-purchase-tips {
+    display: inline-block;
+    margin-right: 20px;
+    position: relative;
+}
+
+checkbox {
+    margin-right: 20px;
+    padding: 0 10px;
+}
+
+.needed {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 5px;
+    left: -15px;
+}
+
+.longitude-value,
+.latitude-value {
+    width: 100px;
+    border-bottom: 1px solid #eee;
+}
+
+.latitude-tip {
+    margin-left: 20rpx;
+}
+
+.base-name-input,
+.topic-tpye {
+    margin-top: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.title-tip {
+    color: #999;
+    font-size: 0.7em;
+    text-align: right;
+}
+
+.topic-tpye {
+    color: #82898e;
+}
+
+.topic-tpye-cont {
+    position: relative;
+}
+
+.right-icon {
+    position: absolute;
+    right: 0;
+    top: -4rpx;
+    width: 30px;
+    opacity: 0.4;
+}
+
+.item_container {
+    display: inline-flex;
+    padding: 5px;
+    width: 30%;
+}
+
+.item_container:nth-child(3n+3) {
+    margin-right: 0;
+}
+
+.select_icon {
+    width: 25px;
+    height: 25px;
+}
+
+.topic-tpye-select-area {
+    padding: 10px 0;
+    position: relative;
+}
+
+.black {
+    color: black;
+}
+
+.select-confirm {
+    position: absolute;
+    bottom: 2rpx;
+    right: 50rpx;
+    font-size: 15px;
+    padding: 2px 10px;
+    margin-left: 0;
+    line-height: inherit;
+    color: white;
+    background-color: rgb(60, 184, 233);
+    border-radius: 5px;
+}
+
+.tips {
+    font-size: 13px;
+    margin-left: 5px;
+    color: #838f90;
+}
+
+.message-input {
+    padding-top: 10px;
+}
+
+.message-content {
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.message-tip {
+    color: #999;
+    font-size: 0.7em;
+    text-align: right;
+}
+
+textarea {
+    border: 1rpx solid rgb(221, 221, 221);
+    width: 99%;
+    height: 350px;
+}
+
+.submit-area {
+    background-color: white;
+    padding: 10px 0;
+}
+
+.submit-btn {
+    background-color: rgb(1, 143, 215);
+    width: 90%;
+    border: 2px solid;
+    border-radius: 25px;
+    color: white;
+}
+
+.tui-picker-detail {
+    font-size: 15px;
+    display: inline-block;
+    margin-right: 20px;
+}

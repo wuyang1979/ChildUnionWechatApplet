@@ -1,15 +1,24 @@
 <view>
 
-      <view class="one-business" wx:for="{{businessList}}" wx:for-index="index" data-index="{{index}}" data-id="{{item.id}}" wx:key="{{item.id}}"  > 
+  <!-- <view class="one-business" wx:for="{{businessList}}" wx:for-index="index" data-index="{{index}}" data-id="{{item.id}}" wx:key="index"  > 
         <include src="../common/businessTemp.wxml"></include>
-      </view>
+      </view> -->
+
+  <view class="welcome-tip">
+    <view class="red">欢迎加入会员 !</view>
+    <view class="">点击下方按钮加入交流群</view>
+  </view>
+
+  <view class="float">
+    <view class="pay-tips-area">
+      <image class="qr-code" src="/pages/img/childUnionCommunityQrCode.png" mode="widthFix">
+      </image>
+      <cell class="bottom-left-button cell" bind:startmessage='startmessage' bind:completemessage="completemessage" url='https://work.weixin.qq.com/gm/e36ac2c1f3bd206db7ff74a4c90a252c' />
+    </view>
+  </view>
 
 
   <view class="bottom-button">
-    <button class="bottom-left-button bottom-class" bindtap="batchAddFollower">
-      +关注以上5人
-    </button>
-
     <button class="bottom-right-button bottom-class" bindtap="backHome">
       <image src="/pages/img/back-home.png" class="bottom-img" />
       <text class="bottom-txt">回首页</text>

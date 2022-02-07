@@ -7,14 +7,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    templateId: 'auLNgQjD8StjjSvOvVcdk3qU7XDURV2gRZB9OdiYozM',
+    templateId: 'uwhiRcacULuqIySAIE8salPOKd3muX8GIAorF4_b8kk',
+    replyTemplateId: '9mY0ssY4O1iSnG9c3hPID4BQxVBHA_GWWjBZ43-HEl4',
+    followerTemplateId: '01EMtrNhQzLgkppeVZf0PtmoOk812HevdmwKDZQqkUE',
     title: '',
     message: '',
     formIdArray: [],
     index: '',
     messageType: util.messageType,
     select: false,
-    sourceType: 0,
+    sourceType: -1,
     sourcePath: '',
     sourcePathList: [],
     showResult: '',
@@ -24,8 +26,9 @@ Page({
     isVideoChecked: false,
     isPicChecked: false,
     pics: [],
-    canCheckPic: true,
-    canCheckVideo: true,
+    isPic: false,
+    isVideo: false,
+    bottom: 0,
   },
 
   saveFormId: function (v) {
@@ -37,41 +40,42 @@ Page({
   titleBlur: function (e) {
     this.setData({
       titleFocusStatus: false
-    })
+    });
   },
 
   titleFocus: function (e) {
     this.setData({
       titleFocusStatus: true
-    })
+    });
   },
 
   messageBlur: function (e) {
     this.setData({
-      messageFocusStatus: false
-    })
+      messageFocusStatus: false,
+      bottom: 0
+    });
   },
 
   messageFocus: function (e) {
     this.setData({
-      messageFocusStatus: true
-    })
+      messageFocusStatus: true,
+      bottom: e.detail.height,
+    });
   },
 
   bindTitleInput: function (e) {
     this.setData({
       title: e.detail.value
-    })
+    });
   },
 
   bindMessageInput: function (e) {
     this.setData({
       message: e.detail.value
-    })
+    });
   },
 
   bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index: e.detail.value,
       select: true
@@ -82,23 +86,39 @@ Page({
   // radioChange: function (e) {
   //   this.setData({
   //     sourceType: e.detail.value
-  //   })
+  //   });
   // },
 
   choosePic: function (e) {
     let op = this;
-    op.setData({
-      canCheckVideo: !op.data.canCheckVideo,
-      sourceType: e.currentTarget.dataset.value
-    })
+    if (op.data.isPic) {
+      op.setData({
+        isPic: !op.data.isPic,
+        sourceType: -1
+      });
+    } else {
+      op.setData({
+        isPic: !op.data.isPic,
+        isVideo: false,
+        sourceType: e.currentTarget.dataset.value
+      });
+    }
   },
 
   chooseVideo: function (e) {
     let op = this;
-    op.setData({
-      canCheckPic: !op.data.canCheckPic,
-      sourceType: e.currentTarget.dataset.value
-    })
+    if (op.data.isVideo) {
+      op.setData({
+        isVideo: !op.data.isVideo,
+        sourceType: -1
+      });
+    } else {
+      op.setData({
+        isVideo: !op.data.isVideo,
+        isPic: false,
+        sourceType: e.currentTarget.dataset.value
+      });
+    }
   },
 
   postFile2Server: function (path) {
@@ -114,7 +134,7 @@ Page({
           showResult: '上传成功'
         });
       }
-    })
+    });
   },
 
   checkAndPost: function (tempFilePaths) {
@@ -132,7 +152,7 @@ Page({
     if (this.data.sourceType == 0) {
       wx.chooseImage({
         count: 9,
-        sizeType: ['original', 'compressed'],
+        sizeType: ['compressed'],
         sourceType: ['album', 'camera'],
         success(res) {
           var imgsrc = res.tempFilePaths;
@@ -141,7 +161,8 @@ Page({
             picsTemp.push(imgsrc[i]);
           }
           op.setData({
-            pics: picsTemp
+            pics: picsTemp,
+            sourcePathList: [],
           });
         },
         fail() {
@@ -154,7 +175,7 @@ Page({
             path: pisc,
           });
         }
-      })
+      });
     } else if (this.data.sourceType == 1) {
       wx.chooseVideo({
         success(res) {
@@ -171,8 +192,7 @@ Page({
     picsTemp.splice(index, 1);
     op.setData({
       pics: picsTemp
-    })
-    console.log(op.data.pics)
+    });
   },
 
   uploadimg: function (data) {
@@ -196,11 +216,9 @@ Page({
       complete: () => {
         i++;
         if (i == data.path.length) { //当图片传完时，停止调用 
-          console.log('成功：' + success + " 失败：" + fail);
           // that.setData({
           //   showResult: '上传成功'
           // });
-          console.log(that.data.sourcePathList)
         } else { //若图片还没有传完，则继续调用函数
           data.i = i;
           data.success = success;
@@ -234,11 +252,96 @@ Page({
   },
 
   auth: function () {
+    let op = this;
+    let card = wx.getStorageSync('id');
+    if (card == "") {
+      app.onGotUserInfo(e, function () {});
+      return;
+    }
+
+    let templateId = op.data.templateId;
+    let replyTemplateId = op.data.replyTemplateId;
+    let followerTemplateId = op.data.followerTemplateId;
+
     if (!this.data.authClick) {
-      app.getAuth2PushMessage(this.data.templateId);
-      this.setData({
-        authClick: true
-      })
+      app.post("/cooperate/getUnAuthRecordList", {
+        card: app.getUserId()
+      }, function (data) {
+        if (app.hasData(data)) {
+          if (data.length < 2) {
+            //无授权记录
+            wx.requestSubscribeMessage({
+              tmplIds: [followerTemplateId, templateId, replyTemplateId],
+              success: (res) => {
+                // 如果用户点击允许
+                if (res[followerTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {});
+                }
+                if (res[templateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {});
+                }
+              },
+              fail: (res) => {},
+              complete: (res) => {
+                op.addMessage();
+                op.setData({
+                  authClick: true
+                });
+              }
+            });
+          } else {
+            let authFlag = true;
+            for (let i = 0; i < data.length; i++) {
+              if (data[i].auth_status == 0) {
+                authFlag = false;
+              }
+            }
+
+            if (!authFlag) {
+              //有未授权记录
+              wx.requestSubscribeMessage({
+                tmplIds: [followerTemplateId, templateId, replyTemplateId],
+                success: (res) => {
+                  // 如果用户点击允许
+                  if (res[followerTemplateId] == 'accept') {
+                    app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                      card: app.getUserId()
+                    }, function (data) {});
+                  }
+                  if (res[templateId] == 'accept') {
+                    app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                      card: app.getUserId()
+                    }, function (data) {});
+                  }
+                },
+                fail: (res) => {},
+                complete: (res) => {
+                  op.addMessage();
+                  op.setData({
+                    authClick: true
+                  });
+                }
+              });
+            } else {
+              wx.requestSubscribeMessage({
+                tmplIds: [replyTemplateId],
+                success: (res) => {},
+                fail: (res) => {},
+                complete: (res) => {
+                  op.addMessage();
+                  op.setData({
+                    authClick: true
+                  });
+                }
+              });
+            }
+          }
+        }
+      });
     }
   },
 
@@ -258,6 +361,26 @@ Page({
       if (app.hasData(data)) {
         app.globalData.messageDataUpdated = true;
         if (data == 1) {
+          op.setData({
+            title: '',
+            message: '',
+            formIdArray: [],
+            index: '',
+            messageType: util.messageType,
+            select: false,
+            sourceType: -1,
+            sourcePath: '',
+            sourcePathList: [],
+            showResult: '',
+            authClick: false,
+            titleFocusStatus: false,
+            messageFocusStatus: false,
+            isVideoChecked: false,
+            isPicChecked: false,
+            pics: [],
+            isPic: false,
+            isVideo: false,
+          });
           var allUrl = util.fillUrlParams('/pages/cooperate/verify', {
             type: 1,
           });
@@ -271,14 +394,13 @@ Page({
 
   submit: function (e) {
     var op = this;
-    if (op.data.canCheckVideo && op.data.canCheckPic) {
+    if (!op.data.isVideo && !op.data.isPic) {
       op.setData({
-        sourceType: ""
-      })
+        sourceType: -1
+      });
     }
     if (!this.checkInput()) return;
     this.auth();
-    this.addMessage();
   },
 
   /**
@@ -299,9 +421,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({
-      select: false
-    });
+
   },
 
   /**
@@ -309,6 +429,15 @@ Page({
    */
   onHide: function () {
 
+  },
+
+
+  onTabItemTap(item) {
+    let card = wx.getStorageSync('id');
+    if (card == '') {
+      app.onGotUserInfo(item, function () {});
+      return;
+    }
   },
 
   /**
@@ -338,4 +467,4 @@ Page({
   onShareAppMessage: function () {
 
   }
-})
+});

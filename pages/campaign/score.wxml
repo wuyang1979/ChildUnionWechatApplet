@@ -1,89 +1,96 @@
 <view>
   <image class="join-vip-image" src="/pages/img/join-vip.jpg" mode=""></image>
-  <view class="main-panel">
-    <view class="vip-rights">会员权益：</view>
-    <view class="vip-rights-content">
-      1、无限量查看亲子名片中的联系方式；<text>\t\n</text>
-      2、进入一个300人以上的亲子商户微信群；<text>\t\n</text>
-      3、免费参加亲子大联盟线下活动；<text>\t\n</text>
-      4、享受会员商城多个免费福利。<text>\t\n</text>
-    </view>
 
-    <view class="join-conditions">加入条件：</view>
-    <view class="join-conditions-content">
-      1、从事的业务属于亲子领域或与亲子领域相关；<text>\t\n</text>
-      2、无不良信用记录。<text>\t\n</text>
-    </view>
-
-    <view class="vip-tips">说明：本会员为个人会员，仅限个人使用。</view>
-
-    <view class="vip-cost">
-      <view class="vip-fee">会员费用：</view>
-      <view class="vip-fee-content">年卡：¥798（¥66.5/月）</view>
-    </view>
-
-    <view class="contailer">
-      <!-- 限时特惠 -->
-      <view class="limit-time-discount">
-        <view class="limit-time-discount-title">
-          <!-- 限时特惠|距离优惠结束仅剩 -->
-          限时特惠
-        </view>
-        <view class="pay">券后合计：</view>
-        <view class="pay-count">
-          <view class="pay-rmb">¥</view>
-          <view class="pay-value">{{value}}</view>
-        </view>
-      </view>
-
-      <!-- 优惠券 -->
-      <view class="coupon">
-        <view class="coupon-title">优惠券：</view>
-        <view class="coupon-content">限时立减 ¥200</view>
-      </view>
-      <button class="confirm-btn" open-type="getUserInfo" bindtap="prepay">立即开通</button>
-    </view>
-
-
+  <view class="qinzi-label">
+    <view class="{{individualShowFlag?'individual-vip choosed':'individual-vip'}}" bindtap="individualLab">个人会员</view>
+    <view class="{{enterpriseShowFlag?'enterprise-vip choosed':'enterprise-vip'}}" bindtap="enterpriseLab">企业会员</view>
   </view>
 
-  <view class="businesses">
-    <view class="businesses-title">推荐名片</view>
-    <view class="more" bindtap="more">更多</view>
-    <view class="one-business" wx:for="{{randomBusinessList}}" wx:for-index="index" data-index="{{index}}"
-      data-id="{{item.id}}" wx:key="{{item.id}}" wx:if="{{index < 10}}">
-      <!-- <include src="../common/businessTemp.wxml"></include> -->
-      <!-- 头像 -->
-      <view class="business-left-info" data-id="{{item.id}}" data-follow="{{item.isFollow}}" bindtap="oneBusiness">
-        <image class="business-photo" src="{{item.headimgurl}}" background-size="cover"></image>
-      </view>
-      <!-- 信息 -->
-      <view class="business-middle-info" data-id="{{item.id}}" data-follow="{{item.isFollow}}" bindtap="oneBusiness">
-        <!-- 姓名头衔 -->
-        <view class="business-desc-info">
-          <text class="business-name"> {{item.realname}} </text>
-          <text class="business-job"> {{item.job}} </text>
-          <image src="/pages/img/women.png" wx:if="{{item.gender == 1}}" style="width: 15px; height: 15px; " />
-          <image src="/pages/img/man.png" wx:else style="width: 15px; height: 15px; " />
-          <!--image src="/pages/img/leaguer_normal.png" class="leaguer_normal"  wx:if="{{item.score >= 2000}}"></image-->
-          <image src="/pages/img/leaguer_normal.png" class="leaguer_normal" wx:if="{{item.leaguer == 1}}"></image>
-        </view>
-        <!-- 公司 -->
-        <view class="business-desc-info">
-          <text class="business-company" style="font-size:0.8em;"> {{item.company}} </text>
-        </view>
-        <!-- 标签 -->
-        <view class="business-button-info">
-          <button class="business-btn-tag" wx:if="{{!!item.tag1}}">{{item.tag1}}</button>
-          <button class="business-btn-tag" wx:if="{{!!item.tag2}}">{{item.tag2}}</button>
-          <button class="business-btn-tag" wx:if="{{!!item.tag3}}">{{item.tag3}}</button>
-          <button class="business-btn-tag default-tag" wx:if="{{!item.tag1 && !item.tag2 && !item.tag3}}"></button>
-        </view>
-
+  <view class="individual-vip-area" wx:if="{{individualShowFlag}}">
+    <view class="main-panel">
+      <view class="vip-rights">个人会员权益：</view>
+      <view class="vip-rights-content">
+        1、展示个人名片；<text>\t\n</text>
+        2、发布合作需求信息；<text>\t\n</text>
+        3、无限次参加线下交流会；<text>\t\n</text>
+        4、可查看亲子云商平台上的亲子商家信息；<text>\t\n</text>
+        5、可根据行业、职位筛选商家信息；<text>\t\n</text>
+        6、可免费下载知识库里的资料。<text>\t\n</text>
       </view>
 
-      <!-- 关注 -->
-      <!-- <view class="business-right-info">
+      <view class="join-conditions">加入条件：</view>
+      <view class="join-conditions-content">
+        1、从事的业务属于亲子领域或与亲子领域相关；<text>\t\n</text>
+        2、无不良信用记录。<text>\t\n</text>
+      </view>
+
+      <view class="vip-tips">说明：本会员为个人会员，仅限个人使用。</view>
+
+      <view class="vip-cost">
+        <view class="vip-fee">会员费用：</view>
+        <view class="vip-fee-content">年卡：¥798（¥66.5/月）</view>
+        <button class="confirm-btn" open-type="getUserInfo" bindtap="prepay">立即开通</button>
+      </view>
+
+      <!-- <view class="contailer">
+        <view class="limit-time-discount">
+          <view class="limit-time-discount-title">
+            限时特惠
+          </view>
+          <view class="pay">券后合计：</view>
+          <view class="pay-count">
+            <view class="pay-rmb">¥</view>
+            <view class="pay-value">{{value}}</view>
+          </view>
+        </view> -->
+
+      <!-- 优惠券 -->
+      <!-- <view class="coupon">
+          <view class="coupon-title">优惠券：</view>
+          <view class="coupon-content">限时立减 ¥200</view>
+        </view> -->
+      <!-- <button class="confirm-btn" open-type="getUserInfo" bindtap="prepay">立即开通</button> -->
+      <!-- </view> -->
+
+
+    </view>
+
+    <view class="businesses">
+      <view class="businesses-title">推荐名片</view>
+      <view class="more" bindtap="more">更多</view>
+      <view class="one-business" wx:for="{{randomBusinessList}}" wx:for-index="index" data-index="{{index}}" data-id="{{item.id}}" wx:key="index" wx:if="{{index < 10}}">
+        <!-- <include src="../common/businessTemp.wxml"></include> -->
+        <!-- 头像 -->
+        <view class="business-left-info" data-id="{{item.id}}" data-follow="{{item.isFollow}}" bindtap="oneBusiness">
+          <image class="business-photo" src="{{item.headimgurl}}" background-size="cover"></image>
+        </view>
+        <!-- 信息 -->
+        <view class="business-middle-info" data-id="{{item.id}}" data-follow="{{item.isFollow}}" bindtap="oneBusiness">
+          <!-- 姓名头衔 -->
+          <view class="business-desc-info">
+            <text class="business-name"> {{item.realname}} </text>
+            <text class="business-job"> {{item.job}} </text>
+            <image src="/pages/img/women.png" wx:if="{{item.gender == 1}}" style="width: 15px; height: 15px; " />
+            <image src="/pages/img/man.png" wx:else style="width: 15px; height: 15px; " />
+            <!--image src="/pages/img/leaguer_normal.png" class="leaguer_normal"  wx:if="{{item.score >= 2000}}"></image-->
+            <image src="/pages/img/leaguer_normal.png" class="leaguer_normal" wx:if="{{item.leaguer == 1}}"></image>
+          </view>
+          <!-- 公司 -->
+          <view class="business-desc-info">
+            <text class="business-company" style="font-size:0.8em;"> {{item.company}} </text>
+          </view>
+          <!-- 标签 -->
+          <view class="business-button-info">
+            <button class="business-btn-tag" wx:if="{{!!item.tag1}}">{{item.tag1}}</button>
+            <button class="business-btn-tag" wx:if="{{!!item.tag2}}">{{item.tag2}}</button>
+            <button class="business-btn-tag" wx:if="{{!!item.tag3}}">{{item.tag3}}</button>
+            <button class="business-btn-tag default-tag" wx:if="{{!item.tag1 && !item.tag2 && !item.tag3}}"></button>
+          </view>
+
+        </view>
+
+        <!-- 关注 -->
+        <!-- <view class="business-right-info">
 
       <form bindsubmit="saveFormId" report-submit="{{true}}" class='form_class_message'>
         <button class="business-btn-not-follow" wx:if="{{item.isFollow == 0}}" data-id="{{item.id}}"
@@ -93,7 +100,40 @@
       <button class="business-btn-follow" wx:if="{{item.isFollow == 1}}" data-id="{{item.id}}"
         data-follow="{{item.isFollow}}">已关注</button>
     </view> -->
+      </view>
     </view>
   </view>
 
+  <view class="enterprise-vip-area" wx:if="{{enterpriseShowFlag}}">
+    <view class="main-panel">
+      <view class="vip-rights">企业会员权益：</view>
+      <view class="vip-rights-content">
+        1、尊享个人会员全部权益；<text>\t\n</text>
+        2、企业产品PPT路演；<text>\t\n</text>
+        3、可在交流会现场发放宣传手册或摆放宣传展架；<text>\t\n</text>
+        4、享受亲子大联盟已签约的商户福利资源；<text>\t\n</text>
+        5、可优先报名参与联盟策划组织的各类活动；<text>\t\n</text>
+        6、可在平台广告位展示一个月；<text class="red">（仅限黄金会员）</text><text>\t\n</text>
+        7、官方公众号头条推文一次；<text class="red">（仅限黄金会员）</text><text>\t\n</text>
+        8、企业考核和诊断一次。<text class="red">（仅限黄金会员）</text><text>\t\n</text>
+      </view>
+
+      <view wx:if="{{enterpriseOtherShowFlag}}">
+        <view class="join-conditions">加入条件：</view>
+        <view class="join-conditions-content">
+          1、从事的业务属于亲子领域或与亲子领域相关；<text>\t\n</text>
+          2、无不良信用记录。<text>\t\n</text>
+        </view>
+
+        <view class="vip-cost">
+          <view class="vip-fee">会员费用：</view>
+          <view class="vip-fee-content">白银会员：¥2000/年</view>
+          <view class="vip-fee-content">黄金会员：¥10000/年</view>
+        </view>
+
+        <button class="enterprise-confirm-btn spec-btn" bindtap="toBeEnterpriseVip">开通白银会员</button>
+        <button class="enterprise-confirm-btn" bindtap="toBeGoldEnterpriseVip">开通黄金会员</button>
+      </view>
+    </view>
+  </view>
 </view>

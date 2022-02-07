@@ -1,0 +1,21 @@
+<view class="active-base">
+    <view class="title">产品列表</view>
+
+    <view class="active-base-list" wx:for="{{productList}}" wx:for-index="index" data-index="{{index}}" data-id="{{item.id}}" data-card_id="{{item.card_id}}" data-name="{{item.name}}" data-main_image="{{item.main_image}}" data-original_price="{{item.original_price}}" data-present_price="{{item.present_price}}" data-inventory="{{item.inventory}}" data-repeat_purchase="{{item.repeat_purchase}}" data-once_max_purchase_count="{{item.once_max_purchase_count}}" data-phone="{{item.phone}}" data-introduce="{{item.introduce}}" data-vedio_path="{{item.vedio_path}}" data-instruction="{{item.instruction}}" data-create_time="{{item.create_time}}" data-deadline_time="{{item.deadline_time}}" wx:key="index" bindtap="oneProduct">
+        <image class="active-base-image" src="{{'https://qinzi123.com'+item.main_image}}" mode="aspectFill"></image>
+        <view class="active-base-name">{{item.name}}</view>
+        <view class="active-base-address">发布时间：{{item.create_time}}</view>
+        <button class="modify-btn" data-id="{{item.id}}" data-name="{{item.name}}" data-main_image="{{item.main_image}}" data-original_price="{{item.original_price}}" data-present_price="{{item.present_price}}" data-inventory="{{item.inventory}}" data-repeat_purchase="{{item.repeat_purchase}}" data-once_max_purchase_count="{{item.once_max_purchase_count}}" data-phone="{{item.phone}}" data-introduce="{{item.introduce}}" data-vedio_path="{{item.vedio_path}}" data-instruction="{{item.instruction}}" data-create_time="{{item.create_time}}" data-deadline_time="{{item.deadline_time}}" catchtap="modify">修改</button>
+        <button class="delete-btn" catchtap="delete" data-id="{{item.id}}">删除</button>
+    </view>
+
+    <view class="cover-area" wx:if="{{isConfirmShow}}">
+        <view class="confirm-area">
+            <view class="confirm-area-tip">确认删除该产品？</view>
+            <view class="confirm-area-bottom">
+                <view class="deny" bindtap="deny">取消</view>
+                <view class="confirm" bindtap="confirm">确认</view>
+            </view>
+        </view>
+    </view>
+</view>

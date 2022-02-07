@@ -26,11 +26,10 @@
       <view class="business-right-info">
 
         <form bindsubmit="saveFormId" class='form_class_message'>
-          <button class="business-btn-not-follow" data-id="{{card}}" form-type="submit" catchtap="guanzhu">关注</button>
+          <button class="business-btn-not-follow" data-id="{{card}}" wx:if="{{!isFollow}}" disabled="{{selfCard==card}}" form-type="submit" catchtap="guanzhu">关注</button>
         </form>
 
-        <!-- <button class="business-btn-follow" wx:if="{{item.isFollow == 1}}" data-id="{{item.id}}"
-          data-follow="{{item.isFollow}}">已关注</button> -->
+        <button class="business-btn-follow" wx:if="{{isFollow}}" disabled="false">已关注</button>
       </view>
     </view>
 
@@ -39,14 +38,12 @@
     </view>
     <view wx:if="{{!!sourcePath}}" class="source">
       <!-- 图片 -->
-      <view wx:for="{{sourcePathList}}" wx:if="{{sourceType == 0 && sourcePathList.length>0}}">
-        <image class="one-pic" src="{{item.url}}" data-src="{{item.url}}" mode="widthFix" style="width: 100%;"
-          bindtap="previewImage"></image>
+      <view wx:for="{{sourcePathList}}" wx:key="index" wx:if="{{sourceType == 0 && sourcePathList.length>0}}">
+        <image class="one-pic" src="{{item.url}}" data-src="{{item.url}}" mode="widthFix" style="width: 100%;" bindtap="previewImage"></image>
       </view>
       <view wx:if="{{sourceType == 0 && sourcePathList.length==0 && sourcePath}}">
-        <image class="one-pic" src="{{sourcePath}}" data-src="{{sourcePath}}" mode="widthFix" style="width: 100%;"
-          bindtap="previewImage">
-          </image>
+        <image class="one-pic" src="{{sourcePath}}" data-src="{{sourcePath}}" mode="widthFix" style="width: 100%;" bindtap="previewImage">
+        </image>
       </view>
 
       <!-- 视频 -->
@@ -73,13 +70,7 @@
   </view>
 
   <view class="reply-content">
-    <view class="recommandList" wx:for="{{newMessageList}}" wx:for-index="index" wx:if="{{index < 5}}"
-      data-index="{{index}}" data-id="{{item.id}}" data-title="{{item.title}}" data-message="{{item.message}}"
-      data-type="{{item.messageType}}" data-last="{{item.lastString}}" data-card="{{item.cardId}}"
-      data-realname="{{item.cardInfo.realname}}" realname data-job="{{item.cardInfo.job}}"
-      data-company="{{item.cardInfo.company}}" data-headimgurl="{{item.cardInfo.headimgurl}}"
-      data-phone="{{item.cardInfo.phone}}" data-read="{{item.readCount}}" data-like="{{item.giveLike}}"
-      data-stype="{{item.sourceType}}" data-spath="{{item.sourcePath}}" wx:key="{{item.id}}" bindtap="oneMessage">
+    <view class="recommandList" wx:for="{{newMessageList}}" wx:for-index="index" wx:if="{{index < 5}}" data-index="{{index}}" data-id="{{item.id}}" data-title="{{item.title}}" data-message="{{item.message}}" data-type="{{item.messageType}}" data-last="{{item.lastString}}" data-card="{{item.cardId}}" data-realname="{{item.cardInfo.realname}}" realname data-job="{{item.cardInfo.job}}" data-company="{{item.cardInfo.company}}" data-headimgurl="{{item.cardInfo.headimgurl}}" data-phone="{{item.cardInfo.phone}}" data-read="{{item.readCount}}" data-like="{{item.giveLike}}" data-stype="{{item.sourceType}}" data-spath="{{item.sourcePath}}" wx:key="index" bindtap="oneMessage">
       <view class="weui-media-box__title">
         {{item.title}}</view>
     </view>
@@ -92,7 +83,7 @@
 
   <view class="reply-content" wx:if="{{replyList.length > 0}}">
     <view class="weui-panel__bd">
-      <view wx:for="{{replyList}}" wx:key="{{item.id}}">
+      <view wx:for="{{replyList}}" wx:key="index">
         <view class="weui-media-box weui-media-box_text">
           <view class="weui-media-box__desc">
             <include src="../common/messageReplyTemp.wxml"></include>

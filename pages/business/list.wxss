@@ -342,3 +342,63 @@ swiper {
   top: 10px;
   right: 2px;
 }
+
+.non-leaguer-area {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.confirm-area {
+  position: fixed;
+  width: 80%;
+  height: 160px;
+  top: 380rpx;
+  left: 70rpx;
+  background-color: #f8f8f8;
+  border: 1px solid #d0d0d0;
+  border-radius: 10px;
+  z-index: 20;
+}
+
+.weui-search-bar__input {
+  width: 100px;
+}
+
+.confiem-area-tip {
+  height: 50px;
+  font-size: 20px;
+  padding-left: 120rpx;
+  padding-top: 70rpx;
+}
+
+.confirm-area-bottom {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  border-top: 1px solid #d8d8d8;
+}
+
+.deny,
+.confirm {
+  display: inline-block;
+  width: 42%;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.deny {
+  border-right: 1px solid #d8d8d8;
+}
+
+.confirm {
+  color: #00b500;
+}

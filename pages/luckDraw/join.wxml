@@ -1,0 +1,5 @@
+<view class="luck-draw">
+    <view class="title">XXXXX抽奖活动</view>
+
+    <button class="join" disabled="{{hasJoinLuckDraw}}" bindtap="joinOutside">报名抽奖</button>
+</view>

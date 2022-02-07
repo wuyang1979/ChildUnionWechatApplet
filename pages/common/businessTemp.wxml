@@ -6,8 +6,9 @@
 <view class="business-middle-info" data-id="{{item.id}}" data-follow="{{item.isFollow}}" bindtap="oneBusiness">
   <!-- 姓名头衔 -->
   <view class="business-desc-info">
-    <text class="business-name"> {{item.realname}} </text>
-    <text class="business-job"> {{item.job}} </text>
+    <view class="business-name"> {{item.realname}} </view>
+    <view class="business-job"> {{item.job}} </view>
+    <!-- <view class="business-job"> {{item.id}} </view> -->
     <image src="/pages/img/women.png" wx:if="{{item.gender == 1}}" style="width: 15px; height: 15px; " />
     <image src="/pages/img/man.png" wx:else style="width: 15px; height: 15px; " />
     <!--image src="/pages/img/leaguer_normal.png" class="leaguer_normal"  wx:if="{{item.score >= 2000}}"></image-->
@@ -15,7 +16,7 @@
   </view>
   <!-- 公司 -->
   <view class="business-desc-info">
-    <text class="business-company" style="font-size:0.8em;"> {{item.company}} </text>
+    <view class="business-company" style="font-size:0.8em;"> {{item.company}} </view>
   </view>
   <!-- 标签 -->
   <view class="business-button-info">
@@ -31,11 +32,8 @@
 <view class="business-right-info">
 
   <form bindsubmit="saveFormId" report-submit="{{true}}" class='form_class_message'>
-    <button class="business-btn-not-follow" wx:if="{{item.isFollow == 0}}" data-id="{{item.id}}"
-      data-follow="{{item.isFollow}}" form-type="submit" bindtap="onGotUserInfo"
-      disabled="{{id == item.id}}">关注</button>
+    <button class="business-btn-not-follow" wx:if="{{item.isFollow == 0}}" data-id="{{item.id}}" data-follow="{{item.isFollow}}" form-type="submit" bindtap="onGotUserInfo" disabled="{{id == item.id}}">关注</button>
   </form>
 
-  <button class="business-btn-follow" wx:if="{{item.isFollow == 1}}" data-id="{{item.id}}"
-    data-follow="{{item.isFollow}}">已关注</button>
+  <button class="business-btn-follow" wx:if="{{item.isFollow == 1}}" data-id="{{item.id}}" data-follow="{{item.isFollow}}">已关注</button>
 </view>

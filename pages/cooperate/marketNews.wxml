@@ -1,42 +1,10 @@
 <wxs src="../../utils/tool.wxs" module="tool" />
 
 <view class="page">
-  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-    <block wx:for="{{imgUrls}}" wx:key="item.link">
-      <!--  是否是本地页面 -->
-      <swiper-item wx:if="{{item.isLocal}}">
-        <navigator url="{{item.link}}" hover-class="navigator-hover" open-type="switchTab" wx:if="{{item.isTab}}">
-          <image src="{{item.url}}" class="slide-image" width="355" height="150" />
-        </navigator>
-        <navigator url="{{item.link}}" hover-class="navigator-hover" open-type="navigate" wx:else>
-          <image src="{{item.url}}" class="slide-image" width="355" height="150" />
-        </navigator>
-      </swiper-item>
-      <!-- 跳转公众号页面 -->
-      <swiper-item wx:else>
-        <navigator url="{{bannerDefault + '?id=' + item.id}}" hover-class="navigator-hover" open-type="switchTab"
-          wx:if="{{item.isTab}}">
-          <image src="{{item.url}}" class="slide-image" width="355" height="150" />
-        </navigator>
-        <navigator url="{{bannerDefault + '?id=' + item.id}}" hover-class="navigator-hover" open-type="navigate"
-          wx:else>
-          <image src="{{item.url}}" class="slide-image" width="355" height="150" />
-        </navigator>
-      </swiper-item>
-
-    </block>
-  </swiper>
-
   <!-- 市场动态 -->
   <view class="cooperation" id="cooperation">
     <view class="cooperation-title">市场动态</view>
-    <view class="one-message" wx:for="{{messageList}}" wx:for-index="index" data-index="{{index}}" data-id="{{item.id}}"
-      data-title="{{item.title}}" data-message="{{item.message}}" data-type="{{item.messageType}}"
-      data-last="{{item.lastString}}" data-card="{{item.cardId}}" data-realname="{{item.cardInfo.realname}}" realname
-      data-job="{{item.cardInfo.job}}" data-company="{{item.cardInfo.company}}"
-      data-headimgurl="{{item.cardInfo.headimgurl}}" data-phone="{{item.cardInfo.phone}}" data-read="{{item.readCount}}"
-      data-like="{{item.giveLike}}" data-stype="{{item.sourceType}}" data-spath="{{item.sourcePath}}"
-      wx:key="{{item.id}}" bindtap="oneMessage">
+    <view class="one-message" wx:for="{{messageList}}" wx:for-index="index" data-index="{{index}}" data-id="{{item.id}}" data-title="{{item.title}}" data-message="{{item.message}}" data-type="{{item.messageType}}" data-last="{{item.lastString}}" data-card="{{item.cardId}}" data-realname="{{item.cardInfo.realname}}" realname data-job="{{item.cardInfo.job}}" data-company="{{item.cardInfo.company}}" data-headimgurl="{{item.cardInfo.headimgurl}}" data-phone="{{item.cardInfo.phone}}" data-read="{{item.readCount}}" data-like="{{item.giveLike}}" data-stype="{{item.sourceType}}" data-spath="{{item.sourcePath}}" wx:key="index" bindtap="oneMessage">
 
       <view class="weui-panel weui-panel_access">
         <!--view class="weui-panel__hd">
@@ -50,9 +18,12 @@
               {{item.title}}</view>
             <view class="weui-media-box__img" wx:if="{{!!item.sourcePath}}" class="source">
               <view wx:if="{{item.sourceType == 0}}">
-                <image class="weui-media-box__image" src="{{'https://www.qinzi123.com/'+item.sourcePath}}"
-                  mode="aspectFill">
+                <image class="weui-media-box__image" src="{{'https://www.qinzi123.com/'+item.sourcePath}}" mode="aspectFill">
                 </image>
+              </view>
+              <view wx:if="{{item.sourceType == 1}}">
+                <video class="weui-media-box__image one-message-image" src="{{'https://www.qinzi123.com/'+item.sourcePath}}" mode="aspectFill">
+                </video>
               </view>
             </view>
             <view class="weui-media-box__bottom_info">
@@ -69,10 +40,10 @@
     </view>
   </view>
 
-  <button class="weui-btn btn-addmessage" bindtap="onGotUserInfo">
+  <!-- <button class="weui-btn btn-addmessage" bindtap="onGotUserInfo">
     <image src="/pages/img/add-message1.jpg">
     </image>
 
-  </button>
+  </button> -->
 
 </view>

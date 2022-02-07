@@ -14,7 +14,7 @@
                 </view>
                 <view class="weui-cell__bd">
                     <radio-group class="radio-group" bindchange="radioChange">
-                      <radio class="radio" value="0" checked="{{gender == 0}}">
+                      <radio class="radio man" value="0" checked="{{gender == 0}}">
                         <text class="sexText">男</text>
                       </radio>
                       <radio class="radio" value="1" checked="{{gender == 1}}">
@@ -38,6 +38,14 @@
                 </view>
                 <view class="weui-cell__bd">
                     <input class="weui-input" placeholder=""   bindinput="bindJobInput" value="{{job}}" />
+                </view>
+            </view>
+            <view class="weui-cell weui-cell_input">
+                <view class="weui-cell__hd">
+                    <view class="weui-label">行业标签</view>
+                </view>
+                <view class="weui-cell__bd" bindtap="selectTag">
+                    <view class="weui-label tag-name">{{tagName}}</view>
                 </view>
             </view>
             <view class="weui-cell weui-cell_input">
@@ -68,7 +76,7 @@
 
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
-                    <view class="weui-label">地址</view>
+                    <view class="weui-label">公司地址</view>
                 </view>
                 <view class="weui-cell__bd">
                     <input class="weui-input" placeholder="" bindinput="bindWorkaddressInput" value="{{workaddress}}" />
@@ -77,7 +85,7 @@
 
             <view class="weui-cell weui-cell_input weui-cell_box">
                 <view class="weui-cell__hd">
-                    <view class="weui-label">简介</view>
+                    <view class="weui-label">公司简介</view>
                 </view>
                 <view class="weui-cell__bd">
                     <textarea bindinput='bindIntroduceInput' class="boxInput"     maxlength='2048' placeholder='' value="{{introduce}}"   selection-end='-1' selection-start='-1' cursor='-1'></textarea>

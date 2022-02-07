@@ -2,7 +2,7 @@
 
 page {
   margin-top: 0px;
-  background-color: #eee;
+  background-color: #f7f7f7;
 }
 
 .reply-bannber {

@@ -1,13 +1,13 @@
 .page,
 page {
-  background-color: #eee;
+  background-color: #f7f7f7;
 }
 
 .activity {
   position: relative;
 }
 
-.cooperation{
+.cooperation {
   position: relative;
 }
 
@@ -19,7 +19,67 @@ page {
   font-size: 14px;
 }
 
-.cooperation-more{
+.latest-establishment-area {
+  padding: 10px 0 5px 15px;
+  background-color: white;
+  margin-top: 3px;
+  font-size: 13px;
+  position: relative;
+}
+
+.latest-establishment-container {
+  height: 60px;
+  overflow: hidden;
+}
+
+.latest-esttablishment-content {
+  height: 60px;
+}
+
+.latest-establishment-item {
+  width: 95%;
+  margin-bottom: 5px;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.latest-establishment-item:last-child {
+  margin-bottom: 0;
+}
+
+.latest-establishment-name {
+  display: inline-block;
+  width: 58%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.latest-establishment-tip {
+  display: inline-block;
+  margin-left: 5px;
+  overflow: hidden;
+}
+
+.latest-establishment-createTime {
+  display: inline-block;
+  color: #a09a9a;
+  margin-left: 15px;
+  overflow: hidden;
+}
+
+.chevron-right {
+  width: 30px;
+  height: 20px;
+  position: absolute;
+  top: 52rpx;
+  right: 20rpx;
+  opacity: 0.4;
+}
+
+.cooperation-more {
   position: absolute;
   top: 2px;
   right: 20px;
@@ -34,21 +94,18 @@ page {
 }
 
 .navigation-bar {
-  padding: 10px 10px 0 10px;
+  padding: 10px 0 0 0;
   background-color: white;
   width: 100%;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .navigation-bar-item {
-  display: inline-block;
   width: 14%;
-  margin-right: 15px;
   height: 50px;
-  padding: 5px 10px 0 10px;
-}
-
-.navigation-bar-item:first-child {
-  margin-left: 15px;
+  padding: 5px 30px 5px 30px;
 }
 
 .weui-panel__hd {
@@ -69,6 +126,10 @@ page {
   width: 100%;
 }
 
+.one-message-image {
+  height: 170px;
+}
+
 .weui-panel:after {
   border-bottom: 0rpx;
 }
@@ -87,15 +148,24 @@ page {
 }
 
 .weui-media-box__title {
-  font-size: 15px;
+  font-size: 17px;
   white-space: inherit;
-  font-weight: 550;
+  margin-bottom: 3px;
 }
 
 .weui-media-box__bottom_info {
   font-size: 13px;
   display: inline-block;
   margin-right: 5px;
+  color: #969696;
+}
+
+.source {
+  margin-bottom: -7px;
+}
+
+.one-message-box {
+  padding: 5px 15px;
 }
 
 .userinfo-avatar {
@@ -232,4 +302,17 @@ swiper {
   font-size: 0.7em;
   color: #777777;
   text-align: right;
+}
+
+.show-data-area {
+  padding: 5px 0;
+  display: flex;
+  font-size: 13px;
+  align-items: center;
+}
+
+.visit-count,
+.business-count,
+.establishment-count {
+  margin-left: 15px;
 }

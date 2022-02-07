@@ -1,0 +1,24 @@
+.luck-draw{
+    padding: 40px 10px 0 10px;
+}
+
+.title{
+    text-align: center;
+    font-size: 18px;
+}
+
+.introduce{
+    text-indent: 2em;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.join{
+    text-align: center;
+    color: #725023;
+    background-color: #f1bd72;
+    border-radius: 30px;
+    font-weight: 550;
+    margin-top: 90px;
+    width: 70%;
+}

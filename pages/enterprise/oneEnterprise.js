@@ -114,6 +114,9 @@ Page({
         var op = this;
         app.getUrl('/enterprise/enterpriseComment/' + enterpriseId, function (data) {
             if (app.hasData(data)) {
+                for (let i = 0; i < data.length; i++) {
+                    data[i].realname = data[i].realname.substr(0, 1) + "**"
+                }
                 op.setData({
                     replyList: data,
                 });
@@ -295,7 +298,6 @@ Page({
             title: '分享了一条企业服务！',
             path: allUrl,
             success: function (res) {
-                console.log(res)
                 // 转发成功
             },
             fail: function (res) {

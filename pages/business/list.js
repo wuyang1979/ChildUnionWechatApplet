@@ -41,8 +41,10 @@ Page({
     signCount: 0,
 
     start: 0,
+    firstTagStart: 0,
     pageSize: 30,
     hasMoreData: true,
+    firstTagHasMoreData: true,
     qinziBusinessesShowFlag: true,
     qinziCommunitiesShowFlag: false,
 
@@ -66,6 +68,7 @@ Page({
 
     isIos: false,
     iosJoinFlag: false,
+    isLeague: false,
 
     needRefreshFlag: false,
   },
@@ -75,6 +78,7 @@ Page({
   addFollower: businessTemp.addFollower,
   getSeeCardRecord: businessTemp.getSeeCardRecord,
   addSeeCardRecord: businessTemp.addSeeCardRecord,
+  auth: businessTemp.auth,
 
   saveFormId: function (v) {
     app.formIdInput(v, this);
@@ -307,7 +311,8 @@ Page({
 
   showInput: function () {
     this.setData({
-      inputShowed: true
+      inputShowed: true,
+      isSelectIndustryShow: false
     });
   },
 
@@ -322,24 +327,56 @@ Page({
   },
 
   searchSubmit: function (e) {
-    this.setData({
-      businessList: [],
-      start: 0,
-      hasMoreData: true,
-      inputShowed: false
-    });
-    this.loadAllBusiness();
+
+    let op = this;
+    let card = wx.getStorageSync('id');
+    if (card == '') {
+      app.onGotUserInfo(e, function () {});
+    } else {
+      if (op.data.oneBusiness.leaguer == 0) {
+        op.setData({
+          isLeague: true,
+        })
+      } else {
+        op.setData({
+          businessList: [],
+          start: 0,
+          hasMoreData: true,
+          inputShowed: false
+        });
+        op.loadAllBusiness();
+      }
+    }
   },
 
   selectCity: function (event) {
-    var tag = this.data.tag;
-    var allUrl = util.fillUrlParams('./citys', {
+    let op = this;
+    let tag = this.data.tag;
+    let allUrl = util.fillUrlParams('./citys', {
       sourceTab: 1,
       sourcePage: '/pages/business/list'
     });
     wx.navigateTo({
       url: allUrl,
     });
+  },
+
+  deny: function (e) {
+    let op = this;
+    op.setData({
+      isLeague: false,
+    })
+  },
+
+  toBeEstablishmentVip: function (e) {
+    let op = this;
+    let allUrl = util.fillUrlParams('/pages/campaign/score', {
+      individualShowFlag: JSON.stringify(true),
+      enterpriseShowFlag: JSON.stringify(false),
+    });
+    wx.navigateTo({
+      url: allUrl,
+    })
   },
 
   selectType: function (event) {
@@ -413,11 +450,40 @@ Page({
     });
   },
 
+  loadSelectAllBusinessByFirstTagId: function () {
+    var op = this;
+    var id = wx.getStorageSync('id');
+    id = id == '' ? -1 : id;
+    let businessList = op.data.businessList;
+    // 加载商户
+    app.post('/business/selectBusinessListByFirstTagId', {
+      id: id,
+      tag: op.data.tag,
+      city: op.data.cityCode,
+      start: op.data.firstTagStart,
+      num: op.data.pageSize,
+    }, function (data) {
+      if (app.hasData(data)) {
+        if (data.length < op.data.pageSize) {
+          op.setData({
+            businessList: businessList.concat(data),
+            firstTagHasMoreData: false
+          });
+        } else {
+          op.setData({
+            businessList: businessList.concat(data),
+            firstTagHasMoreData: true,
+            firstTagStart: op.data.firstTagStart + op.data.pageSize
+          })
+        }
+      }
+    });
+  },
+
   loadSelectAllBusiness: function () {
     var op = this;
     var id = wx.getStorageSync('id');
     id = id == '' ? -1 : id;
-    var businessList = this.data.businessList;
     // 加载商户
     app.post('/business/selectIndustryList', {
       id: id,
@@ -457,8 +523,67 @@ Page({
     let op = this;
     app.post("/business/getTagList", {}, function (data) {
       if (app.hasData(data)) {
+        let teachTagList = [],
+          activityTagList = [],
+          lifeTagList = [],
+          baseTagList = [],
+          otherTagList = [];
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].subservice_id == 11) {
+            teachTagList.push(data[i]);
+          } else if (data[i].subservice_id == 12) {
+            activityTagList.push(data[i]);
+          } else if (data[i].subservice_id == 13) {
+            lifeTagList.push(data[i]);
+          } else if (data[i].subservice_id == 14) {
+            baseTagList.push(data[i]);
+          } else if (data[i].subservice_id == 15) {
+            otherTagList.push(data[i]);
+          }
+        }
+        let teachAllTag = {
+          service_id: 1,
+          service_name: "服务类",
+          subservice_id: 11,
+          subservice_name: "教育",
+          tag_id: 11,
+          tag_name: "全部"
+        }
+        let activityAllTag = {
+          service_id: 1,
+          service_name: "服务类",
+          subservice_id: 12,
+          subservice_name: "亲子活动",
+          tag_id: 12,
+          tag_name: "全部"
+        }
+        let lifeAllTag = {
+          service_id: 1,
+          service_name: "服务类",
+          subservice_id: 13,
+          subservice_name: "亲子生活",
+          tag_id: 13,
+          tag_name: "全部"
+        }
+        let baseAllTag = {
+          service_id: 1,
+          service_name: "服务类",
+          subservice_id: 14,
+          subservice_name: "亲子基地",
+          tag_id: 14,
+          tag_name: "全部"
+        }
+        teachTagList.unshift(teachAllTag);
+        activityTagList.unshift(activityAllTag);
+        lifeTagList.unshift(lifeAllTag);
+        baseTagList.unshift(baseAllTag);
+
         op.setData({
-          tagList: data
+          teachTagList: teachTagList,
+          activityTagList: activityTagList,
+          lifeTagList: lifeTagList,
+          baseTagList: baseTagList,
+          otherTagList: otherTagList,
         })
       }
     });
@@ -505,15 +630,45 @@ Page({
 
   chooseTag: function (e) {
     let op = this;
+    let card = wx.getStorageSync('id');
     let tagId = e.currentTarget.dataset.tag_id;
     let tagName = e.currentTarget.dataset.tag_name;
 
-    op.setData({
-      industryName: tagName,
-      tag: tagId,
-      isSelectIndustryShow: false,
-    })
-    op.loadSelectAllBusiness();
+    if (card == '') {
+      app.onGotUserInfo(e, function () {
+        op.loadOneBusiness(wx.getStorageSync('id'));
+      });
+    } else {
+      if (op.data.oneBusiness.leaguer == 0) {
+        op.setData({
+          isLeague: true,
+        })
+      } else {
+        if (tagId == 11) {
+          tagName = "教育";
+        } else if (tagId == 12) {
+          tagName = "亲子活动";
+        } else if (tagId == 13) {
+          tagName = "亲子生活";
+        } else if (tagId == 14) {
+          tagName = "亲子基地";
+        }
+
+        op.setData({
+          industryName: tagName,
+          tag: tagId,
+          isSelectIndustryShow: false,
+          firstTagStart: 0,
+
+          businessList: [],
+        })
+        if (tagId == 11 || tagId == 12 || tagId == 13 || tagId == 14) {
+          op.loadSelectAllBusinessByFirstTagId();
+        } else {
+          op.loadSelectAllBusiness();
+        }
+      }
+    }
   },
 
   onLoad: function (options) {
@@ -555,7 +710,7 @@ Page({
       //this.setData({ cityCode: 220, cityName: '南京' });
       this.setData({
         cityCode: -1,
-        cityName: '全部'
+        cityName: '全国'
       });
       //this.loadCity();
     }
@@ -599,12 +754,17 @@ Page({
       op.refreshAllBusiness();
       app.globalData.listDataUpdated = false;
     }
-    if (wx.getStorageSync('city') == '') {
-      this.loadCity();
-    }
+    // if (wx.getStorageSync('city') == '') {
+    //   this.loadCity();
+    // }
     // this.refresh();
     if (op.data.needRefreshFlag) {
-      op.refreshAllBusiness();
+      if (op.data.cityCode == -1 && op.data.tag == -1) {
+        op.refreshAllBusiness();
+      } else {
+        op.loadSelectAllBusiness();
+      }
+
     }
   },
 
@@ -620,15 +780,26 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if (this.data.hasMoreData) {
-      this.loadAllBusiness();
+    if (this.data.tag == 11 || this.data.tag == 12 || this.data.tag == 13 || this.data.tag == 14) {
+      if (this.data.firstTagHasMoreData) {
+        this.loadSelectAllBusinessByFirstTagId();
+      } else {
+        wx.showToast({
+          title: '没有更多数据',
+          duration: 500,
+        })
+      }
     } else {
-      wx.showToast({
-        title: '没有更多数据',
-        duration: 500,
-      })
+      if (this.data.hasMoreData) {
+        this.loadAllBusiness();
+      } else {
+        wx.showToast({
+          title: '没有更多数据',
+          duration: 500,
+        })
+      }
+      this.refresh();
     }
-    this.refresh();
   },
 
   /**

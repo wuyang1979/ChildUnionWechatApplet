@@ -10,21 +10,24 @@ Page({
   data: {
     businessList: [],
     id: app.getUserId(),
+    followerId: -1,
     formIdArray: [],
   },
 
   oneBusiness: businessTemp.oneBusiness,
   onGotUserInfo: businessTemp.onGotUserInfo,
   addFollower: businessTemp.addFollower,
-  
+  auth: businessTemp.auth,
+  getSeeCardRecord: businessTemp.getSeeCardRecord,
+  addSeeCardRecord: businessTemp.addSeeCardRecord,
+
   saveFormId: function (v) {
     app.formIdInput(v, this);
   },
 
-
   loadFans: function () {
     var op = this;
-    var id = this.data.id;
+    var id = this.data.followerId;
     // 加载商户
     app.getUrl('/business/my/fans/' + id + "-" + app.getUserId(), function (data) {
       if (app.hasData(data)) {
@@ -42,14 +45,16 @@ Page({
   onLoad: function (options) {
     //this.loadFans();
     var id = options.id;
-    this.setData({ id: id });
+    this.setData({
+      followerId: id
+    });
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
   },
 
   /**

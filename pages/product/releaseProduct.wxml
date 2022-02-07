@@ -1,0 +1,176 @@
+<wxs src="../../utils/tool.wxs" module="tool" />
+
+<view class="base-settle">
+    <view class="title">发布产品</view>
+
+    <view class="main-image-area">
+        <view class="add-main-image-area" wx:if="{{mainImagePic.length==0}}" bindtap="uploadMainImage">
+            <image class="add-main-image" src="/pages/img/camera.png" mode="aspectFill"></image>
+            <view class="add-main-image-tip">主题图片<image src="/pages/img/needed.png" class="needed" mode="aspectFill">
+                </image>
+            </view>
+        </view>
+
+        <view class="upload-main-image-area" wx:if="{{mainImagePic.length>0}}" bindtap="uploadMainImage">
+            <image class="main-image" wx:for="{{mainImagePic}}" wx:key="index" src="{{item}}" mode="aspectFill"></image>
+        </view>
+    </view>
+
+    <!-- 产品名称 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">
+            <image src="/pages/img/needed.png" class="needed" mode="aspectFill"></image>
+            产品名称：
+        </view>
+        <input type="text" maxlength="50" class="base-name-input" placeholder="请输入产品名称" bindinput="inputName" />
+        <view class="title-tip">
+            最多50字
+        </view>
+    </view>
+
+    <!-- 产品现价 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">
+            <image src="/pages/img/needed.png" class="needed" mode="aspectFill"></image>
+            产品原价（元）：
+        </view>
+        <input type="text" class="base-name-input" placeholder="请输入产品原价" bindinput="inputOriginalPrice" />
+    </view>
+
+    <!-- 产品现价 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">
+            <image src="/pages/img/needed.png" class="needed" mode="aspectFill"></image>
+            产品现价（元）：
+        </view>
+        <input type="text" class="base-name-input" placeholder="请输入产品现价" bindinput="inputPresentPrice" />
+    </view>
+
+    <!-- 库存数量 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">
+            <image src="/pages/img/needed.png" class="needed" mode="aspectFill"></image>
+            库存数量：
+        </view>
+        <input type="text" class="base-name-input" placeholder="请输入库存数量" bindinput="inputInventory" />
+    </view>
+
+    <!-- 是否允许重复购买 -->
+    <view class="base-name-area">
+        <checkbox-group class="radio-group">
+            <view class="repeat-purchase-tips">
+                <image src="/pages/img/needed.png" class="needed" mode="aspectFill"></image>
+                是否允许重复购买:
+            </view>
+            <checkbox class="radio" data-value="0" checked="{{repeatPurchase==0}}" bindtap="allowRepeatPurchase">
+                <text class="sexText">是</text>
+            </checkbox>
+            <checkbox class="radio" data-value="1" checked="{{repeatPurchase==1}}" bindtap="refuseRepeatPurchase">
+                <text class="sexText">否</text>
+            </checkbox>
+        </checkbox-group>
+    </view>
+
+    <!-- 单次最大购买数量 -->
+    <view class="base-name-area">
+        <view class="max-tip">
+            <image src="/pages/img/needed.png" class="needed" mode="aspectFill"></image>
+            单次最大购买数量：
+        </view>
+        <input type="text" class="{{disableInputMaxCount?'special-input gray':'special-input'}}" disabled="{{disableInputMaxCount}}" bindinput="inputOnceMaxPurchaseCount" />
+        <checkbox-group class="radio-group" style="display: inline-block;vertical-align: text-bottom;">
+            <checkbox class="radio" style="zoom:90%" checked="{{buxianFlag}}" bindtap="chooseBuXian">
+                <text class="sexText">不限</text>
+            </checkbox>
+        </checkbox-group>
+    </view>
+
+    <!-- 产品截止时间 -->
+    <view class="base-name-area">
+        <view class="base-name-tip" style="margin-bottom: 10px;">
+            <image src="/pages/img/needed.png" class="needed" mode="aspectFill"></image>
+            产品截止时间：
+        </view>
+        <picker disabled="{{disableChooseDeadlineFlag}}" mode="multiSelector" value="{{dateTime1}}" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" range="{{dateTimeArray1}}">
+            <view class="{{disableChooseDeadlineFlag?'tui-picker-detail gray':'tui-picker-detail'}}">
+                选取时间： {{dateTimeArray1[0][dateTime1[0]]}}-{{dateTimeArray1[1][dateTime1[1]]}}-{{dateTimeArray1[2][dateTime1[2]]}} {{dateTimeArray1[3][dateTime1[3]]}}:{{dateTimeArray1[4][dateTime1[4]]}}
+            </view>
+            <checkbox-group class="radio-group" style="display: inline-block;vertical-align: text-bottom;">
+                <checkbox class="radio" style="zoom:90%" checked="{{deadlineBuxianFlag}}" catchtap="deadlineBuxian">
+                    <text class="sexText">不限</text>
+                </checkbox>
+            </checkbox-group>
+        </picker>
+    </view>
+
+    <!-- 客服电话 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">
+            <image src="/pages/img/needed.png" class="needed" mode="aspectFill"></image>
+            客服电话：
+        </view>
+        <input type="text" class="base-name-input" placeholder="请输入客服电话" bindinput="inputPhone" />
+    </view>
+
+    <!-- 产品介绍 -->
+    <view class="base-name-area">
+        <view class="zhuyi">注意：产品介绍、图片或视频至少上传一项。</view>
+        <view class="base-name-tip">产品介绍</view>
+        <view class="tips">请勿填写QQ、微信、电话等联系方式及特殊符号、违反法律的相关内容，否则有可能会导致您的账号被封禁。</view>
+        <view class="message-input">
+            <textarea maxlength="2000" placeholder="请输入产品介绍" bindinput="inputIntroduce" class="message-content" cursor-spacing="150rpx">
+        </textarea>
+
+        </view>
+        <view class="message-tip">
+            最多2000字(不支持表情包)
+        </view>
+    </view>
+
+    <!-- 产品图片 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">产品图片</view>
+        <image class="other-image" wx:for="{{otherImagePic}}" data-index="{{index}}" wx:key="index" src="{{item}}" mode="aspectFill" bindlongpress="delectPic"></image>
+
+        <view class="add-other-image-area" bindtap="uploadOtherImage">
+            <image class="add-other-image" src="/pages/img/camera.png" mode="aspectFill"></image>
+        </view>
+
+        <view class="one-pic-tip" wx:if="{{otherImagePic.length>0}}">图片长按以删除</view>
+    </view>
+
+    <!-- 产品视频 -->
+    <view class="base-name-area">
+        <view class="base-name-tip vedio-special">
+            产品视频
+            <view class="delete-vedio" bindtap="deleteVedio">删除</view>
+        </view>
+
+        <view class="add-video-area" wx:if="{{videoPath==''}}" bindtap="uploadvideo">
+            <image class="add-video" src="/pages/img/camera.png" mode="aspectFill"></image>
+        </view>
+
+        <view class="upload-video-area" wx:if="{{videoPath!=''}}" bindtap="uploadvideo">
+            <video class="upload-video" src="{{'https://qinzi123.com'+videoPath}}"></video>
+        </view>
+    </view>
+
+    <!-- 购买须知 -->
+    <view class="base-name-area">
+        <view class="base-name-tip">购买须知</view>
+        <view class="tips"></view>
+        <view class="message-input">
+            <textarea style="height: 150px;" maxlength="500" placeholder="请输入购买须知" bindinput="inputInstruction" class="message-content" cursor-spacing="150rpx">
+        </textarea>
+
+        </view>
+        <view class="message-tip">
+            最多500字(不支持表情包)
+        </view>
+    </view>
+
+    <view class="submit-area">
+        <button bindtap="submit" class="submit-btn" formType="submit">提交</button>
+    </view>
+
+</view>

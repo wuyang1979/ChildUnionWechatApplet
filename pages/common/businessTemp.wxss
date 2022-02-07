@@ -1,25 +1,27 @@
-.one-business{
+.one-business {
   margin-left: 5px;
   background-color: white;
 }
 
-.business-photo{
+.business-photo {
   width: 150rpx;
   height: 150rpx;
   margin: 10rpx;
   border-radius: 50%;
 }
 
-.business-left-info, .business-middle-info, .business-right-info{
+.business-left-info,
+.business-middle-info,
+.business-right-info {
   display: inline-block;
   margin-bottom: 5px;
 }
 
-.business-left-info{
+.business-left-info {
   width: 25%;
 }
 
-.business-middle-info{
+.business-middle-info {
   width: 55%;
 }
 
@@ -29,38 +31,43 @@
 }
 */
 
-.business-desc-info{
+.business-desc-info {
   margin: 0px;
 }
 
-.business-name{
+.business-name {
   font-size: 0.9em;
+  display: inline-block;
+  margin-right: 5px;
 }
 
-.business-job{
+.business-job {
   color: #777777;
-  font-size:0.7em;
+  font-size: 0.7em;
+  display: inline-block;
 }
 
-.business-company{
+.business-company {
   color: #777777;
-  font-size:0.7em;
+  font-size: 0.7em;
   overflow: hidden;
   white-space: nowrap;
-  text-overflow:ellipsis;
+  text-overflow: ellipsis;
 }
 
-.business-name, .business-job{
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow:ellipsis;
+.business-name,
+.business-job {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-.business-name, .business-job{
-  width: 45%;
+.business-job {
+  max-width: 60%;
+  margin-right: 5px;
 }
 
-.leaguer-btn{
+.leaguer-btn {
   font-size: 0.6em;
   font-weight: bold;
   width: 36px;
@@ -72,17 +79,17 @@
   margin-left: 5px;
 }
 
-.leaguer_normal{
+.leaguer_normal {
   width: 17px;
   height: 15px;
   margin-left: 5px;
 }
 
-.business-button-info{
+.business-button-info {
   margin: 0px;
 }
 
-.business-btn-tag{
+.business-btn-tag {
   color: black;
   font-size: 0.6em;
   width: 60px;
@@ -95,38 +102,40 @@
   margin-right: 3px;
 }
 
-.tag1{
+.tag1 {
   background-color: rgb(128, 214, 127);
 }
 
-.tag2{
+.tag2 {
   background-color: rgb(242, 184, 121);
 }
 
-.tag3{
-  background-color:rgb(137, 218, 199);
+.tag3 {
+  background-color: rgb(137, 218, 199);
 }
 
-.default-tag, .default-tag::after{
+.default-tag,
+.default-tag::after {
   border: none;
   background-color: white;
 }
 
-.business-btn-not-follow, .business-btn-follow{
-  font-size:0.8em;
+.business-btn-not-follow,
+.business-btn-follow {
+  font-size: 0.8em;
   width: 70px;
-  border-radius:5px;
-  padding-left:10px;
+  border-radius: 5px;
+  padding-left: 10px;
   padding-right: 10px;
   margin-bottom: 30%;
 }
 
-.business-btn-not-follow{
+.business-btn-not-follow {
   background-color: rgb(2, 143, 215);
   color: white;
 }
 
-.business-btn-follow{
+.business-btn-follow {
   background-color: rgb(238, 238, 238);
 }
 

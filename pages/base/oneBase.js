@@ -38,6 +38,9 @@ Page({
     isActivities: false,
     isConsultinge: false,
     pictureList: [],
+    number: "",
+    leaguetype: "",
+    phone: "",
   },
 
   openMapByTencent: function (e) {
@@ -152,9 +155,13 @@ Page({
   onGotUserInfo: function (e) {
     var op = this;
     app.onGotUserInfo(e, function () {
-      op.setData({
-        isConfirmShow: true,
-      });
+      if (op.data.card_id == -1) {
+       op.reserve();
+      }else{
+        op.setData({
+          isConfirmShow: true,
+        });
+      }
     });
   },
 
@@ -174,10 +181,8 @@ Page({
     wx.requestSubscribeMessage({
       tmplIds: [templateId],
       success: (res) => {
-        console.log(res);
         // 如果用户点击允许
         if (res[templateId] == 'accept') {
-          console.log('点击了允许');
           app.post('/base/reserve', {
             baseId: op.data.id,
             cardId: card,
@@ -185,14 +190,27 @@ Page({
             openId: app.globalData.openId,
           }, function (data) {
             if (app.hasData(data)) {
-              var allUrl = util.fillUrlParams('/pages/business/success', {
-                id: op.data.id,
-                type: 5,
-                name: op.data.name,
-              });
-              wx.navigateTo({
-                url: allUrl
-              });
+              if (data.rows == 1) {
+                if (op.data.card_id == -1) {
+                  if (op.data.phone != null && op.data.phone != "") {
+                    wx.makePhoneCall({
+                      phoneNumber: op.data.phone,
+                    })
+                  }
+                  op.setData({
+                    isConfirmShow:false,
+                  })
+                } else {
+                  var allUrl = util.fillUrlParams('/pages/business/success', {
+                    id: op.data.id,
+                    type: 5,
+                    name: op.data.name,
+                  });
+                  wx.navigateTo({
+                    url: allUrl
+                  });
+                }
+              }
             } else {
               wx.showToast({
                 title: '预订失败',
@@ -200,21 +218,33 @@ Page({
             }
           });
         } else {
-          console.log('点击了取消');
           app.post('/base/reserve', {
             baseId: op.data.id,
             cardId: card,
             authClick: false,
           }, function (data) {
             if (app.hasData(data)) {
-              var allUrl = util.fillUrlParams('/pages/business/success', {
-                id: op.data.id,
-                type: 5,
-                name: op.data.name,
-              });
-              wx.navigateTo({
-                url: allUrl
-              });
+              if (data.rows == 1) {
+                if (op.data.card_id == -1) {
+                  if (op.data.phone != null && op.data.phone != "") {
+                    wx.makePhoneCall({
+                      phoneNumber: op.data.phone,
+                    })
+                  }
+                  op.setData({
+                    isConfirmShow:false,
+                  })
+                } else {
+                  var allUrl = util.fillUrlParams('/pages/business/success', {
+                    id: op.data.id,
+                    type: 5,
+                    name: op.data.name,
+                  });
+                  wx.navigateTo({
+                    url: allUrl
+                  });
+                }
+              }
             } else {
               wx.showToast({
                 title: '预订失败',
@@ -223,13 +253,8 @@ Page({
           });
         }
       },
-      fail: (res) => {
-        console.log('操作失败', res);
-      },
-      complete: (res) => {
-        console.log('一定操作', res);
-        //runFunction();
-      }
+      fail: (res) => {},
+      complete: (res) => {}
     });
   },
 
@@ -269,6 +294,8 @@ Page({
     let levelId = options.levelId;
     let districtName = options.districtName;
     let number = options.number;
+    let leaguetype = options.leaguetype;
+    let phone = options.phone;
 
     this.setData({
       id: id,
@@ -292,6 +319,8 @@ Page({
       levelId: levelId,
       districtName: districtName,
       number: number,
+      leaguetype: leaguetype,
+      phone: phone,
     });
 
     op.loadAllConsultinges(id);
@@ -394,13 +423,15 @@ Page({
       isActivities: op.data.isActivities,
       isConsultinge: op.data.isConsultinge,
       pictureList: op.data.pictureList,
+      number: op.data.number,
+      leaguetype: op.data.leaguetype,
+      phone: op.data.phone,
     });
 
     return {
       title: '分享了一个活动基地！',
       path: allUrl,
       success: function (res) {
-        console.log(res)
         // 转发成功
       },
       fail: function (res) {

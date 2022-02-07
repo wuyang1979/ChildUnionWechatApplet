@@ -76,7 +76,6 @@ Page({
       title: '快来加入南京亲子云',
       path: allUrl,
       success: function (res) {
-        console.log(res)
         // 转发成功
       },
       fail: function (res) {

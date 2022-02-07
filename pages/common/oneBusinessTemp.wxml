@@ -34,8 +34,8 @@
     </view>
   </view>
   <view class="follow-count">
-    <view class="follow-left" data-count=" {{oneBusiness.follow_count}}" data-id="{{oneBusiness.id}}"
-      bindtap="getFollowerById">
+    <view class="{{isOneSelf?'follow-left':'follow-left-other'}}" data-count=" {{oneBusiness.follow_count}}"
+      data-id="{{oneBusiness.id}}" bindtap="getFollowerById">
       <view class="follow-desc">关注
       </view>
       <view class="follow-value">
@@ -43,8 +43,8 @@
       </view>
     </view>
 
-    <view class="follow-middle" data-count=" {{oneBusiness.fans_count}}" data-id="{{oneBusiness.id}}"
-      bindtap="getFansById">
+    <view class="{{isOneSelf?'follow-middle':'follow-middle-other'}}" data-count=" {{oneBusiness.fans_count}}"
+      data-id="{{oneBusiness.id}}" bindtap="getFansById">
       <view class="follow-desc">粉丝
       </view>
       <view class="follow-value">
@@ -52,7 +52,8 @@
       </view>
     </view>
 
-    <view class="follow-middle" data-score=" {{oneBusiness.score}}" data-id="{{oneBusiness.id}}" bindtap="jumpScore">
+    <view class="{{isOneSelf?'follow-middle':'follow-middle-other'}}" data-score=" {{oneBusiness.score}}"
+      data-id="{{oneBusiness.id}}" bindtap="jumpScore">
       <view class="follow-desc">亲子币
       </view>
       <view class="follow-value">
@@ -60,7 +61,7 @@
       </view>
     </view>
 
-    <view class="follow-right" bindtap="sign1">
+    <view class="{{isOneSelf?'follow-right':'follow-right-other'}}" bindtap="sign1" wx:if="{{isOneSelf}}">
       <image src="/pages/img/sign.png" class="sign-image" mode="aspectFill"></image>
       <view class="sign-tip1" wx:if="{{needSign}}">每日签到</view>
       <view class="sign-tip2" wx:if="{{!needSign}}">已签到</view>

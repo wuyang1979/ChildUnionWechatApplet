@@ -1,4 +1,5 @@
 {
+    "setting": {},
     "condition": {
         "plugin": {
             "list": []
@@ -16,6 +17,12 @@
                     "name": "new",
                     "pathName": "pages/cooperate/list",
                     "query": "cc=1",
+                    "scene": null
+                },
+                {
+                    "name": "pages/cooperate/list",
+                    "pathName": "pages/cooperate/list",
+                    "query": "",
                     "scene": null
                 },
                 {

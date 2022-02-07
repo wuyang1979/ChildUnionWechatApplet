@@ -1,6 +1,6 @@
 .page,
 page {
-    background-color: #eee;
+    background-color: #f7f7f7;
 }
 
 .one-base {
@@ -282,10 +282,10 @@ page {
 
 .confirm-area {
     position: fixed;
-    width: 95%;
-    height: 230px;
-    top: 250rpx;
-    left: 20rpx;
+    width: 80%;
+    height: 160px;
+    top: 330rpx;
+    left: 70rpx;
     background-color: #f8f8f8;
     border: 1px solid #d0d0d0;
     border-radius: 10px;
@@ -302,11 +302,11 @@ page {
     z-index: 10;
 }
 
-.confiem-area-tip {
+.confirm-area-tip {
     height: 50px;
     font-size: 22px;
-    padding-left: 120rpx;
-    padding-top: 140rpx;
+    padding-left: 80rpx;
+    padding-top: 60rpx;
 }
 
 .confirm-area-bottom {
@@ -320,7 +320,7 @@ page {
 .deny,
 .confirm {
     display: inline-block;
-    width: 44%;
+    width: 43%;
     height: 40px;
     text-align: center;
     line-height: 40px;

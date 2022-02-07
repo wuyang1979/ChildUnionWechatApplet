@@ -5,12 +5,84 @@ var oneBusiness = {
 
   sign1: function (e) {
     var op = this;
-    this.saveFormId1(e);
-    app.batchAddFormId(op);
-    app.onGotUserInfo(e, function () {
-      var id = app.getUserId();
-      op.sign2Server1(id);
-    });
+    let card = wx.getStorageSync('id');
+    if (card == "") {
+      app.onGotUserInfo(e, function () {
+        op.refresh();
+      });
+      return;
+    }
+    let followerTemplateId = '01EMtrNhQzLgkppeVZf0PtmoOk812HevdmwKDZQqkUE';
+    let cardMessageTemplateId = 'uwhiRcacULuqIySAIE8salPOKd3muX8GIAorF4_b8kk';
+
+    app.post("/cooperate/getUnAuthRecordList", {
+      card: app.getUserId()
+    }, function (data) {
+      if (app.hasData(data)) {
+        if (data.length < 2) {
+          //无授权记录
+          wx.requestSubscribeMessage({
+            tmplIds: [followerTemplateId, cardMessageTemplateId],
+            success: (res) => {
+              // 如果用户点击允许
+              if (res[followerTemplateId] == 'accept') {
+                app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                  card: app.getUserId()
+                }, function (data) {})
+              }
+              if (res[cardMessageTemplateId] == 'accept') {
+                app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                  card: app.getUserId()
+                }, function (data) {})
+              }
+            },
+            fail: (res) => {},
+            complete: (res) => {
+              op.saveFormId1(e);
+              app.batchAddFormId(op);
+              op.sign2Server1(card);
+            }
+          })
+        } else {
+          let authFlag = true;
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].auth_status == 0) {
+              authFlag = false;
+            }
+          }
+
+          if (!authFlag) {
+            //有未授权记录
+            wx.requestSubscribeMessage({
+              tmplIds: [followerTemplateId, cardMessageTemplateId],
+              success: (res) => {
+                // 如果用户点击允许
+                if (res[followerTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateFollowerAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+                if (res[cardMessageTemplateId] == 'accept') {
+                  app.post("/cooperate/addOrUpdateCardMessageAuthAcceptRecord", {
+                    card: app.getUserId()
+                  }, function (data) {})
+                }
+              },
+              fail: (res) => {},
+              complete: (res) => {
+                op.saveFormId1(e);
+                app.batchAddFormId(op);
+                op.sign2Server1(card);
+              }
+            })
+          } else {
+            op.saveFormId1(e);
+            app.batchAddFormId(op);
+            op.sign2Server1(card);
+          }
+        }
+      }
+    })
   },
 
   saveFormId1: function (v) {

@@ -378,7 +378,6 @@ Page({
       title: '发布了一条最新活动！',
       path: allUrl,
       success: function (res) {
-        console.log(res)
         // 转发成功
       },
       fail: function (res) {

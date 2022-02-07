@@ -1,0 +1,9 @@
+<view class="message-area">
+    <view class="message-title">消息通知</view>
+    <view class="message-item" bindtap="toInteractionMessagePage">
+        <image class="message-item-image" src="/pages/img/interaction-message.png" mode="aspectFill"></image>
+        <view class="message-item-name">互动消息</view>
+        <image class="chevron-right" src="/pages/img/chevron-right.png" mode="aspectFill" wx:if="{{readStatus}}"></image>
+        <image class="point" src="/pages/img/point.png" mode="aspectFill" wx:if="{{!readStatus}}"></image>
+    </view>
+</view>

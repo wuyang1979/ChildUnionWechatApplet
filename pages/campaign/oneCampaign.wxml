@@ -98,7 +98,7 @@
 
   <view class="reply-content" wx:if="{{replyList.length > 0}}">
     <view class="weui-panel__bd">
-      <view wx:for="{{replyList}}" wx:key="{{item.id}}">
+      <view wx:for="{{replyList}}" wx:key="index">
         <view class="weui-media-box weui-media-box_text">
           <view class="weui-media-box__desc">
             <!-- 头像 -->

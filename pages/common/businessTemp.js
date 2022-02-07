@@ -56,10 +56,12 @@ var business = {
 
   onGotUserInfo: function (e) {
     var op = this;
-    app.onGotUserInfo(e, function () {
-      op.addFollower(e);
-      app.batchAddFormId(op);
-    });
+    let card = wx.getStorageSync("id");
+    if (card == "") {
+      app.onGotUserInfo(e, function () {});
+    } else {
+      op.auth(e);
+    }
   },
 
   addFollower: function (event) {
@@ -76,6 +78,24 @@ var business = {
         }
       }
     });
+  },
+
+
+  auth: function (e) {
+    let op = this;
+    let templateId = '01EMtrNhQzLgkppeVZf0PtmoOk812HevdmwKDZQqkUE';
+    wx.requestSubscribeMessage({
+      tmplIds: [templateId],
+      success: (res) => {
+        // 如果用户点击允许
+        if (res[templateId] == 'accept') {} else {}
+      },
+      fail: (res) => {},
+      complete: (res) => {
+        op.addFollower(e);
+        app.batchAddFormId(op);
+      }
+    })
   },
 
 };

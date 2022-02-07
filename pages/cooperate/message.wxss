@@ -117,7 +117,7 @@ textarea {
 
 textarea {
   width: 99%;
-  height: 350px;
+  height: 240px;
 }
 
 .submit-view {

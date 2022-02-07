@@ -1,0 +1,5 @@
+/* pages/base/baseMap.wxss */
+page,
+.page {
+    height: 100%;
+}

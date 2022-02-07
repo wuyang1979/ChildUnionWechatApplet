@@ -1,6 +1,4 @@
 <view class="knowledge">
-
-
     <view class="qinzi-label">
         <view class="{{activityPlanShowFlag?'activity-plan choosed':'activity-plan'}}" bindtap="activityPlanLab">活动方案
         </view>
@@ -17,7 +15,7 @@
     </view>
 
 
-    <view class="knowledge-area" wx:for="{{knowledgeList}}" data-url="{{item.url}}" data-id="{{item.id}}"
+    <view class="knowledge-area" wx:for="{{knowledgeList}}" wx:key="index" data-url="{{item.url}}" data-id="{{item.id}}"
         data-typeId="{{item.typeId}}" data-createTime="{{item.createTime}}" data-readCount="{{item.read_count}}"
         data-title="{{item.title}}" data-cost="{{item.cost}}" wx:if="{{item.typeId == 1 && activityPlanShowFlag}}"
         bindtap="previewDetail">
@@ -30,7 +28,7 @@
     </view>
 
 
-    <view class="knowledge-area" wx:for="{{knowledgeList}}" data-url="{{item.url}}" data-id="{{item.id}}"
+    <view class="knowledge-area" wx:for="{{knowledgeList}}" wx:key="index" data-url="{{item.url}}" data-id="{{item.id}}"
         data-typeId="{{item.typeId}}" data-createTime="{{item.createTime}}" data-readCount="{{item.read_count}}"
         data-title="{{item.title}}" data-cost="{{item.cost}}" wx:if="{{item.typeId == 2 && safetyPlanShowFlag}}"
         bindtap="previewDetail">
@@ -42,7 +40,7 @@
         <view class="time">{{item.createTime}}</view>
     </view>
 
-    <view class="knowledge-area" wx:for="{{knowledgeList}}" data-url="{{item.url}}" data-id="{{item.id}}"
+    <view class="knowledge-area" wx:for="{{knowledgeList}}" wx:key="index" data-url="{{item.url}}" data-id="{{item.id}}"
         data-typeId="{{item.typeId}}" data-createTime="{{item.createTime}}" data-readCount="{{item.read_count}}"
         data-title="{{item.title}}" data-cost="{{item.cost}}" wx:if="{{item.typeId == 3 && activitySummaryShowFlag}}"
         bindtap="previewDetail">
@@ -54,7 +52,7 @@
         <view class="time">{{item.createTime}}</view>
     </view>
 
-    <view class="knowledge-area" wx:for="{{knowledgeList}}" data-url="{{item.url}}" data-id="{{item.id}}"
+    <view class="knowledge-area" wx:for="{{knowledgeList}}" wx:key="index" data-url="{{item.url}}" data-id="{{item.id}}"
         data-typeId="{{item.typeId}}" data-createTime="{{item.createTime}}" data-readCount="{{item.read_count}}"
         data-title="{{item.title}}" data-cost="{{item.cost}}" wx:if="{{item.typeId == 4 && researchManualShowFlag}}"
         bindtap="previewDetail">
@@ -66,7 +64,7 @@
         <view class="time">{{item.createTime}}</view>
     </view>
 
-    <view class="knowledge-area" wx:for="{{knowledgeList}}" data-url="{{item.url}}" data-id="{{item.id}}"
+    <view class="knowledge-area" wx:for="{{knowledgeList}}" wx:key="index" data-url="{{item.url}}" data-id="{{item.id}}"
         data-typeId="{{item.typeId}}" data-createTime="{{item.createTime}}" data-readCount="{{item.read_count}}"
         data-title="{{item.title}}" data-cost="{{item.cost}}" wx:if="{{item.typeId == 5 && agreementShowFlag}}"
         bindtap="previewDetail">

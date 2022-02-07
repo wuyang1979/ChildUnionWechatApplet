@@ -1,0 +1,13 @@
+<view class="message-area">
+    <view class="message-title">产品管理</view>
+    <view class="message-item" bindtap="releaseProducts">
+        <image class="message-item-image" src="/pages/img/releaseProduct.png" mode="aspectFill"></image>
+        <view class="message-item-name">发布产品</view>
+        <image class="chevron-right" src="/pages/img/chevron-right.png" mode="aspectFill"></image>
+    </view>
+    <view class="message-item" bindtap="myProducts">
+        <image class="message-item-image" style="border-radius: 0;" src="/pages/img/myProduct.png" mode="aspectFill"></image>
+        <view class="message-item-name">我的产品</view>
+        <image class="chevron-right" src="/pages/img/chevron-right.png" mode="aspectFill"></image>
+    </view>
+</view>

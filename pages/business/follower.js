@@ -9,14 +9,18 @@ Page({
    */
   data: {
     businessList: [],
-    id : app.getUserId(),
+    id: app.getUserId(),
+    followerId: -1,
     formIdArray: [],
   },
 
   oneBusiness: businessTemp.oneBusiness,
   onGotUserInfo: businessTemp.onGotUserInfo,
   addFollower: businessTemp.addFollower,
-  
+  getSeeCardRecord: businessTemp.getSeeCardRecord,
+  addSeeCardRecord: businessTemp.addSeeCardRecord,
+  auth: businessTemp.auth,
+
   saveFormId: function (v) {
     app.formIdInput(v, this);
   },
@@ -24,13 +28,13 @@ Page({
 
   loadFollower: function () {
     var op = this;
-    var id = this.data.id;
+    var id = this.data.followerId;
     // 加载商户
     app.getUrl('/business/my/follower/' + id + "-" + app.getUserId(), function (data) {
       if (app.hasData(data)) {
-          op.setData({
-            businessList: data,
-          });
+        op.setData({
+          businessList: data,
+        });
       }
     });
   },
@@ -39,9 +43,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //this.loadFollower();
+    // this.loadFollower();
     var id = options.id;
-    this.setData({id: id});
+    this.setData({
+      followerId: id
+    });
   },
 
   /**

@@ -1,0 +1,135 @@
+.page,
+page {
+    background-color: white;
+}
+
+.active-base {
+    margin-top: 5px;
+}
+
+.title {
+    padding: 10px;
+    font-size: 17px;
+    text-align: center;
+    background-color: white;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+.active-base-list {
+    padding: 10px 5px 10px 10px;
+    background-color: white;
+    position: relative;
+}
+
+.active-base-image {
+    width: 100px;
+    height: 80px;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+.active-base-name {
+    position: absolute;
+    top: 13px;
+    left: 120px;
+    font-size: 17px;
+    font-weight: 550;
+    width: 40%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.active-base-address {
+    position: absolute;
+    top: 65px;
+    left: 120px;
+    font-size: 14px;
+    width: 40%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.modify-btn {
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    font-size: 11px;
+    width: 55px;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #028fd7;
+    color: white;
+}
+
+.delete-btn {
+    position: absolute;
+    right: 30px;
+    top: 60px;
+    font-size: 11px;
+    width: 55px;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: red;
+    color: white;
+}
+
+.confirm-area {
+    position: fixed;
+    width: 80%;
+    height: 160px;
+    top: 330rpx;
+    left: 70rpx;
+    background-color: #f8f8f8;
+    border: 1px solid #d0d0d0;
+    border-radius: 10px;
+    z-index: 20;
+}
+
+.cover-area {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.confirm-area-tip {
+    height: 50px;
+    font-size: 22px;
+    padding-left: 80rpx;
+    padding-top: 60rpx;
+}
+
+.confirm-area-bottom {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    border-top: 1px solid #d8d8d8;
+}
+
+.deny,
+.confirm {
+    display: inline-block;
+    width: 43%;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.deny {
+    border-right: 1px solid #d8d8d8;
+}
+
+.confirm {
+    color: #6483c3;
+}

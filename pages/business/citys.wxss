@@ -54,10 +54,22 @@
 .li_style {
   height: 50rpx;
   padding: 20rpx 0;
-  width: 710rpx;
   line-height: 50rpx;
   font-size: 29rpx;
-  margin: 0 20rpx;
+  margin: 0 20rpx 0 30rpx;
+  display: inline-block;
+}
+
+.hot-li_style {
+  height: 50rpx;
+  padding: 10rpx 0;
+  line-height: 50rpx;
+  font-size: 29rpx;
+  margin: 0 0 0 30rpx;
+  display: inline-block;
+  background-color: white;
+  width: 25%;
+  text-align: center;
 }
 
 .searchLetter {
@@ -103,7 +115,6 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  margin-top: 10rpx;
 }
 
 .item_letter {
@@ -189,4 +200,13 @@
   font-size: 30rpx;
   color: #aaa;
   line-height: 60rpx;
+}
+
+.hot-cities {
+  background-color: #f4f4f6;
+  padding: 20px 0;
+}
+
+.hot-tip{
+  margin: 0 0 10px 16px;
 }

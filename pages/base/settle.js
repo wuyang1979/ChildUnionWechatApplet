@@ -16,6 +16,7 @@ Page({
         level: '',
         traffic: "",
         address: "",
+        phone: "",
         city: "南京市",
         districtIndex: "",
         district: "",
@@ -76,7 +77,6 @@ Page({
     },
 
     bindLevelPickerChange: function (e) {
-        console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({
             level: e.detail.value,
             selectLevel: true
@@ -84,13 +84,11 @@ Page({
     },
 
     bindDistrictPickerChange: function (e) {
-        console.log('picker发送选择改变，携带值为', e.detail.value)
         this.setData({
             district: parseInt(e.detail.value) + 1 + "",
             districtIndex: e.detail.value,
             selectDistrict: true
         });
-        console.log(this.data.district)
     },
 
     inputTraffic: function (e) {
@@ -104,6 +102,13 @@ Page({
         let op = this;
         op.setData({
             address: e.detail.value,
+        })
+    },
+
+    inputPhone: function (e) {
+        let op = this;
+        op.setData({
+            phone: e.detail.value,
         })
     },
 
@@ -132,7 +137,7 @@ Page({
         let op = this;
         wx.chooseImage({
             count: 1,
-            sizeType: ['original', 'compressed'],
+            sizeType: ['compressed'],
             sourceType: ['album', 'camera'],
             success(res) {
                 var imgsrc = res.tempFilePaths;
@@ -149,6 +154,18 @@ Page({
             },
             complete() {
                 var pisc = op.data.mainImagePic;
+                let mainImagePicTemp = pisc[0];
+                wx.compressImage({
+                    src: mainImagePicTemp, // 图片路径
+                    quality: 80, // 压缩质量
+                    success: function (res) {},
+                    fail: function (res) {
+
+                    },
+                    complete: function (res) {
+
+                    }
+                })
                 op.uploadimg({
                     url: app.qinzi + '/mini/uploadFile/sourcePath', //请更改为你自己部署的接口
                     path: pisc,
@@ -186,12 +203,11 @@ Page({
             },
             complete: () => {
                 i++;
-                if (i == data.path.length) { //当图片传完时，停止调用 
-                    console.log('成功：' + success + " 失败：" + fail);
+                if (i == data.path.length) {
+                    //当图片传完时，停止调用 
                     // that.setData({
                     //   showResult: '上传成功'
                     // });
-                    console.log(that.data.mainImage)
                 } else { //若图片还没有传完，则继续调用函数
                     data.i = i;
                     data.success = success;
@@ -339,6 +355,12 @@ Page({
             });
             return false;
         }
+        if (!this.data.phone || this.data.phone.length < 1) {
+            wx.showToast({
+                title: '请输入联系方式'
+            });
+            return false;
+        }
         if (!this.data.longitude || this.data.longitude.length < 1 || !this.data.latitude || this.data.latitude.length < 1) {
             wx.showToast({
                 title: '请获取位置信息'
@@ -383,6 +405,7 @@ Page({
             level: op.data.level,
             traffic: op.data.traffic,
             address: op.data.address,
+            phone: op.data.phone,
             city: op.data.city,
             district: op.data.district,
             officialAccountName: op.data.officialAccountName,

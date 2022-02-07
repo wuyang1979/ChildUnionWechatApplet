@@ -34,7 +34,6 @@ Page({
         wx.downloadFile({
             url: fileLink,
             success: function (res) {
-                console.log(res, "wx.downloadFile success res")
                 if (res.statusCode != 200) {
                     util.hideLoadingWithErrorTips()
                     return false
@@ -44,13 +43,11 @@ Page({
                     filePath: Path,
                     showMenu: true,
                     success: function (res) {
-                        console.log('打开成功');
                         util.hideLoading()
                     }
                 })
             },
             fail: function (err) {
-                console.log(err, "wx.downloadFile fail err");
                 util.hideLoadingWithErrorTips()
             }
         })
@@ -101,9 +98,7 @@ Page({
         app.post("/knowledge/updateReadCount", {
             id: op.data.id,
         }, function (data) {
-            if (typeof data == 'number') {
-                console.log("更新阅读量成功")
-            } else {
+            if (typeof data == 'number') {} else {
                 wx.showToast({
                     title: '系统正在更新，请稍后再试'
                 });
@@ -229,6 +224,24 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
+        let op = this;
+        let allUrl = util.fillUrlParams('/pages/knowledge/oneKnowledge', {
+            id: op.data.id,
+            url: op.data.url,
+            title: op.data.title,
+            cost: op.data.cost,
+            readCount: op.data.readCount,
+        });
 
+        return {
+            title: '分享了一个学习资料！',
+            path: allUrl,
+            success: function (res) {
+                // 转发成功
+            },
+            fail: function (res) {
+                // 转发失败
+            }
+        }
     }
 })

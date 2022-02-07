@@ -121,7 +121,7 @@ page {
 }
 
 .enterprise-item {
-    padding: 15px 10px 10px 20px;
+    padding: 15px 10px 10px 10px;
     border-bottom: 1px solid #ccc;
     font-size: 14px;
     position: relative;
@@ -133,8 +133,8 @@ page {
 }
 
 .enterprise-item-image {
-    width: 100px;
-    height: 80px;
+    width: 120px;
+    height: 90px;
     border: 1px solid white;
     border-radius: 10px;
 }

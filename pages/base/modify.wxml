@@ -1,7 +1,7 @@
 <wxs src="../../utils/tool.wxs" module="tool" />
 
 <view class="base-settle">
-    <view class="title">基地入驻</view>
+    <view class="title">修改基地信息</view>
 
     <view class="main-image-area">
         <!-- <view class="add-main-image-area" wx:if="{{mainImagePic.length==0}}" bindtap="uploadMainImage">

@@ -18,5 +18,5 @@
 <include src="../common/typeTemp.wxml"></include>
 
 <view class="next-view">
-  <button class="next-step" bindtap="nextStep">下一步</button>
+  <button class="next-step" bindtap="nextStep">确定</button>
 </view>

@@ -1,6 +1,6 @@
 <view class="enterprise">
     <view class="title">{{title}}</view>
-    <image class="main-image" src="{{mainImage}}" mode="aspectFill" data-src="{{mainImage}}" bindtap="previewImage">
+    <image class="main-image" src="{{mainImage}}" mode="scaleToFill" data-src="{{mainImage}}" bindtap="previewImage">
     </image>
     <view class="tips">
         <view class="authentication">平台认证</view>
@@ -32,13 +32,13 @@
 
     <view class="detail-area" wx:if="{{isDetail}}">
         <view class="detail">{{introduce}}</view>
-        <image class="detail-image-item" wx:for="{{pictureList}}" src="{{item.url}}" mode="widthFix"
+        <image class="detail-image-item" wx:for="{{pictureList}}" src="{{item.url}}" mode="widthFix" wx:key="index"
             data-src="{{item.url}}" bindtap="previewImage"></image>
     </view>
 
     <view class="reply-content" wx:if="{{isComment}}">
         <view class="weui-panel__bd">
-            <view wx:for="{{replyList}}" wx:key="{{item.id}}">
+            <view wx:for="{{replyList}}" wx:key="index">
                 <view class="weui-media-box weui-media-box_text">
                     <view class="weui-media-box__desc">
                         <!-- 头像 -->
@@ -48,12 +48,8 @@
                         </view>
                         <view class="reply-middle-info">
                             <view class="reply-name-info">
-                                <text class="reply-name"> {{item.realname}}</text>
-                                <text class="job-text"> {{item.job}}</text>
-                                <text class="reply-time"> {{item.lastString}} </text>
-                            </view>
-                            <view class="reply-time-info">
-                                <text class="company-text"> {{item.company}} </text>
+                                <view class="reply-name"> {{item.realname}}</view>
+                                <view class="reply-time"> {{item.lastString}} </view>
                             </view>
                         </view>
                         <view class="reply-message">
@@ -62,15 +58,16 @@
                     </view>
                 </view>
             </view>
+
+            <view class="none-reply-tip" wx:if="{{replyList.length == 0}}">暂无评价~</view>
+
         </view>
-        <text> \t\n </text>
-        <text> \t\n </text>
     </view>
 
     <view class="consulting-area" wx:if="{{isConsulting}}">
         <!-- 咨询动态 -->
         <view class="weui-panel__bd">
-            <view class="weui-panel-area" wx:for="{{consultingeList}}" wx:key="{{item.id}}">
+            <view class="weui-panel-area" wx:for="{{consultingeList}}" wx:key="index">
                 <view class="weui-media-box weui-media-box_text">
                     <view class="weui-media-box__desc">
                         <view class="reply-middle-info consulting-middle-info">

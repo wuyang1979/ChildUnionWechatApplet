@@ -15,7 +15,7 @@
   </view>
 
   <view class="message-list">
-    <view wx:for="{{isMoreMessageList?messageList:messageShowList}}" wx:key="{{item.id}}" class="one-message"
+    <view wx:for="{{isMoreMessageList?messageList:messageShowList}}" wx:key="index" class="one-message"
       data-id="{{item.id}}" data-title="{{item.title}}" data-message="{{item.message}}" data-last="{{item.lastString}}"
       data-read="{{item.readCount}}" data-like="{{item.giveLike}}" data-stype="{{item.sourceType}}"
       data-spath="{{item.sourcePath}}" bindtap="jump2OneMessage">

@@ -20,11 +20,20 @@
     </view>
     <view id='address' hidden='{{address_show}}'>
         <view class='all_city'>
-            <view class='li_style'>所有城市</view>
+            <view class='li_style' bindtap="allCity">所有城市 ></view>
         </view>
-        <view class="selection" wx:for="{{cityList}}" wx:key="{{item.id}}">
+
+        <!-- 热门城市 -->
+        <view class="hot-cities">
+            <view class="hot-tip">热门城市</view>
+            <view class='hot-li_style' bindtap="nanjing">南京</view>
+            <view class='hot-li_style' bindtap="shanghai">上海</view>
+            <view class='hot-li_style' bindtap="suzhou">苏州</view>
+        </view>
+
+        <view class="selection" wx:for="{{cityList}}" wx:key="index">
             <view class="item_letter" id="{{item.initial}}">{{item.initial}}</view>
-            <view class="item_city" wx:for="{{item.cityInfo}}" wx:for-item="ct" wx:key="{{ct.id}}"
+            <view class="item_city" wx:for="{{item.cityInfo}}" wx:for-item="ct" wx:key="index"
                 data-cityCode="{{ct.city_code}}" data-cityName="{{ct.city_name}}" bindtap="bindCity">
                 {{ct.city_name}}
             </view>
@@ -32,7 +41,7 @@
     </view>
     <view id='address_search' hidden='{{!address_show}}'>
         <view>
-            <view class="item_city" wx:for="{{search_city}}" wx:for-item="ct" wx:key="{{ct.id}}"
+            <view class="item_city" wx:for="{{search_city}}" wx:for-item="ct" wx:key="index"
                 data-cityCode="{{ct.city_code}}" data-cityName="{{ct.city_name}}" bindtap="bindCity">
                 {{ct.city_name}}
             </view>

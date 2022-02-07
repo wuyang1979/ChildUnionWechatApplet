@@ -9,6 +9,7 @@ Page({
    */
   data: {
     oneBusiness: {},
+    vipBtnName: "开通VIP",
     isMyPage: true,
     needShow: false,
     id: -1,
@@ -19,9 +20,18 @@ Page({
     payFlag: false,
     isIos: false,
     isBaseAdministrator: false,
+    isEnterpriseAdministrator: false,
     baseList: [],
     signCount: 0,
     needSign: true,
+    enterpriseOrderUnreadNum: 0,
+    baseReserveUnreadNum: 0,
+
+    establishmentAdminName: "",
+    establishmentBtnName: "",
+    isEstablishmentAdministrator: 0,
+    isIndividualLeague: false,
+    isGoldEstablishmentLeague: false,
   },
 
   getFollowerById: oneBusinessTemp.getFollowerById,
@@ -33,11 +43,18 @@ Page({
   sign2Server1: oneBusinessTemp.sign2Server1,
 
   modifyCard: function (event) {
+    let op = this;
     var card = wx.getStorageSync('id');
     if (card == '') {
+      app.onGotUserInfo(event, function () {
+        op.refresh();
+      });
       return;
     }
-    app.modifyCard();
+    var allUrl = util.fillUrlParams('/pages/my/info', {});
+    wx.navigateTo({
+      url: allUrl,
+    })
   },
 
   previewImage: function (e) {
@@ -101,7 +118,12 @@ Page({
       });
       return;
     }
-    var allUrl = util.fillUrlParams('/pages/campaign/score', {});
+    var allUrl = util.fillUrlParams('/pages/campaign/score', {
+      companyId: op.data.oneBusiness.companyId || -1,
+      myPageEnterFlag: JSON.stringify(true),
+      isIndividualLeague: JSON.stringify(op.data.isIndividualLeague),
+      isGoldEstablishmentLeague: JSON.stringify(op.data.isGoldEstablishmentLeague),
+    });
     wx.navigateTo({
       url: allUrl
     });
@@ -129,11 +151,105 @@ Page({
   },
 
 
-  jumpOrderList: function () {
-    var allUrl = util.fillUrlParams('/pages/campaign/orderList', {});
-    wx.navigateTo({
-      url: allUrl
-    });
+  jumpOrderList: function (e) {
+    let op = this;
+    var card = wx.getStorageSync('id');
+    if (card == '') {
+      app.onGotUserInfo(e, function () {
+        var allUrl = util.fillUrlParams('/pages/campaign/orderList', {});
+        wx.navigateTo({
+          url: allUrl
+        });
+      });
+      return;
+    } else {
+      var allUrl = util.fillUrlParams('/pages/campaign/orderList', {});
+      wx.navigateTo({
+        url: allUrl
+      });
+    }
+  },
+
+  myEstablishment: function (e) {
+    let op = this;
+    var card = wx.getStorageSync('id');
+    if (card == '') {
+      app.onGotUserInfo(e, function () {
+        op.refresh()
+      });
+      return;
+    } else {
+      if (op.data.isEstablishmentAdministrator == 1) {
+        var allUrl = util.fillUrlParams('/pages/establishment/settle', {
+          companyId: op.data.oneBusiness.companyId || -1,
+          company: op.data.oneBusiness.company,
+          introduce: op.data.oneBusiness.introduce,
+          workaddress: op.data.oneBusiness.workaddress,
+          cardName: op.data.oneBusiness.realname,
+        });
+        wx.navigateTo({
+          url: allUrl,
+        })
+      } else if (op.data.isEstablishmentAdministrator == 0) {
+        let id = op.data.oneBusiness.companyId;
+        app.post("/establishment/getEstablishmentInfoById", {
+          establishmentId: id
+        }, function (data) {
+          if (app.hasData(data)) {
+            let leaguetype = data[0].leaguetype;
+            let companydesc = data[0].companydesc;
+            let company = data[0].company;
+            let logopic = data[0].logopic;
+            if (logopic.indexOf('http') == -1) {
+              logopic = app.qinzi + logopic;
+            }
+
+            let members = data[0].members;
+            let companyaddr = data[0].companyaddr;
+            let companytel = data[0].companytel;
+            let companyweb = data[0].companyweb;
+            let industry = data[0].industry;
+            let mainbussiness = data[0].mainbussiness;
+            let maindemand = data[0].maindemand;
+            let licensepic = data[0].licensepic;
+            let contactname = data[0].contactname;
+            let contactduty = data[0].contactduty;
+            let contacttel = data[0].contacttel;
+            let contactwx = data[0].contactwx;
+            let contactopenid = data[0].contactopenid;
+            let email = data[0].email;
+
+            var allUrl = util.fillUrlParams('/pages/establishment/oneEstablishment', {
+              id: id,
+              leaguetype: leaguetype,
+              companydesc: companydesc,
+              company: company,
+              logopic: logopic,
+              members: members,
+              companyaddr: companyaddr,
+              companytel: companytel,
+              companyweb: companyweb,
+              industry: industry,
+              mainbussiness: mainbussiness,
+              maindemand: maindemand,
+              licensepic: licensepic,
+              contactname: contactname,
+              contactduty: contactduty,
+              contacttel: contacttel,
+              contactwx: contactwx,
+              contactopenid: contactopenid,
+              email: email,
+
+              searchValue: "",
+              inputShowed: false,
+            });
+            wx.navigateTo({
+              url: allUrl
+            });
+          }
+        })
+      }
+    }
   },
 
   // loadSign: function (id) {
@@ -156,6 +272,12 @@ Page({
   //   });
   // },
 
+  test: function (e) {
+    wx.navigateTo({
+      url: '/pages/luckDraw/join',
+    })
+  },
+
   sign2Server: function (id) {
     var op = this;
     // 加载一个商户
@@ -168,6 +290,9 @@ Page({
 
   loadOneBusiness: function (id) {
     var op = this;
+    let vipBtnName;
+    let isIndividualLeague;
+    let isGoldEstablishmentLeague;
     // 加载一个商户
     app.getUrl('/business/info/' + id, function (data) {
       if (app.hasData(data)) {
@@ -176,6 +301,34 @@ Page({
           oneBusiness: data[0],
           needShow: true
         });
+        if (op.data.oneBusiness.leaguer == 0) {
+          vipBtnName = "开通VIP";
+          isIndividualLeague = false;
+          isGoldEstablishmentLeague = false;
+        } else if (op.data.oneBusiness.leaguer == 1) {
+          if (app.hasData(op.data.oneBusiness.buss_league)) {
+            if (op.data.oneBusiness.buss_league == 3) {
+              vipBtnName = "会员权益";
+              isIndividualLeague = true;
+              isGoldEstablishmentLeague = true;
+            } else {
+              vipBtnName = "升级VIP";
+              isIndividualLeague = true;
+              isGoldEstablishmentLeague = false;
+            }
+          } else {
+            vipBtnName = "升级VIP";
+            isIndividualLeague = true;
+            isGoldEstablishmentLeague = false;
+          }
+        }
+        op.setData({
+          vipBtnName: vipBtnName,
+          isIndividualLeague: isIndividualLeague,
+          isGoldEstablishmentLeague: isGoldEstablishmentLeague,
+        })
+
+        op.getEstablishmentAdminName();
       }
     });
   },
@@ -192,6 +345,32 @@ Page({
           baseList: data,
         })
       }
+    })
+  },
+
+  manageProduct: function (e) {
+    let op = this;
+    let card = wx.getStorageSync('id');
+    if (card == "") {
+      app.onGotUserInfo(e, function () {});
+      return;
+    }
+    if (!app.hasData(op.data.oneBusiness.companyId)) {
+      wx.showToast({
+        title: '请完善企业信息',
+      })
+      return;
+    }
+    else if (op.data.oneBusiness.buss_league == "0") {
+      wx.showToast({
+        title: '请上传营业执照',
+      })
+      return;
+    }
+
+    let allUrl = util.fillUrlParams("/pages/product/productController", {});
+    wx.navigateTo({
+      url: allUrl,
     })
   },
 
@@ -231,6 +410,38 @@ Page({
     }
   },
 
+  toEnterpriseOrderList: function (e) {
+    let op = this;
+    var allUrl = util.fillUrlParams("/pages/my/enterpriseOrderList", {
+
+    });
+    wx.navigateTo({
+      url: allUrl,
+    })
+  },
+
+  toBaseReserveList: function (e) {
+    let op = this;
+    var allUrl = util.fillUrlParams("/pages/my/baseReserveList", {
+
+    });
+    wx.navigateTo({
+      url: allUrl,
+    })
+  },
+
+  getUnreadNum: function (e) {
+    let op = this;
+    app.post("/business/getUnreadNum", {}, function (data) {
+      if (app.hasData) {
+        op.setData({
+          enterpriseOrderUnreadNum: data.enterpriseOrderUnreadNum,
+          baseReserveUnreadNum: data.baseReserveUnreadNum,
+        })
+      }
+    })
+  },
+
   refresh: function () {
     var op = this;
     var id = app.getUserId();
@@ -239,11 +450,55 @@ Page({
     });
     var card = wx.getStorageSync('id');
     if (card != '') {
-      op.getBaseList(card);
+      if (card == "1428" || card == "490") {
+        op.setData({
+          isEnterpriseAdministrator: true,
+        });
+        op.getBaseList(card);
+        op.getUnreadNum();
+      }
     }
 
     this.loadOneBusiness(id);
     // this.loadSign(id);
+  },
+
+  getEstablishmentAdminName: function (e) {
+    let op = this;
+    let companyId = op.data.oneBusiness.companyId || -1;
+    let establishmentBtnName = "";
+    let isEstablishmentAdministrator = 0;
+    if (companyId != -1) {
+      app.post("/establishment/getAdminName", {
+        companyId: companyId,
+      }, function (data) {
+        if (app.hasData(data)) {
+          op.setData({
+            establishmentAdminName: data.adminName,
+          });
+          if (companyId != -1 && op.data.establishmentAdminName == op.data.oneBusiness.realname) {
+            establishmentBtnName = "更新企业信息";
+            isEstablishmentAdministrator = 1;
+          } else if (companyId != -1 && op.data.establishmentAdminName != op.data.oneBusiness.realname) {
+            establishmentBtnName = "企业信息";
+            isEstablishmentAdministrator = 0;
+          }
+          op.setData({
+            establishmentBtnName: establishmentBtnName,
+            isEstablishmentAdministrator: isEstablishmentAdministrator,
+          })
+        }
+      })
+    } else if (companyId == -1) {
+      establishmentBtnName = "完善企业信息";
+      isEstablishmentAdministrator = 1;
+      op.setData({
+        establishmentBtnName: establishmentBtnName,
+        isEstablishmentAdministrator: isEstablishmentAdministrator,
+      })
+    }
+
+
   },
 
   /**
@@ -317,7 +572,6 @@ Page({
       title: '请关注我',
       path: allUrl,
       success: function (res) {
-        console.log(res)
         // 转发成功
       },
       fail: function (res) {

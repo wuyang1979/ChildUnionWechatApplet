@@ -21,39 +21,53 @@ App({
   // },
 
   onLoad() {
-    //正式版检测小程序是否有新版本
-    if (wx.canIUse("getUpdateManager")) {
-      const updateManager = wx.getUpdateManager();
+    var self = this
+    // 获取小程序更新机制兼容
+    if (wx.canIUse('getUpdateManager')) {
+      const updateManager = wx.getUpdateManager()
+      //1. 检查小程序是否有新版本发布
       updateManager.onCheckForUpdate(function (res) {
         // 请求完新版本信息的回调
         if (res.hasUpdate) {
-          updateManager.onUpdateReady(function () {
-            wx.showModal({
-              title: "更新提示",
-              content: "新版本已经准备好，是否重启应用？",
-              success(res) {
-                if (res.confirm) {
-                  // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
-                  updateManager.applyUpdate();
-                }
+          //检测到新版本，需要更新，给出提示
+          wx.showModal({
+            title: '更新提示',
+            content: '检测到新版本，是否下载新版本并重启小程序？',
+            success: function (res) {
+              if (res.confirm) {
+                //2. 用户确定下载更新小程序，小程序下载及更新静默进行
+                self.downLoadAndUpdate(updateManager)
+              } else if (res.cancel) {
+                //用户点击取消按钮的处理，如果需要强制更新，则给出二次弹窗，如果不需要，则这里的代码都可以删掉了
+                wx.showModal({
+                  title: '温馨提示~',
+                  content: '本次版本更新涉及到新的功能添加，旧版本无法正常访问的哦~',
+                  showCancel: false, //隐藏取消按钮
+                  confirmText: "确定更新", //只保留确定更新按钮
+                  success: function (res) {
+                    if (res.confirm) {
+                      //下载新版本，并重新应用
+                      self.downLoadAndUpdate(updateManager)
+                    }
+                  }
+                })
               }
-            });
-          });
-          updateManager.onUpdateFailed(function () {
-            // 新的版本下载失败
-            wx.showModal({
-              title: "已经有新版本了哟~",
-              content: "新版本已经上线啦~，请您删除当前小程序，重新搜索打开哟~"
-            });
-          });
+            }
+          })
         }
-      });
+      })
     } else {
+      // 如果希望用户在最新版本的客户端上体验您的小程序，可以这样子提示
       wx.showModal({
-        title: "提示",
-        content: "当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。"
-      });
+        title: '提示',
+        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+      })
     }
+
+    //新增小程序访问次数
+    this.post("/start/addVisitCount", {}, function (data) {
+
+    })
 
     // 登录
     wx.login({
@@ -61,18 +75,58 @@ App({
         var code = res.code;
         if (code) {
           this.userCode = code;
-        } else {
-          console.log('获取用户登录态失败：' + res.errMsg);
-        }
+          this.globalData.userCode = code;
+        } else {}
 
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        //console.log(res);
       }
     });
     if (wx.getUserProfile) {
       this.canIUseGetUserProfile = true
     }
   },
+
+  /**
+   * 下载小程序新版本并重启应用
+   */
+  downLoadAndUpdate: function (updateManager) {
+    var self = this
+    wx.showLoading();
+    //静默下载更新小程序新版本
+    updateManager.onUpdateReady(function () {
+      wx.hideLoading()
+      //新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+      updateManager.applyUpdate()
+    })
+    updateManager.onUpdateFailed(function () {
+      // 新的版本下载失败
+      wx.showModal({
+        title: '已经有新版本了哟~',
+        content: '新版本已经上线啦~，请您删除当前小程序，重新搜索打开哟~',
+      })
+    })
+  },
+
+  getUserProfileForLuckDraw(e, getFunction) {
+    wx.getUserProfile({
+      desc: '用于报名抽奖', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+      success: (res) => {
+        this.globalData.userInfo = res.userInfo;
+        this.globalData.hasUserInfo = true;
+        getFunction();
+      },
+      fail: (res) => {
+        wx.switchTab({
+          url: '/pages/cooperate/list',
+        })
+        wx.showToast({
+          title: '请点允许继续',
+        })
+      },
+      complete: (res) => {}
+    })
+  },
+
   getUserProfile(e, getFunction) {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
     // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
@@ -84,11 +138,15 @@ App({
         this.onGotUserInfoV1(e, getFunction);
       },
       fail: (res) => {
-        console.log(res);
+
+        wx.switchTab({
+          url: '/pages/cooperate/list',
+        })
+        wx.showToast({
+          title: '请点允许继续',
+        })
       },
-      complete: (res) => {
-        console.log(res);
-      }
+      complete: (res) => {}
     })
   },
 
@@ -186,7 +244,7 @@ App({
 
   modifyCard: function () {
     wx.navigateTo({
-      url: '/pages/my/type'
+      url: '/pages/my/info'
     });
   },
 
@@ -206,10 +264,9 @@ App({
             if (op.hasData(data)) {
               if (data == null || data == -1) {
                 wx.showModal({
-                  title: '完善信息',
-                  content: '请完善个人信息,谢谢',
+                  title: '提示',
+                  content: '请注册会员信息',
                   success: function (res) {
-                    console.log(res)
                     if (res.confirm) {
                       op.modifyCard();
                     }
@@ -222,11 +279,7 @@ App({
                     id: data,
                     headingImgUrl: op.globalData.userInfo.avatarUrl,
                   }, function (data) {
-                    if (op.hasData(data)) {
-                      console.log("更新头像成功");
-                    } else {
-                      console.log("更新头像失败");
-                    }
+                    if (op.hasData(data)) {} else {}
                   })
                 }
                 getFunction();
@@ -235,14 +288,14 @@ App({
           });
         });
       } else {
+        op.globalData.openId = op.newOpenId;
         op.getUrl('/business/info/code/' + op.newOpenId, function (data) {
           if (op.hasData(data)) {
             if (data == null || data == -1) {
               wx.showModal({
-                title: '完善信息',
-                content: '请完善个人信息,谢谢',
+                title: '提示',
+                content: '请注册会员信息',
                 success: function (res) {
-                  console.log(res)
                   if (res.confirm) {
                     op.modifyCard();
                   }
@@ -257,6 +310,28 @@ App({
       }
 
 
+    }
+  },
+
+  luckDrawOnGotUserInfo: function (e, func) {
+    let op = this;
+    if (op.globalData.joinerOpenId == "") {
+      op.getUrl('/business/info/getOpenId/' + op.globalData.userCode, function (data) {
+        if (op.hasData(data)) {
+          op.globalData.joinerOpenId = data.openid;
+          if (Object.keys(op.globalData.userInfo) == 0) {
+            op.getUserProfileForLuckDraw(e, func);
+          } else {
+            func();
+          }
+        }
+      })
+    } else {
+      if (Object.keys(this.globalData.userInfo) == 0) {
+        this.getUserProfileForLuckDraw(e, func);
+      } else {
+        func();
+      }
     }
   },
 
@@ -303,7 +378,6 @@ App({
       if (op.data.formIdArray.length == 0) return;
       var idList = op.data.formIdArray.join(",");
       this.post('/formList/' + this.getUserId() + '-' + idList, {}, function (data) {
-        console.log("批量新增formId：" + data);
         op.setData({
           formIdArray: []
         });
@@ -316,21 +390,11 @@ App({
     wx.requestSubscribeMessage({
       tmplIds: [templateId],
       success: (res) => {
-        console.log(res);
         // 如果用户点击允许
-        if (res[templateId] == 'accept') {
-          console.log('点击了允许');
-        } else {
-          console.log('点击了取消');
-        }
+        if (res[templateId] == 'accept') {} else {}
       },
-      fail: (res) => {
-        console.log('操作失败', res);
-      },
-      complete: (res) => {
-        console.log('一定操作', res);
-        //runFunction();
-      }
+      fail: (res) => {},
+      complete: (res) => {}
     })
   },
 
@@ -406,5 +470,7 @@ App({
     messageDataUpdated: false,
     messageBussinessUpdated: false,
     openId: "",
+    userCode: "",
+    joinerOpenId: "",
   }
 })

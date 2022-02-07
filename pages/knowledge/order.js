@@ -64,7 +64,6 @@ Page({
         wx.showToast({
           title: '后台处理失败',
         })
-        console.log(data);
         return;
       } else {
         app.post("/knowledge/updateBuyCount", {
@@ -72,7 +71,6 @@ Page({
           card: card,
         }, function (data) {
           if (typeof data == 'number') {
-            console.log("更新阅读量成功");
             op.previewFile(app.qinzi + op.data.url);
           } else {
             wx.showToast({
@@ -97,7 +95,6 @@ Page({
     wx.downloadFile({
       url: fileLink,
       success: function (res) {
-        console.log(res, "wx.downloadFile success res")
         if (res.statusCode != 200) {
           util.hideLoadingWithErrorTips()
           return false
@@ -107,13 +104,11 @@ Page({
           filePath: Path,
           showMenu: true,
           success: function (res) {
-            console.log('打开成功');
             util.hideLoading()
           }
         })
       },
       fail: function (err) {
-        console.log(err, "wx.downloadFile fail err");
         util.hideLoadingWithErrorTips()
       }
     })

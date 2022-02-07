@@ -148,7 +148,64 @@ Page({
         prePage.setData({
             cityCode: e.currentTarget.dataset.citycode,
             cityName: e.currentTarget.dataset.cityname,
-            needRefreshFlag:true,
+            needRefreshFlag: true,
+        })
+        wx.navigateBack({
+            delta: 1,
+        })
+    },
+
+    nanjing:function(e){
+        let pages = getCurrentPages();
+        let currentPage = pages[pages.length - 1];
+        let prePage = pages[pages.length - 2];
+        prePage.setData({
+            cityCode: 220,
+            cityName: "南京",
+            needRefreshFlag: true,
+        })
+        wx.navigateBack({
+            delta: 1,
+        })
+    },
+
+    suzhou:function(e){
+        let pages = getCurrentPages();
+        let currentPage = pages[pages.length - 1];
+        let prePage = pages[pages.length - 2];
+        prePage.setData({
+            cityCode: 255,
+            cityName: "苏州",
+            needRefreshFlag: true,
+        })
+        wx.navigateBack({
+            delta: 1,
+        })
+    },
+
+    shanghai:function(e){
+        let pages = getCurrentPages();
+        let currentPage = pages[pages.length - 1];
+        let prePage = pages[pages.length - 2];
+        prePage.setData({
+            cityCode: 253,
+            cityName: "上海",
+            needRefreshFlag: true,
+        })
+        wx.navigateBack({
+            delta: 1,
+        })
+    },
+
+    //所有城市
+    allCity: function (e) {
+        let pages = getCurrentPages();
+        let currentPage = pages[pages.length - 1];
+        let prePage = pages[pages.length - 2];
+        prePage.setData({
+            cityCode: -1,
+            cityName: "全国",
+            needRefreshFlag: true,
         })
         wx.navigateBack({
             delta: 1,

@@ -7,6 +7,10 @@
         "chooseLocation": {
             "version": "1.0.8",
             "provider": "wx76a9a06e5b4e693e"
+        },
+        "materialPlugin": {
+            "version": "1.0.5",
+            "provider": "wx4d2deeab3aed6e5a"
         }
     },
     "pages": [
@@ -35,13 +39,11 @@
         "pages/campaign/orderList",
         "pages/campaign/rechargeOrderList",
         "pages/campaign/success",
-        "pages/company/list",
         "pages/my/index",
         "pages/my/info",
         "pages/my/type",
         "pages/my/invite",
         "pages/resource/resource",
-        "pages/shopping/shopping",
         "pages/business/recharge",
         "pages/base/list",
         "pages/base/oneBase",
@@ -56,29 +58,55 @@
         "pages/enterprise/detailList",
         "pages/enterprise/oneEnterprise",
         "pages/enterprise/comment",
-        "pages/enterprise/consulting"
+        "pages/enterprise/consulting",
+        "pages/establishment/list",
+        "pages/establishment/oneEstablishment",
+        "pages/establishment/settle",
+        "pages/my/enterpriseOrderList",
+        "pages/my/baseReserveList",
+        "pages/establishment/establishmentInfo",
+        "pages/cooperate/weplug-add-tips-master/index",
+        "pages/luckDraw/join",
+        "pages/base/baseMap",
+        "pages/message/messageController",
+        "pages/message/list",
+        "pages/product/productController",
+        "pages/product/releaseProduct",
+        "pages/product/list",
+        "pages/product/modify",
+        "pages/product/oneProduct"
     ],
     "tabBar": {
         "list": [
             {
                 "pagePath": "pages/cooperate/list",
                 "text": "首页",
-                "iconPath": "pages/img/icon-cooperate.png"
+                "iconPath": "pages/img/icon-cooperate.png",
+                "selectedIconPath": "pages/img/icon-cooperate.png"
             },
             {
                 "pagePath": "pages/enterprise/list",
                 "text": "企业服务",
-                "iconPath": "pages/img/icon-business.png"
+                "iconPath": "pages/img/icon-business.png",
+                "selectedIconPath": "pages/img/icon-business.png"
             },
             {
-                "pagePath": "pages/knowledge/list",
-                "text": "知识库",
-                "iconPath": "pages/img/icon-company.png"
+                "pagePath": "pages/cooperate/message",
+                "text": "发布",
+                "iconPath": "pages/img/release.png",
+                "selectedIconPath": "pages/img/release.png"
+            },
+            {
+                "pagePath": "pages/message/messageController",
+                "text": "消息",
+                "iconPath": "pages/img/message.png",
+                "selectedIconPath": "pages/img/message.png"
             },
             {
                 "pagePath": "pages/my/index",
                 "text": "我的",
-                "iconPath": "pages/img/icon-my.png"
+                "iconPath": "pages/img/icon-my.png",
+                "selectedIconPath": "pages/img/icon-my.png"
             }
         ]
     },

@@ -162,7 +162,6 @@ Page({
             title: '分享了一些热门企业服务！',
             path: allUrl,
             success: function (res) {
-                console.log(res)
                 // 转发成功
             },
             fail: function (res) {

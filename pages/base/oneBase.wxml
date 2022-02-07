@@ -3,7 +3,7 @@
     <view class="one-base-info">
         <view class="one-base-name">{{name}}</view>
         <view class="one-base-type-area">
-            <view class="one-base-topic_type" wx:for="{{topic_type}}">{{item}}</view>
+            <view class="one-base-topic_type" wx:for="{{topic_type}}" wx:key="index">{{item}}</view>
             <view class="one-base-level" wx:if="{{levelId!='0'}}">{{level+'级景区'}}</view>
             <!-- <view class="one-base-city">{{city}}</view>
             <view class="one-base-district">{{districtName}}</view> -->
@@ -52,7 +52,7 @@
                         {{introduce}}
                     </view>
                     <view class="one-base-picture-area" wx:if="{{pictureList.length>0}}">
-                        <image wx:for="{{pictureList}}" class="one-base-picture-item" src="{{item.src}}"
+                        <image wx:for="{{pictureList}}" wx:key="index" class="one-base-picture-item" src="{{item.src}}"
                             data-src="{{item.src}}" mode="widthFix" bindtap="previewImage"></image>
                     </view>
                 </view>
@@ -60,7 +60,7 @@
                 <!-- 咨询动态 -->
                 <view class="one-base-consulting" wx:if="{{isConsultinge}}">
                     <view class="weui-panel__bd">
-                        <view class="weui-panel-area" wx:for="{{consultingeList}}" wx:key="{{item.id}}">
+                        <view class="weui-panel-area" wx:for="{{consultingeList}}" wx:key="index">
                             <!-- bindtap="jumpBusiness" -->
                             <view class="weui-media-box weui-media-box_text" data-card="{{item.card_id}}">
                                 <view class="weui-media-box__desc">
@@ -98,10 +98,10 @@
 
     <view class="cover-area" wx:if="{{isConfirmShow}}">
         <view class="confirm-area">
-            <view class="confiem-area-tip">是否继续？</view>
+            <view class="confirm-area-tip">是否继续？</view>
             <view class="confirm-area-bottom">
                 <view class="deny" bindtap="deny">取消</view>
-                <view class="confirm" bindtap="confirm">允许</view>
+                <view class="confirm" bindtap="confirm">确认</view>
             </view>
         </view>
     </view>

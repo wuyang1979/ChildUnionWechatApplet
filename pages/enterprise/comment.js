@@ -7,7 +7,6 @@ Page({
      * 页面的初始数据
      */
     data: {
-        templateId: '9mY0ssY4O1iSnG9c3hPID4BQxVBHA_GWWjBZ43-HEl4',
         enterpriseId: "",
         replyId: 0,
         message: '',
@@ -39,8 +38,9 @@ Page({
 
     auth: function () {
         // this.data.authClick = false;
+        let op = this;
         if (!this.data.authClick) {
-            app.getAuth2PushMessage(this.data.templateId);
+            op.addComment();
             this.setData({
                 authClick: true
             })
@@ -70,7 +70,6 @@ Page({
         if (!this.checkInput()) return;
         //var formId = e.detail.formId;
         this.auth();
-        this.addComment();
     },
 
     /**
